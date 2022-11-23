@@ -2,7 +2,7 @@
 
 import { http } from "../util/config";
 
-export default class LocationService {
+ class LocationService {
     // lấy danh sách vị trí để tìm kiếm
     getLocationList= () => {
     return http.get(`/api/vi-tri`)
@@ -13,3 +13,5 @@ export default class LocationService {
         return http.get(`/api/vi-tri/phan-trang-tim-kiem`,data)
     }
 }
+const locationService = new LocationService()
+export default locationService
