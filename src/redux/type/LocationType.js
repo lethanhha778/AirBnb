@@ -1,0 +1,1 @@
+ export const GET_LIST_LOCATION = 'GET_LIST_LOCATION'

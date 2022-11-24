@@ -1,16 +1,16 @@
 
 import { http } from "../util/config";
 
-const AuthService = {
+class AuthService {
     // gửi thông tin đăng ký
-    register: (infoUserRegister) => {
+    register = (infoUserRegister) => {
         return http.post(`/api/auth/signup`, infoUserRegister)
-    },
+    }
     // gửi thông tin đăng nhập
-    login: (infoUserLogin) => {
+    login = (infoUserLogin) => {
         return http.post(`/api/auth/signin`, infoUserLogin);
     }
 
 }
 
-export default AuthService
+export default new AuthService()
