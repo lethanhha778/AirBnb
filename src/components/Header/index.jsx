@@ -1,7 +1,5 @@
-import React from 'react'
-import './style.css'
+import React from "react";
+import "./style.css";
 export default function Header() {
-  return (
-    <div>index</div>
-  )
+  return <div>Header</div>;
 }
