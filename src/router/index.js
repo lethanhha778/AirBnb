@@ -3,9 +3,10 @@ import {
 } from "react-router-dom";
 
 import NotLoggedInLayout from '../layout/NotLoggedInLayout';
+import LoggedInLayout from '../layout/LoggedInLayout';
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import HomeLayout from '../layout/HomeLayout';
+import Home from "../pages/Home";
 
 export default createBrowserRouter([
   {
@@ -26,8 +27,14 @@ export default createBrowserRouter([
   },
   {
     path: "/",
-    element: <HomeLayout />,
+    element: <LoggedInLayout />,
     requiredLogin: true,
-    children: []
+    children: [
+      {
+        path: "home",
+        element: <Home />,
+        requiredLogin: false
+      },
+    ]
   },
 ]);
