@@ -4,4 +4,6 @@ export const URL_API = 'https://airbnbnew.cybersoft.edu.vn'
 
 export const ACCESS_TOKEN = 'ACCESS_TOKEN'
 
+export const USER_INFO = 'USER_INFO'
+
 export const USER_LOGIN = 'userLogin'
