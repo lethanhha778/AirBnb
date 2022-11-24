@@ -22,6 +22,9 @@ const App = () => {
     if (requiredLogin && !loggedIn) {
       navigate("/auth/login");
     }
+    // if (requiredLogin && loggedIn) {
+    //   navigate("/home");
+    // }
   }, [loggedIn, navigate]);
 
   return (

@@ -7,6 +7,7 @@ import LoggedInLayout from '../layout/LoggedInLayout';
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
+import NotFound from "../pages/NotFound"
 
 export default createBrowserRouter([
   {
@@ -29,6 +30,7 @@ export default createBrowserRouter([
     path: "/",
     element: <LoggedInLayout />,
     requiredLogin: true,
+    errorElement: <NotFound />,
     children: [
       {
         path: "home",
