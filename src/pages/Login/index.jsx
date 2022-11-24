@@ -16,17 +16,14 @@ export default function Login() {
   const loggedIn = useSelector((state) => state.AuthReducer.loggedIn);
 
   useEffect(() => {
-    loggedIn &&
+    if (loggedIn) {
       openCustomNotificationWithIcon(
         "success",
         "Login Sucess",
         "Congratulations, you have successfully logged in"
       );
-  }, [loggedIn]);
 
-  useEffect(() => {
-    if (loggedIn) {
-      navigate("/");
+      navigate("/home");
     }
   }, [loggedIn, navigate]);
 
