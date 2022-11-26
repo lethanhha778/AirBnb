@@ -9,10 +9,10 @@ export const getListLocation = () => {
         // import getLocationList từ locationService để lấy data 
         let promise = locationService.getLocationList()
         promise.then((res) => {
-            console.log(res.data);
+            console.log(res.data.content);
             const action = {
                 type: GET_LIST_LOCATION,
-                arryLocation: res.data.content
+                arrayLocation: res.data.content
             }
             dispatch(action)
         })

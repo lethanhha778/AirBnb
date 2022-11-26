@@ -1,14 +1,14 @@
 import { GET_LIST_LOCATION } from "../type/LocationType"
 
 const initialState = {
-    arryLocation: []
+    arrayLocation: []
 }
 
 export const LocationReducer = (state = initialState, action) => {
     switch (action.type) {
         // lấy ds vị trí 
         case GET_LIST_LOCATION:
-            state.arryLocation = action.arryLocation
+            state.arrayLocation = action.arrayLocation
             return { ...state }
 
         default:
