@@ -1,5 +1,6 @@
 import { createBrowserHistory } from 'history';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import router from "./router"
 import { useDispatch, useSelector } from "react-redux";
 import { CHECK_LOGIN } from "./redux/actions/AuthAction"
@@ -19,6 +20,7 @@ const App = () => {
 
   useEffect(() => {
     const requiredLogin = router?.state?.matches.some(el => el.route.requiredLogin)
+    console.log(requiredLogin)
     if (requiredLogin && !loggedIn) {
       navigate("/auth/login");
     }

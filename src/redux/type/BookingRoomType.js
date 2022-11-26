@@ -1,0 +1,1 @@
+export const DATA_SEARCH ='DATA_SEARCH'

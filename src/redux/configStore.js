@@ -3,12 +3,14 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 
 import AuthReducer from "./reducer/AuthReducer";
+import { BookingReducer } from './reducer/BookingReducer';
 import { LocationReducer } from './reducer/LocationReducer';
 
 const RootReducer = combineReducers({
     // reducer 
     LocationReducer,
-    AuthReducer
+    AuthReducer,
+    BookingReducer,
 })
 
 export const store = createStore(
