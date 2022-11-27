@@ -29,7 +29,7 @@ export default createBrowserRouter([
   {
     path: "/",
     element: <LoggedInLayout />,
-    requiredLogin: true,
+    requiredLogin: false,
     errorElement: <NotFound />,
     children: [
       {
@@ -37,6 +37,11 @@ export default createBrowserRouter([
         element: <Home />,
         requiredLogin: false
       },
+      {
+        path:'/',
+        element:<Home/>,
+        requiredLogin:false
+      }
     ]
   },
 ]);
