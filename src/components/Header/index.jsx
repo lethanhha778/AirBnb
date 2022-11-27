@@ -100,10 +100,8 @@ export default function Header() {
             <Navbar expand="md" fixed="top" className={`header-airbnb d-none d-md-flex ${bg ? 'bg-transparent' : 'bg-white'} `} >
                 <Container >
                     <Navbar.Brand href="/" className="d-none d-md-block" >
-                        <img className='logo-airbnb' src={`${bg
-                            ? ' https://www.pngkey.com/png/full/60-606021_horizontal-white-transparent-for-web-airbnb-logo-white.png'
-                            : 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png'
-                            }`} alt="" />
+                        <img className='logo-airbnb' src=
+                            'https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png' alt="" />
                     </Navbar.Brand>
                     <Navbar className='px-3 px-md-0 justify-content-end'>
                         {openSelect ?
