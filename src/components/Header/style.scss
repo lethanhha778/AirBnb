@@ -145,12 +145,14 @@
 .header-mobile {
     width: 100%;
     position: fixed;
-    top: 0;
+    top: 10px;
     left: 0;
-    padding: 10px 4px;
+    padding: 0 4px;
+    z-index: 10;
 }
 .header__mobile-top {
     width: 100%;
+    background-color: white;
     border: 2px solid rgb(229, 216, 216);
     border-radius: 40px;
     padding: 12px 20px;
@@ -181,11 +183,15 @@
     bottom: 0;
     left: 0;
     padding: 0 10px;
+    background-color: white;
+    z-index: 10;
     .menu__bottom {
         width: 100%;
+        padding: 10px 4px;
         list-style: none;
         display: flex;
         justify-content: space-between;
+        background-color: white;
         .menu__bottom-item {
             display: flex;
             flex-direction: column;

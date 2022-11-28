@@ -1,0 +1,23 @@
+@import "../../scss/index.scss";
+
+.destination-container {
+    width: 85%;
+    margin: 0 auto;
+    .title {
+        font-weight: bold;
+        cursor: pointer;
+        transition: linear 0.2s;
+        -webkit-transition: linear 0.2s;
+        &:hover {
+            color: $color-AirBnb;
+        }
+    }
+    .title-city {
+        font-weight: bold;
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+        &:hover {
+            color: $color-AirBnb;
+        }
+    }
+}
