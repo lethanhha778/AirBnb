@@ -5,8 +5,8 @@ import './style.scss'
 export default function Destination() {
 
     return (
-        <div className='destination-container'>
-            <Divider orientation="left"><h2 className='title'>Điểm Đến Gần Đây</h2></Divider>
+        <div className='destination-container' data-aos="fade-right" data-aos-duration="1000">
+            <Divider orientation="left"><h2 className='title mt-3'>Điểm Đến Gần Đây</h2></Divider>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} >
                 <Col className="gutter-row py-3" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
                     <div className='d-flex'>
