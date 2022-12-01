@@ -73,7 +73,7 @@ export default function Header() {
                 }
             }
             dispatch(action)
-            navigate(`/roomLisst/${idViTri}`);
+            navigate(`/roomList/${idViTri}`);
         }
         else {
             openCustomNotificationWithIcon(
