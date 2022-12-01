@@ -22,7 +22,6 @@ export default function Header() {
         dispatch(getListLocation());
     }, []);
     const { arrayLocation } = useSelector(state => state.LocationReducer)
-    console.log(arrayLocation);
     const [idViTri, setIdViTri] = useState(0);
     const [dateStar, setDateStar] = useState('')
     const [dateEnd, setDateEnd] = useState('')
@@ -31,11 +30,11 @@ export default function Header() {
     const [bg, setBg] = useState(true);
     // check user login hay chưa
     const [userLogin, setUserLogin] = useState(true)
-    const onChangeLocation = (value) => {
+    const onChange = (value) => {
         setIdViTri(value)
-        console.log(`selected ${value}`);
+        console.log(`valueChange ${value}`);
     };
-    const onSearchLocation = (value) => {
+    const onSearch = (value) => {
         setIdViTri(value)
         console.log('search:', value);
     };
@@ -47,7 +46,7 @@ export default function Header() {
     const onChangeStartDay = (date, dateString) => {
         setDateStar(dateString)
     };
-    const onChangeEndDay = (dateString) => {
+    const onChangeEndDay = (date, dateString) => {
         setDateEnd(dateString)
     };
     const { Option } = Select;
@@ -74,7 +73,7 @@ export default function Header() {
                 }
             }
             dispatch(action)
-            navigate(`/roomLisst/${idViTri}`);
+            navigate(`/roomList/${idViTri}`);
         }
         else {
             openCustomNotificationWithIcon(
@@ -117,10 +116,10 @@ export default function Header() {
                                             showSearch
                                             placeholder="Địa Điểm Đến"
                                             optionFilterProp="children"
-                                            onChange={onChangeLocation}
-                                            onSearch={onSearchLocation}
+                                            onChange={onChange}
+                                            onSearch={onSearch}
                                             filterOption={(input, option) =>
-                                                (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                                option.children.toLowerCase().includes(input.toLowerCase())
                                             }
                                         >
                                             {renderOption()}
@@ -225,8 +224,8 @@ export default function Header() {
                                     showSearch
                                     placeholder="Địa Điểm Đến"
                                     optionFilterProp="children"
-                                    onChange={onChangeLocation}
-                                    onSearch={onSearchLocation}
+                                    onChange={onChange}
+                                    onSearch={onSearch}
                                     filterOption={(input, option) =>
                                         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                                     }
