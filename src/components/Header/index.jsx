@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { Select, DatePicker, Space, Button } from 'antd'
-import { AiOutlineSearch, AiOutlineMenu, AiOutlineHeart, AiOutlineUserAdd } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineMenu, AiOutlineHeart, AiOutlineUserAdd,AiTwotoneHome } from "react-icons/ai";
 import { HiUserCircle, HiOutlineUserCircle } from "react-icons/hi";
 import { ImExit } from "react-icons/im";
 import { FaUserEdit, FaUserCircle } from "react-icons/fa";
@@ -96,7 +96,7 @@ export default function Header() {
     return (
         <>
             {/* Navbar Pc */}
-            <Navbar expand="md" fixed="top" className={`header-airbnb d-none d-md-flex ${bg ? 'bg-transparent' : 'bg-white'} `} >
+            <Navbar fixed="top" className={`d-none d-md-flex header-airbnb ${bg ? 'bg-transparent' : 'bg-white'} `} >
                 <Container >
                     <Navbar.Brand href="/" className="d-none d-md-block" >
                         <img className='logo-airbnb' src=
@@ -209,7 +209,7 @@ export default function Header() {
                 </Container>
             </Navbar >
             {/*Navbar mobile */}
-            <div fixed="top" className=" d-md-none header-mobile" >
+            <Navbar fixed="top" className="d-md-none">
 
                 {openSelect ?
                     <div className="header__mobile-location" >
@@ -234,13 +234,11 @@ export default function Header() {
                                 </Select>
                             </div>
                             <div className="input__mobile-choose-item">
-                                <span className="mx-3">Ngày Bắt Đầu</span>
                                 <Space direction="vertical" size={12}>
                                     <DatePicker
                                         placeholder="Ngày Bắt Đầu"
                                         onChange={onChangeStartDay} />
                                 </Space>
-                                <span className="mx-3">Ngày Kết Thúc</span>
                                 <Space direction="vertical" size={12}>
                                     <DatePicker
                                         placeholder="Ngày Kết Thúc"
@@ -294,10 +292,10 @@ export default function Header() {
                         <span>Bạn Muốn Đi Đâu?</span>
                     </div>
                 }
-            </div>
-            <div className="header__mobile-bottom d-flex d-md-none">
+            </Navbar>
+            <Navbar fixed="bottom" className="header__mobile-bottom d-flex d-md-none">
                 <ul className="menu__bottom">
-                    <li className="menu__bottom-item"><AiOutlineSearch style={{ color: '#FF385C' }} />Khám Phá</li>
+                    <NavLink to="/" className="menu__bottom-item"><AiTwotoneHome style={{ color: '#FF385C' }} />Home</NavLink>
                     <li className="menu__bottom-item"><AiOutlineHeart />Yêu Thích</li>
                     {userLogin ? <>
                         <NavLink className="menu__bottom-item"><FaUserCircle />UserName</NavLink>
@@ -310,8 +308,7 @@ export default function Header() {
                         </>
                     }
                 </ul>
-            </div>
-
+            </Navbar>
         </>
     )
 }

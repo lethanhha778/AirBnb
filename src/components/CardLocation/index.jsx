@@ -5,9 +5,8 @@ import { Col, Divider, Row } from 'antd';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 import { AiFillStar } from "react-icons/ai";
-import { Card } from 'antd';
-import './style.scss'
 import { useNavigate } from 'react-router-dom';
+import './style.scss'
 import { dataIMG } from './dataImg';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -31,8 +30,10 @@ export default function CardLocation() {
       return { ...item, data: dataIMG[index] };
     });
     console.log(room)
+    
     return room?.slice(0, 18).map((item, index) => {
-      return <Col className="gutter-row" xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 6 }} key={index} data-aos="zoom-out-up" data-aos-duration="1000">
+      return <Col
+        className="gutter-row" xs={{ span: 24 }} sm={{span:12}} md={{ span: 12 }} lg={{ span: 8 }} xl={{span:6}} key={index} data-aos="flip-left" data-aos-duration="800" >
         <Swiper
           loop={true}
           cssMode={true}
@@ -74,18 +75,16 @@ export default function CardLocation() {
         </Swiper>
         <div data-aos="flip-left" data-aos-duration="1000">
           <div className='location__decripton'>
-            <h5 className='location__decripton-sites' >Địa Danh: <span>{item.tenViTri}</span></h5>
-            <span><AiFillStar /></span>
+            <h5 onClick={() => {
+              navigate(`/roomList/${item.id}`)
+            }}
+              className='location__decripton-sites' ><span>{item.tenViTri}</span></h5>
+            <span><AiFillStar />{`${item.data?.start}`}</span>
           </div>
           <div className='location__area'>
             <h6>Tỉnh Thành: {item.tinhThanh}</h6>
             <h6>Quốc Gia: {item.quocGia}</h6>
           </div>
-          <button
-            onClick={() => {
-              navigate(`/roomList/${item.id}`)
-            }}
-            className='btn-searchRoom' > Tìm Phòng</button>
         </div>
 
       </Col >;
@@ -98,7 +97,7 @@ export default function CardLocation() {
   return (
     <div className='cardLocaTion'>
       <Row className='mt-5'
-        gutter={[16, 24]}
+        gutter={[24, 24]}
       >
         {renderRoomItem()}
       </Row>

@@ -17,7 +17,7 @@ export default function RoomList() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(getAllRoom(id))
-  }, [])
+  }, [id])
 
   const { arrRoom } = useSelector(state => state.RoomReducer)
   console.log(arrRoom);
@@ -85,15 +85,14 @@ export default function RoomList() {
             <p>{item.giuong} giường</p>
             <p>Số người ở: {item.khach} người</p>
           </div>
-          <span>Giá phòng 1 đêm: {item.giaTien} $</span>
+          <span className='fw-bold'> {item.giaTien} </span> <span>$ / đêm</span>
         </div>
-
-      </Col >;
+      </Col >
     });
   };
 
   return (
-    <div className='room-container'>
+    <div className='room-container mb-4'>
       <Row gutter={[24, 16]}>
         <Col xs={24} lg={12}>
           <h6>Có  {arrRoom?.length} Kết Quả Được Tìm Thấy</h6>
