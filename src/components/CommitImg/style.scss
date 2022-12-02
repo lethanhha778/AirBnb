@@ -1,6 +1,6 @@
 @import "../../scss/index.scss";
 .commitImg-container {
-    width: 85%;
+    width: 90%;
     margin: 0 auto;
     padding-bottom: 40px;
     .title {
@@ -15,6 +15,9 @@
     .ant-col {
         img {
             border-radius: 10px;
+            max-height: 180px;
+            min-height: 180px;
+            width: 100%;
             &:hover {
                 transition: 0.9s;
                 -webkit-transition: 0.9s;
@@ -87,5 +90,14 @@
     .conection__customer-content {
         width: 100%;
         border-radius: 20px;
+    }
+    .commitImg-container {
+        .ant-col {
+            img {
+                border-radius: 10px;
+                max-height: 200px;
+                min-height: 200px;
+            }
+        }
     }
 }
