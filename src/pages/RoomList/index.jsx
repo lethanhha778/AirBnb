@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllRoom } from '../../redux/actions/RoomAction';
 import { useParams } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
-import { dataIMG } from '../../components/CardLocation/dataImg';
+import { dataIMG } from '../../components/CardRoom/dataImg';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -21,11 +21,6 @@ export default function RoomList() {
 
   const { arrRoom } = useSelector(state => state.RoomReducer)
   console.log(arrRoom);
-  const [newArrRoom, setNewArrRoom] = useState([]);
-  console.log(newArrRoom);
-  useEffect(() => {
-    setNewArrRoom(arrRoom)
-  }, [arrRoom])
   const defaultProps = {
     center: {
       lat: 21.1010564,
@@ -34,11 +29,11 @@ export default function RoomList() {
     zoom: 12
   };
   const renderRoomItem = () => {
-    let room = newArrRoom?.map((item, index) => {
+    let room = arrRoom?.map((item, index) => {
       return { ...item, data: dataIMG[index] };
     });
     console.log(room)
-    return room?.slice(0, 15).map((item, index) => {
+    return room?.slice(0, 16).map((item, index) => {
       return <Col className="gutter-row" xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }} key={index} data-aos="zoom-out-up" data-aos-duration="1000">
         <Swiper
           loop={true}

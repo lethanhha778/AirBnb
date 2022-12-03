@@ -1,6 +1,6 @@
 @import "../../scss/index.scss";
 
-.cardLocaTion {
+.cardRoom {
     width: 90%;
     margin: 0 auto;
     .title {
@@ -26,7 +26,6 @@
         text-align: center;
         font-size: 18px;
         background: #fff;
-        /* Center slide text vertically */
         display: -webkit-box;
         display: -ms-flexbox;
         display: -webkit-flex;
@@ -110,11 +109,11 @@
     color: $color-AirBnb;
 }
 
-.location__decripton {
+.room__decripton {
     display: flex;
     justify-content: space-between;
     padding: 6px 0px;
-    .location__decripton-sites {
+    .room__decripton-sites {
         font-size: 1.1rem;
         display: -webkit-box;
         -webkit-line-clamp: 1;
@@ -133,13 +132,8 @@
             color: $color-AirBnb;
         }
     }
-    .search{
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-    }
 }
-.location__area {
+.room__area {
     width: 100%;
     color: #717171;
     line-height: inherit;

@@ -9,6 +9,7 @@ import Register from "../pages/Register";
 import Home from "../pages/Home";
 import NotFound from "../pages/NotFound"
 import RoomList from "../pages/RoomList";
+import DetailRoom from "../pages/DetailRoom";
 
 export default createBrowserRouter([
   {
@@ -48,6 +49,12 @@ export default createBrowserRouter([
         element: <RoomList />,
         requiredLogin: false
       },
+      {
+        path: "detailRoom/:id",
+        element: <DetailRoom />,
+        requiredLogin: false
+      },
+
     ]
   },
  

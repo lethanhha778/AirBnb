@@ -15,12 +15,12 @@ export default function Banner() {
                         width: 240,
                         height: 340,
                     }}
-                    cover={<img alt="example" src="https://badenmountain.sunworld.vn/wp-content/uploads/2020/01/RAW_6966-Edit-768x513.jpg" />}
+                    cover={<img alt="example" src="https://cdn3.ivivu.com/2022/08/cong-troi-dong-giang-ivivu-4.jpg" />}
                 >
                 </Card>
             </div>
             <div className='img__carousel'>
-                <img src="http://baogialai.com.vn/dataimages/201706/original/images2544706_l_10.jpg" alt="" />
+                <img src="https://dulichdiaphuong.com/imgs/tinh-cao-bang/bai-tinh.jpg" alt="" />
                 <Card
                     hoverable
                     style={{
@@ -33,14 +33,14 @@ export default function Banner() {
 
             </div>
             <div className='img__carousel'>
-                <img src="	https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2019/10/21/761376/D-03.jpg" alt="" />
+                <img src="https://www.dideden.com/wp-content/uploads/2022/09/cac-dia-diem-du-lich-sapa-12.jpg" alt="" />
                 <Card
                     hoverable
                     style={{
                         width: 240,
                         height: 340,
                     }}
-                    cover={<img alt="example" src="https://fansipanlegend.sunworld.vn/wp-content/uploads/2018/09/chua-viet-trong-long-nui-dep-nhu-tien-canh-tren-dinh-fansipan-2000-3-768x598.jpg" />}
+                    cover={<img alt="example" src="https://tcspmgnthn.edu.vn/wp-content/uploads/2022/07/mieu-ta-da-lat.jpg" />}
                 >
                 </Card>
 

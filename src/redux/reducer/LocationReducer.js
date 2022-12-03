@@ -16,6 +16,7 @@ export const LocationReducer = (state = initialState, action) => {
             return { ...state }
         case GET_ALL_LOCATION:
             state.allLocation = action.allLocation
+            console.log(state.allLocation)
             return { ...state }
         default:
             return state

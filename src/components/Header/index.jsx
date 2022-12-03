@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Container from 'react-bootstrap/Container';
 import Navbar from 'react-bootstrap/Navbar';
 import { Select, DatePicker, Space, Button } from 'antd'
-import { AiOutlineSearch, AiOutlineMenu, AiOutlineHeart, AiOutlineUserAdd,AiTwotoneHome } from "react-icons/ai";
+import { AiOutlineSearch, AiOutlineMenu, AiOutlineHeart, AiOutlineUserAdd, AiTwotoneHome } from "react-icons/ai";
 import { HiUserCircle, HiOutlineUserCircle } from "react-icons/hi";
 import { ImExit } from "react-icons/im";
 import { FaUserEdit, FaUserCircle } from "react-icons/fa";
@@ -297,12 +297,12 @@ export default function Header() {
                 <ul className="menu__bottom">
                     <NavLink to="/" className="menu__bottom-item"><AiTwotoneHome style={{ color: '#FF385C' }} />Home</NavLink>
                     <li className="menu__bottom-item"><AiOutlineHeart />Yêu Thích</li>
-                    {userLogin ? <>
-                        <NavLink className="menu__bottom-item"><FaUserCircle />UserName</NavLink>
-                        <NavLink className="menu__bottom-item"><ImExit />Đăng Xuất</NavLink>
-                    </>
-                        :
-                        <>
+                    {userLogin
+                        ? <>
+                            <NavLink className="menu__bottom-item"><FaUserCircle />UserName</NavLink>
+                            <NavLink className="menu__bottom-item"><ImExit />Đăng Xuất</NavLink>
+                        </>
+                        : <>
                             <NavLink to="/auth/login" className="menu__bottom-item"><HiOutlineUserCircle />Đăng Nhập</NavLink>
                             <NavLink to="/auth/register" className="menu__bottom-item"><AiOutlineUserAdd />Đăng Ký</NavLink>
                         </>
