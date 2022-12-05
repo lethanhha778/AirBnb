@@ -2,17 +2,41 @@ import { http } from "../util/config";
 
 // Api Nguoi Dung
 
-export default class UserService {
+class UserService {
     // gửi thông tin đăng ký
-    register= (infoUserRegister) => {
-    return http.post(`/api/auth/signup`,infoUserRegister)
+    register = (infoUserRegister) => {
+        return http.post(`/api/auth/signup`, infoUserRegister)
     }
     // gửi thông tin đăng nhập
-    login = (infoUserLogin)=>{
+    login = (infoUserLogin) => {
         return http.post(`/api/auth/signin`, infoUserLogin);
     }
-    infoUser = (id)=>{
+    infoUser = (id) => {
         return http.post(`/api/users/${id}`)
     }
 
+    //admin
+    listUser = () => {
+        return http.get(`/api/users`);
+    }
+
+    detailUser= (id)=>{
+        return http.get(`/api/users/${id}`);
+    }
+
+    removeUser = (id) => {
+        return http.delete(`api/users?id=${id}`);
+    }
+
+    addUser = (user) => {
+        return http.post(`/api/users`, user);
+    }
+
+    updateUser = (user, id) => {
+        return http.put(`/api/users/${id}`, user);
+    }
+
 }
+
+const userService = new UserService()
+export default userService
