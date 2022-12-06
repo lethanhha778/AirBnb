@@ -9,7 +9,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import { useEffect } from 'react';
-
+import Loading from './components/isLoading';
 export const history = createBrowserHistory()
 
 const App = () => {
@@ -31,7 +31,10 @@ const App = () => {
   }, [loggedIn, navigate]);
 
   return (
-    <RouterProvider router={router} />
+    <>
+      <Loading/>
+      <RouterProvider router={router} />
+    </>
   );
 }
 

@@ -1,5 +1,4 @@
-import { dataIMG } from "../../components/CardRoom/dataImg"
-import { DATA_SEARCH, GET_ALL_ROOM, GET_DETAIL_ROOM } from "../type/BookingRoomType"
+import { DATA_SEARCH, GET_ALL_ROOM, } from "../type/BookingRoomType"
 
 
 const initialState = {
@@ -19,14 +18,7 @@ export const BookingReducer = (state = initialState, action) => {
         case GET_ALL_ROOM:
             state.arrRoom = action.arrRoom
             return {...state}
-        // case GET_DETAIL_ROOM:
-        //     state.room = action.room.dataRoom
-        //     // console.log(action.room.idRoom);
-        //     // console.log(dataIMG[action.room.idRoom])
-        //     // cần id
-        //     state.room = {...state.room, data:dataIMG[action.room.idRoom]}
-        //     console.log('room',state.room)
-        //     return { ...state }
+
         default:
             return state
     }

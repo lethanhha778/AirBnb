@@ -6,6 +6,9 @@ class RoomService {
     getRoomList = (locationID) => {
         return http.get(`/api/phong-thue/lay-phong-theo-vi-tri?maViTri=${locationID}`)
     }
+    getDetailRoom = (id)=>{
+        return http.get(`/api/phong-thue/${id}`)
+    }
 }
 const roomService = new RoomService()
 export default roomService

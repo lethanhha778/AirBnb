@@ -18,6 +18,8 @@
             border-radius: 10px;
             width: 100%;
             height: 300px;
+            object-fit: cover;
+            vertical-align: bottom;
         }
     }
 }
@@ -110,8 +112,8 @@
 }
 
 .room__decripton {
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
     padding: 6px 0px;
     .room__decripton-sites {
         font-size: 1.1rem;
