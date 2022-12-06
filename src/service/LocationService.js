@@ -8,8 +8,7 @@ class LocationService {
         return http.get(`/api/vi-tri`)
     }
     // lấy danh sách phân trang tìm kiếm
-    // phải có page index, page size, keyword truyền vào data
-    getAllLocation = (pageIndex,pageSize) => {
+    getAllLocation = () => {
         return http.get(`/api/vi-tri/phan-trang-tim-kiem?pageIndex=1&pageSize=30`)
     }
 }

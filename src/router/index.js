@@ -1,7 +1,7 @@
 import {
-  createBrowserRouter,
+  createBrowserRouter
 } from "react-router-dom";
-
+import React from "react"
 import NotLoggedInLayout from '../layout/NotLoggedInLayout';
 import LoggedInLayout from '../layout/LoggedInLayout';
 import Login from "../pages/Login";
@@ -35,14 +35,14 @@ export default createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       {
-        path: "home",
+        path: '/',
         element: <Home />,
         requiredLogin: false
       },
       {
-        path:'/',
-        element:<Home/>,
-        requiredLogin:false
+        path: "home",
+        element: <Home />,
+        requiredLogin: false
       },
       {
         path: "roomList/:id",
@@ -57,5 +57,5 @@ export default createBrowserRouter([
 
     ]
   },
- 
+
 ]);

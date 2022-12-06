@@ -11,13 +11,15 @@ import 'swiper/css/scrollbar';
 import { dataLocation } from './dataLocation'
 import { getAllLocation } from '../../redux/actions/LocationAction';
 import './style.scss'
+import { json } from 'react-router-dom';
+
 
 export default function CardLocation() {
     const dispatch = useDispatch()
     useEffect(() => {
         const action = getAllLocation()
         dispatch(action)
-    }, [])
+    }, [dispatch])
     const { allLocation } = useSelector(state => state.LocationReducer)
     const renderRoomItem = () => {
         let room = allLocation.data?.map((item, index) => {
@@ -26,7 +28,10 @@ export default function CardLocation() {
 
         return room?.slice(1, 9).map((item, index) => {
             return <Col
-                className="gutter-row" xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }} lg={{ span: 8 }} xl={{ span: 6 }} key={index} data-aos="flip-left" data-aos-duration="800" >
+                className="gutter-row"
+                xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }} lg={{ span: 8 }} xl={{ span: 6 }}
+                key={index}
+                data-aos="flip-left" data-aos-duration="800" >
                 <Swiper
                     loop={true}
                     cssMode={true}
@@ -85,8 +90,8 @@ export default function CardLocation() {
             <Row className='mt-5'
                 gutter={[24, 24]}
             >
-
                 {renderRoomItem()}
+
             </Row>
         </div>
     )

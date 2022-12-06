@@ -42,7 +42,7 @@ export let dataLocation = [
         img3: 'https://godidigo.com/blog/wp-content/uploads/2019/06/cau-song-han-da-nang-2-1280x720.jpg',
         img4: 'https://dulichdongque.com/wp-content/uploads/2019/02/bai-bien-my-khe.jpg',
     
-        search: "4.96",
+        search: "4.960",
     },
     {
         img1: 'https://nof.com.vn/wp-content/uploads/2021/01/ghe-tham-thanh-pho-ngan-hoa-da-lat-cam-nang-du-lich-ghe-tham-thanh-pho-ngan-hoa-da-lat-cam-nang-du-lich.jpg',

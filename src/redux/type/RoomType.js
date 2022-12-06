@@ -1,1 +1,2 @@
 export const GET_LIST_ROOM='GET_LIST_ROOM';
+export const GET_DETAIL_ROOM ='GET_DETAIL_ROOM'

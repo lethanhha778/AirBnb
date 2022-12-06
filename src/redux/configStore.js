@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 
 import AuthReducer from "./reducer/AuthReducer";
 import { BookingReducer } from './reducer/BookingReducer';
+import LoadingReducer from './reducer/LoadingReducer';
 import { LocationReducer } from './reducer/LocationReducer';
 import { RoomReducer } from './reducer/RoomReducer';
 
@@ -13,6 +14,7 @@ const RootReducer = combineReducers({
     AuthReducer,
     BookingReducer,
     RoomReducer,
+    LoadingReducer
 })
 
 export const store = createStore(
