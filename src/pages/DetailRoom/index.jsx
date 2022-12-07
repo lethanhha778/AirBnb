@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Row } from 'antd';
+import { Col, Row, Select, DatePicker, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import "antd/dist/reset.css";
 import { useParams } from 'react-router-dom'
 import { dataIMG } from '../../components/CardRoom/dataImg'
-import { DatePicker, Space } from 'antd'
 import { getDetailRoom } from '../../redux/actions/RoomAction'
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import { GiNetworkBars, GiBusDoors, GiThermometerCold, GiWashingMachine } from "react-icons/gi";
@@ -15,30 +14,50 @@ import { MdIron } from "react-icons/md";
 import { BiSwim } from "react-icons/bi";
 import { CgScreen } from "react-icons/cg";
 import { TbToolsKitchen } from "react-icons/tb";
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
 import './style.scss'
+import moment from 'moment/moment';
+
 
 export default function DetailRoom() {
-    dayjs.extend(customParseFormat);
+    const serviceCharge = Number(5)
     let { id } = useParams()
-    console.log(id);
+    const [datePicker, setDatePicker] = useState([0, 0])
+    const [date, setDate] = useState(1)
+    const [totalPay, setTotalPay] = useState(0)
+    const [people, setPeople] = useState(0)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getDetailRoom(id))
     }, [])
     const { detailRoom } = useSelector(state => state.RoomReducer)
     console.log(detailRoom);
-    // chọn ngày
-    const [dateStar, setDateStar] = useState('')
-    const [dateEnd, setDateEnd] = useState('')
-    const onChangeStartDay = (date, dateString) => {
-        console.log('start', dateString);
-        setDateStar(dateString)
+    // chọn ngày 
+    const { RangePicker } = DatePicker;
+    const disabledDate = (current) => {
+        // set disabled ngày đã trải qua
+        let customDate = moment().format("YYYY-MM-DD");
+        return current && current < moment(customDate, "YYYY-MM-DD");
     };
-    const onChangeEndDay = (date, dateString) => {
-        console.log(dateString);
-        setDateEnd(dateString)
+    const onChange = (date, dateString) => {
+        setDatePicker(dateString)
+        //  chuyển ngày chọn sang milisecond rồi tính số ngày
+        const totalMilisecond = Date.parse(`${dateString[1]}`) - Date.parse(`${dateString[0]}`)
+        const totalDate = Number(totalMilisecond / 86400000)
+        const totalPay = detailRoom.giaTien * totalDate
+        console.log(totalPay)
+        setDate(totalDate)
+        setTotalPay(totalPay)
+    };
+    // Tổng tiền
+    const allToatal = () => {
+        if (totalPay === 0) {
+            return detailRoom.giaTien + serviceCharge
+        }
+        return totalPay + serviceCharge
+    }
+    const onChangePeople = (value) => {
+        setPeople(value)
+        console.log(`selected ${value}`);
     };
 
     const renderDetailRoom = () => {
@@ -74,13 +93,12 @@ export default function DetailRoom() {
                 </div>
             </div>
         </div>
-
     }
 
     return (
         <div className='container-detail'>
             {renderDetailRoom()}
-            <Row gutter={[48, 16]}>
+            <Row gutter={[32, 16]}>
                 <Col span={16} className='col__left'>
                     <Row>
                         <Col span={22} className='col__left-1'>
@@ -164,22 +182,80 @@ export default function DetailRoom() {
 
                 </Col>
                 <Col span={8} className='col__right'>
-                    <h6>${detailRoom.giaTien} đêm</h6>
-                    <div className="input__choose-item">
-                        <Space direction="vertical" size={12}>
-                            <DatePicker
-                                placeholder="Ngày Bắt Đầu"
-                                onChange={onChangeStartDay} />
+                    <div className="ticket-pay">
+                        <h6 className='title-pay'> <span>${detailRoom.giaTien}</span> đêm</h6>
 
-
-                        </Space>
-                        <Space direction="vertical" size={12}>
-                            <DatePicker
-                                placeholder="Ngày Kết Thúc"
-                                onChange={onChangeEndDay} />
-                        </Space>
+                        <div className="input__choose-item">
+                            <Space direction="vertical" size={12}>
+                                <RangePicker disabledDate={disabledDate} onChange={onChange} />
+                            </Space>
+                        </div>
+                        <div className="input__choose-item">
+                            <Select
+                                showSearch
+                                placeholder="Số Người"
+                                optionFilterProp="children"
+                                onChange={onChangePeople}
+                                filterOption={(input, option) =>
+                                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                }
+                                options={[
+                                    {
+                                        value: '1',
+                                        label: '1 Người',
+                                    },
+                                    {
+                                        value: '2',
+                                        label: '2 Người',
+                                    },
+                                    {
+                                        value: '3',
+                                        label: '3 Người',
+                                    },
+                                    {
+                                        value: '4',
+                                        label: '4 Người',
+                                    },
+                                    {
+                                        value: '5',
+                                        label: '5 Người',
+                                    }
+                                ]}
+                            />
+                        </div>
+                        <button className='btn-bookingRoom'>
+                            <span>Đặt Phòng</span>
+                        </button>
+                        <p className='text-center'>Bạn Vẫn Chưa Bị Trừ Tiền</p>
+                        <div className='total__pay'>
+                            <div>
+                                <h6>${detailRoom.giaTien} x {date} đêm</h6>
+                            </div>
+                            <div>
+                                {totalPay === 0
+                                    ? <h6> ${detailRoom.giaTien} </h6>
+                                    : <h6> ${totalPay}</h6>}
+                            </div>
+                        </div>
+                        <div className='total__service'>
+                            <div>
+                                <h6>Phí Dịch Vụ</h6>
+                            </div>
+                            <div>
+                                <h6>${serviceCharge}</h6>
+                            </div>
+                        </div>
+                        <div className='total__pay total-end'>
+                            <div>
+                                <h4>Tổng Trước Thuế</h4>
+                            </div>
+                            <div>
+                                <h6>${allToatal()}</h6>
+                            </div>
+                        </div>
 
                     </div>
+
                 </Col>
 
             </Row>
