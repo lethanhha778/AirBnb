@@ -6,8 +6,10 @@ import dayjs from 'dayjs';
 import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
 import { Form, Input, Button, DatePicker, Select, Modal } from 'antd';
 import { getUserAction, setAlertUserAction, updateUserAction } from '../../redux/actions/UserAction';
+import { useParams } from 'react-router-dom';
 
-export default function EditUser(props) {
+export default function EditUser() {
+  let { id } = useParams();
   let { user, arletContent } = useSelector(state => state.userReducer);
   let dispatch = useDispatch();
 
@@ -74,7 +76,7 @@ export default function EditUser(props) {
   };
 
   let getUserAPI = () => {
-    let action = getUserAction(props.match.params.id);
+    let action = getUserAction(id);
     dispatch(action);
   }
 

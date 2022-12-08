@@ -1,11 +1,12 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { listLocationAction, removeLocationAction, setAlertLocationAction } from '../../redux/actions/LocationAction';
 import { EditFilled , DeleteFilled } from '@ant-design/icons';
 import { Button, Table, Modal } from 'antd';
-import { history } from "../../App";
 
 export default function Location() {
+    const navigate = useNavigate();
     let { arrLocation, arletContent } = useSelector(state => state.locationReducer);
     let dispatch = useDispatch();
     useEffect(() => {
@@ -54,7 +55,7 @@ export default function Location() {
             dataIndex: '',
             render: (t, r) => <div>
                 <EditFilled style={{ fontSize: '16px', color: '#1677ff', marginRight:'10px' }} onClick={() => {
-                    history.push(`/admin/editLocation/${r.id}`);
+                    navigate(`/admin/editlocation/${r.id}`);
                 }} className='btn btn-info'/>
                 <DeleteFilled style={{ fontSize: '16px', color: '#ff4d4f' }} onClick={() => {
                     let action = removeLocationAction(r.id);
@@ -89,7 +90,7 @@ export default function Location() {
         <div style={{ padding: '15px' }}>
             <h2 >Quản lý vị trí</h2>
             <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
-                history.push('/admin/addlocation');
+                navigate('/admin/addlocation');
             }} className="btn btn-success m-3">Thêm vị trí</Button>
             <Table rowKey='id' columns={columns} dataSource={arrLocation} />
         </div>

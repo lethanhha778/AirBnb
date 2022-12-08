@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 import { EditFilled , DeleteFilled } from '@ant-design/icons';
 import { Button, Table, Modal } from 'antd';
-import { history } from "../../App";
 import { listBookingAction, removeBookingAction, setAlertBookingAction } from '../../redux/actions/BookingRoomAction';
 
 export default function BookingRoom() {
+    const navigate = useNavigate();
     let { arrBooking, arletContent } = useSelector(state => state.bookingReducer);
     let dispatch = useDispatch();
     useEffect(() => {
@@ -56,7 +57,7 @@ export default function BookingRoom() {
             dataIndex: '',
             render: (t, r) => <div>
                 <EditFilled style={{ fontSize: '16px', color: '#1677ff', marginRight:'10px' }} onClick={() => {
-                    history.push(`/admin/editbookingroom/${r.id}`);
+                    navigate(`/admin/editbookingroom/${r.id}`);
                 }} className='btn btn-info'/>
                 <DeleteFilled style={{ fontSize: '16px', color: '#ff4d4f' }} onClick={() => {
                     let action = removeBookingAction(r.id);
@@ -91,7 +92,7 @@ export default function BookingRoom() {
         <div style={{ padding: '15px' }}>
             <h2 >Quản lý đặt phòng</h2>
             <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
-                history.push('/admin/addbookingroom');
+                navigate('/admin/addbookingroom');
             }} className="btn btn-success m-3">Đặt phòng</Button>
             <Table rowKey='id' columns={columns} dataSource={arrBooking} />
         </div>

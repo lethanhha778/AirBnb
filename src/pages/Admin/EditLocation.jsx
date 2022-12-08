@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
 import { Form, Input, Button, Upload, Modal } from 'antd';
 import { getLocationAction, setAlertLocationAction, updateLocationAction, upImageLocationAction } from '../../redux/actions/LocationAction';
 
 
-export default function EditLocation(props) {
+export default function EditLocation() {
+  let { id } = useParams();
   let { location, arletContent } = useSelector(state => state.locationReducer);
   let dispatch = useDispatch();
   let [fileList, setfileList] = useState([
@@ -82,7 +84,7 @@ export default function EditLocation(props) {
   };
 
   let getLocationAPI = () => {
-    let action = getLocationAction(props.match.params.id);
+    let action = getLocationAction(id);
     dispatch(action);
   }
 

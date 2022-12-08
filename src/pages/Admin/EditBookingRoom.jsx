@@ -5,8 +5,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import dayjs from 'dayjs';
 import { Form, Button, DatePicker, InputNumber, Modal } from 'antd';
 import { getBookingAction, setAlertBookingAction, updateBookingAction } from '../../redux/actions/BookingRoomAction';
+import { useParams } from 'react-router-dom';
 
-export default function EditBookingRoom(props) {
+export default function EditBookingRoom() {
+    let { id } = useParams()
     let { booking, arletContent } = useSelector(state => state.bookingReducer)
     let dispatch = useDispatch();
     const [form] = Form.useForm();
@@ -66,7 +68,7 @@ export default function EditBookingRoom(props) {
     };
 
     let getBookingAPI = () => {
-        let action = getBookingAction(props.match.params.id);
+        let action = getBookingAction(id);
         dispatch(action);
     }
 

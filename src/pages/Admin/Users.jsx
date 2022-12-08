@@ -1,11 +1,12 @@
-import React, { Fragment, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { listUserAction, removeUserAction, setAlertUserAction } from '../../redux/actions/UserAction'
-import { EditFilled , DeleteFilled } from '@ant-design/icons';
+import { EditFilled, DeleteFilled } from '@ant-design/icons';
 import { Button, Table, Modal } from 'antd';
-import { history } from "../../App";
 
 export default function Users() {
+    const navigate = useNavigate();
     let { arrUser, arletContent } = useSelector(state => state.userReducer);
     let dispatch = useDispatch();
     useEffect(() => {
@@ -66,14 +67,14 @@ export default function Users() {
             title: 'Hàng động',
             dataIndex: '',
             render: (t, r) => <div>
-                <EditFilled style={{ fontSize: '16px', color: '#1677ff', marginRight:'10px' }} onClick={() => {
-                    history.push(`/admin/edituser/${r.id}`);
-                }} className='btn btn-info'/>
+                <EditFilled style={{ fontSize: '16px', color: '#1677ff', marginRight: '10px' }} onClick={() => {
+                    navigate(`/admin/edituser/${r.id}`);
+                }} className='btn btn-info' />
                 <DeleteFilled style={{ fontSize: '16px', color: '#ff4d4f' }} onClick={() => {
                     let action = removeUserAction(r.id);
                     dispatch(action);
-                }}/>
-                </div>,
+                }} />
+            </div>,
         },
     ];
 
@@ -101,8 +102,8 @@ export default function Users() {
     return (
         <div style={{ padding: '15px' }}>
             <h2 >Quản lý người dùng</h2>
-            <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
-                history.push('/admin/adduser');
+            <Button type="primary" style={{ marginBottom: '10px' }} onClick={() => {
+                navigate('/admin/adduser');
             }} className="btn btn-success m-3">Thêm người dùng</Button>
             <Table rowKey='id' columns={columns} dataSource={arrUser} />
         </div>

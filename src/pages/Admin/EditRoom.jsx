@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
 import { Col, Row, Form, Input, InputNumber, Switch, Button,Upload, Modal } from 'antd';
 import { getRoomAction, setAlertRoomAction, updateRoomAction, upImageRoomAction } from '../../redux/actions/RoomAction';
 const { TextArea } = Input;
 
-export default function EditLocation(props) {
+export default function EditLocation() {
+    let { id } = useParams()
     let { room, arletContent } = useSelector(state => state.roomReducer);
     let dispatch = useDispatch();
     
@@ -97,7 +99,7 @@ export default function EditLocation(props) {
     };
 
     let getRoomAPI = () => {
-        let action = getRoomAction(props.match.params.id);
+        let action = getRoomAction(id);
         dispatch(action);
     }
 

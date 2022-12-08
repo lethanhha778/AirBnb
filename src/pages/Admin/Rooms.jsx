@@ -1,11 +1,12 @@
-import React, { Fragment, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { EditFilled , DeleteFilled } from '@ant-design/icons';
 import { Button, Table, Modal } from 'antd';
-import { history } from "../../App";
 import { listRoomAction, removeRoomAction, setAlertRoomAction } from '../../redux/actions/RoomAction';
 
 export default function Location() {
+    const navigate = useNavigate();
     let { arrRoom, arletContent } = useSelector(state => state.roomReducer);
     let dispatch = useDispatch();
     useEffect(() => {
@@ -55,7 +56,7 @@ export default function Location() {
             dataIndex: '',
             render: (t, r) => <div>
                 <EditFilled style={{ fontSize: '16px', color: '#1677ff', marginRight:'10px' }} onClick={() => {
-                    history.push(`/admin/editRoom/${r.id}`);
+                    navigate(`/admin/editRoom/${r.id}`);
                 }} className='btn btn-info'/>
                 <DeleteFilled style={{ fontSize: '16px', color: '#ff4d4f' }} onClick={() => {
                     let action = removeRoomAction(r.id);
@@ -91,7 +92,7 @@ export default function Location() {
         <div style={{ padding: '15px' }}>
             <h2 >Quản lý phòng</h2>
             <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
-                history.push('/admin/addroom');
+                navigate('/admin/addroom');
             }} className="btn btn-success m-3">Thêm phòng</Button>
             <Table rowKey='id' columns={columns} dataSource={arrRoom} />
         </div>
