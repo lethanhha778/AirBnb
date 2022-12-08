@@ -15,6 +15,28 @@ class UserService {
         return http.post(`/api/users/${id}`)
     }
 
+    //admin
+    listUser = () => {
+        return http.get(`/api/users`);
+    }
+
+    detailUser= (id)=>{
+        return http.get(`/api/users/${id}`);
+    }
+
+    removeUser = (id) => {
+        return http.delete(`api/users?id=${id}`);
+    }
+
+    addUser = (user) => {
+        return http.post(`/api/users`, user);
+    }
+
+    updateUser = (user, id) => {
+        return http.put(`/api/users/${id}`, user);
+    }
+
 }
+
 const userService = new UserService()
 export default userService

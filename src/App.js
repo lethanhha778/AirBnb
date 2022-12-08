@@ -1,13 +1,11 @@
 import { createBrowserHistory } from 'history';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'antd/dist/antd.css';
-import router from "./router"
+// import 'antd/dist/antd.css';
+import router from "./router";
 import { useDispatch, useSelector } from "react-redux";
 import { CHECK_LOGIN } from "./redux/actions/AuthAction"
-import {
-  RouterProvider,
-} from "react-router-dom";
+import { RouterProvider,} from "react-router-dom";
 import { useEffect } from 'react';
 import Loading from './components/isLoading';
 export const history = createBrowserHistory()
