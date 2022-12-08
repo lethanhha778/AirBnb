@@ -1,22 +1,39 @@
-<<<<<<< HEAD
-import { ADD_LOCATION, DEL_LOCATION, GET_DETAIL_LOCATION, GET_LIST_LOCATION, SET_ALERT, UPDATE_LOCATION, UP_IMAGE_LOCATION } from "../type/LocationType";
+import { GET_ALL_LOCATION, GET_LIST_LOCATION } from "../type/LocationType"
+import { ADD_LOCATION, DEL_LOCATION, GET_DETAIL_LOCATION_AD, GET_LIST_LOCATION_AD, SET_ALERT, UPDATE_LOCATION, UP_IMAGE_LOCATION } from "../type/LocationType";
 
 
 const initialState = {
     arrLocation: [],
     location: {},
     arletContent: '',
+    arrayLocation: [],
+    allLocation: {}
+}
+
+export const LocationReducer = (state = initialState, action) => {
+    switch (action.type) {
+        // lấy ds vị trí 
+        case GET_LIST_LOCATION:
+            state.arrayLocation = action.arrayLocation
+            return { ...state }
+        case GET_ALL_LOCATION:
+            state.allLocation = action.allLocation
+            console.log(state.allLocation)
+            return { ...state }
+        default:
+            return state
+    }
 }
 
 export const locationReducer = (state = initialState, action) => {
     switch (action.type) {
 
         //admin
-        case GET_LIST_LOCATION:
+        case GET_LIST_LOCATION_AD:
             state.arrLocation = action.arrLocation;
             return { ...state }
 
-        case GET_DETAIL_LOCATION:
+        case GET_DETAIL_LOCATION_AD:
             state.location = action.location;
             return { ...state }
 
@@ -54,29 +71,4 @@ export const locationReducer = (state = initialState, action) => {
             return state
     }
 }
-=======
-import { GET_ALL_LOCATION, GET_LIST_LOCATION } from "../type/LocationType"
 
-const initialState = {
-    arrayLocation: [],
-    allLocation: {
-
-    }
-
-}
-
-export const LocationReducer = (state = initialState, action) => {
-    switch (action.type) {
-        // lấy ds vị trí 
-        case GET_LIST_LOCATION:
-            state.arrayLocation = action.arrayLocation
-            return { ...state }
-        case GET_ALL_LOCATION:
-            state.allLocation = action.allLocation
-            console.log(state.allLocation)
-            return { ...state }
-        default:
-            return state
-    }
-}
->>>>>>> main

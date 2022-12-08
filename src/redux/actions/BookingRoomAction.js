@@ -1,7 +1,25 @@
+import { GET_ALL_ROOM, } from "../type/BookingRoomType";
+import { hiddenLoadingAction, loadingAction } from "./LoadingAction";
 import bookingRoomService from "../../service/BookingRoomService";
-<<<<<<< HEAD
-import { ADD_BOOKING, DEL_BOOKING, GET_DETAIL_BOOKING, GET_LIST_BOOKING, SET_ALERT, UPDATE_BOOKING } from "../type/BookingRoomType";
+import { ADD_BOOKING, DEL_BOOKING, GET_DETAIL_BOOKING_AD, GET_LIST_BOOKING_AD, SET_ALERT, UPDATE_BOOKING } from "../type/BookingRoomType";
 
+export const roomList = () => {
+    return (dispatch) => {
+        dispatch(loadingAction)
+        let promise = bookingRoomService.getAllRoom()
+        promise.then((res) => {
+            const action = {
+                type: GET_ALL_ROOM,
+                arrRoom: res.data.content
+            }
+            dispatch(action)
+            dispatch(hiddenLoadingAction)
+        })
+        promise.catch((err) => {
+            console.log(err);
+        })
+    }
+}
 
 //admin
 export const listBookingAction = () => {
@@ -9,7 +27,7 @@ export const listBookingAction = () => {
         let promise = bookingRoomService.listBooking();
         promise.then((result) => {
             let action2 = {
-                type: GET_LIST_BOOKING,
+                type: GET_LIST_BOOKING_AD,
                 arrBooking: result.data.content,
             }
             dispatch2(action2)
@@ -29,7 +47,7 @@ export const getBookingAction = (id = '') => {
         let promise = bookingRoomService.detailBooking(id);
         promise.then((result) => {
             let action2 = {
-                type: GET_DETAIL_BOOKING,
+                type: GET_DETAIL_BOOKING_AD,
                 booking: result.data.content,
             }
             dispatch2(action2)
@@ -115,26 +133,4 @@ export const setAlertBookingAction = (arletContent = '') => {
         }
         dispatch2(action2)
     }
-=======
-import { GET_ALL_ROOM, } from "../type/BookingRoomType";
-import { hiddenLoadingAction, loadingAction } from "./LoadingAction";
-
-
-export const roomList = () => {
-    return (dispatch) => {
-        dispatch(loadingAction)
-        let promise = bookingRoomService.getAllRoom()
-        promise.then((res) => {
-            const action = {
-                type: GET_ALL_ROOM,
-                arrRoom: res.data.content
-            }
-            dispatch(action)
-            dispatch(hiddenLoadingAction)
-        })
-        promise.catch((err) => {
-            console.log(err);
-        })
-    }
->>>>>>> main
 }
