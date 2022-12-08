@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Col, Row, Select, DatePicker, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import "antd/dist/reset.css";
-import { useParams } from 'react-router-dom'
-import { dataIMG } from '../../components/CardRoom/dataImg'
+import { useParams } from 'react-router-dom';
+import moment from 'moment/moment';
 import { getDetailRoom } from '../../redux/actions/RoomAction'
 import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
 import { GiNetworkBars, GiBusDoors, GiThermometerCold, GiWashingMachine } from "react-icons/gi";
@@ -14,9 +14,8 @@ import { MdIron } from "react-icons/md";
 import { BiSwim } from "react-icons/bi";
 import { CgScreen } from "react-icons/cg";
 import { TbToolsKitchen } from "react-icons/tb";
+import { dataIMG } from '../../components/CardRoom/dataImg';
 import './style.scss'
-import moment from 'moment/moment';
-
 
 export default function DetailRoom() {
     const serviceCharge = Number(5)
