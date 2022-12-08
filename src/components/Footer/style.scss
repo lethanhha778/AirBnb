@@ -1,0 +1,112 @@
+@import "../../scss/index.scss";
+.footer{
+    width: 100%;
+    background-color: rgb(244, 241, 241);
+    
+}
+.footer-container {
+    width: 90%;
+    margin: 0 auto;
+    .ant-row{
+        padding: 40px 0 20px;
+        border-bottom: 1px solid rgb(210, 207, 207);
+        h5{
+            color: $color-AirBnb;
+            font-size: 1.4rem;
+        }
+        ul{
+            padding-left: 0;
+        }
+        li{
+            list-style: none;
+            line-height: 2;
+            a{
+                text-decoration: none;
+                color: rgb(37, 36, 36);
+                &:hover{
+                    color: $color-AirBnb;
+                }
+            }
+        }
+    }
+    .title-home {
+        font-size: 1.4rem;
+        font-weight: 700;
+    }
+}
+.footer-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px 0;
+    .footer-bottom-left{
+        display: flex;
+        font-size: 1.1rem;
+        cursor: pointer;
+       ul{
+        display: flex;
+        li{
+            padding-right: 20px;
+            &:hover{
+                color: $color-AirBnb;
+            }
+        }
+       }
+    }
+    
+}
+.footer-bottom-right{
+    display: flex;
+    font-size: 1.1rem;
+    justify-content: space-around;
+    .language , .dollar{
+        cursor: pointer;
+        u{
+            font-weight: bold;
+        }
+        &:hover{
+            color: $color-AirBnb;
+        }
+    }
+
+    span{
+        padding: 0 10px;
+    }
+    .footer-icon{
+        cursor: pointer;
+        .icon{
+            margin: 0 4px;
+            font-size: 1.3rem;
+            &:hover{
+                color: $color-AirBnb;
+            }
+        }
+    }
+}
+@media screen and (max-width: 1023px) {
+    .footer-bottom {
+        display: flex;
+        flex-direction: column;
+        .footer-bottom-left{
+            flex-direction: row;
+            justify-content: space-between;
+            ul{
+                flex-direction: row;
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px) {
+    .footer-bottom {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: 70px;
+        .footer-bottom-left{
+            flex-direction: column;
+            ul{
+                flex-direction: column;
+            }
+        }
+    }
+}
+

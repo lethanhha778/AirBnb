@@ -2,7 +2,11 @@
 import { http } from "../util/config";
 
 class BookingRoomService {
-   
+    // lấy cái api này render ra từng phòng ở home
+    getAllRoom = ()=>{
+        return http.get(`api/phong-thue`)
+    }
+
     //admin
     listBooking = () => {
         return http.get(`/api/dat-phong`)
@@ -23,6 +27,7 @@ class BookingRoomService {
     updateBooking = (booking, id) => {
         return http.put(`/api/dat-phong/${id}`, booking);
     }
+
 }
 
 const bookingRoomService = new BookingRoomService()

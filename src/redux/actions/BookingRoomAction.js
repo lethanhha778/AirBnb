@@ -1,4 +1,5 @@
 import bookingRoomService from "../../service/BookingRoomService";
+<<<<<<< HEAD
 import { ADD_BOOKING, DEL_BOOKING, GET_DETAIL_BOOKING, GET_LIST_BOOKING, SET_ALERT, UPDATE_BOOKING } from "../type/BookingRoomType";
 
 
@@ -114,4 +115,26 @@ export const setAlertBookingAction = (arletContent = '') => {
         }
         dispatch2(action2)
     }
+=======
+import { GET_ALL_ROOM, } from "../type/BookingRoomType";
+import { hiddenLoadingAction, loadingAction } from "./LoadingAction";
+
+
+export const roomList = () => {
+    return (dispatch) => {
+        dispatch(loadingAction)
+        let promise = bookingRoomService.getAllRoom()
+        promise.then((res) => {
+            const action = {
+                type: GET_ALL_ROOM,
+                arrRoom: res.data.content
+            }
+            dispatch(action)
+            dispatch(hiddenLoadingAction)
+        })
+        promise.catch((err) => {
+            console.log(err);
+        })
+    }
+>>>>>>> main
 }

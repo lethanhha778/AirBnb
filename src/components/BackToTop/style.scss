@@ -1,0 +1,39 @@
+@import "../../scss/index.scss";
+
+.top-to-btn {
+    position: relative;
+    .icon-position {
+        position: fixed;
+        bottom: 40px;
+        right: 25px;
+        z-index: 20;
+    }
+    .icon-style {
+        background-color: white;
+        border: 2px solid $color-AirBnb;
+
+        border-radius: 50%;
+        height: 40px;
+        width: 40px;
+        color: #fff;
+        cursor: pointer;
+        animation: movebtn 3s ease-in-out infinite;
+        transition: all 0.3s ease-in-out;
+        img {
+            width: 100%;
+            padding: 6px;
+        }
+    }
+}
+
+@keyframes movebtn {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(10px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
