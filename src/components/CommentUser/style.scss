@@ -1,0 +1,51 @@
+@import "../../scss/index.scss";
+.comment-container {
+    padding: 20px 0;
+    .item-comment{
+        border-bottom: 1px solid #e9e9e9;
+    }
+    .comment {
+        padding: 8px 0;
+    }
+    .user {
+        display: flex;
+        flex-direction: row;
+        justify-content: left;
+        align-items: center;
+        margin-bottom: 10px;
+        .img-user {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+        .user-name {
+            margin-left: 12px;
+            h5 {
+                margin-bottom: 3px;
+            }
+        }
+    }
+}
+.rate-comment{
+    .ant-input-textarea{
+        margin: 20px 0;
+    }
+}
+.btn-comment {
+    width: 20%;
+    padding:0px 4px 4px;
+    margin: 10px 0 ;
+    border-radius: 8px;
+    background-color: $color-AirBnb;
+    border: 2px solid $color-AirBnb;
+    transition: ease-in 0.3s;
+    &:hover {
+        background-color: rgb(224, 23, 96);
+        border: 2px solid rgb(224, 23, 96);
+    }
+    span {
+        font-weight: bold;
+        font-size: 1.2rem;
+        color: white;
+    }
+}

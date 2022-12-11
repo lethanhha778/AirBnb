@@ -16,10 +16,11 @@ import { CgScreen } from "react-icons/cg";
 import { TbToolsKitchen } from "react-icons/tb";
 import { dataIMG } from '../../components/CardRoom/dataImg';
 import './style.scss'
+import CommnetUser from '../../components/CommentUser';
 
 export default function DetailRoom() {
-    const serviceCharge = Number(5)
     let { id } = useParams()
+    const serviceCharge = Number(5)
     const [datePicker, setDatePicker] = useState([0, 0])
     const [date, setDate] = useState(1)
     const [totalPay, setTotalPay] = useState(0)
@@ -33,21 +34,25 @@ export default function DetailRoom() {
     // chọn ngày 
     const { RangePicker } = DatePicker;
     const disabledDate = (current) => {
-        // set disabled ngày đã trải qua
+        // set disabled ngày đã qua
         let customDate = moment().format("YYYY-MM-DD");
         return current && current < moment(customDate, "YYYY-MM-DD");
     };
     const onChange = (date, dateString) => {
         setDatePicker(dateString)
-        //  chuyển ngày chọn sang milisecond rồi tính số ngày
-        const totalMilisecond = Date.parse(`${dateString[1]}`) - Date.parse(`${dateString[0]}`)
+        totalPriceOfDays(dateString)
+
+    };
+    // tính tiền theo ngày chọn
+    const totalPriceOfDays = (date) => {
+        const totalMilisecond = Date.parse(`${date[1]}`) - Date.parse(`${date[0]}`)
         const totalDate = Number(totalMilisecond / 86400000)
         const totalPay = detailRoom.giaTien * totalDate
         console.log(totalPay)
         setDate(totalDate)
         setTotalPay(totalPay)
-    };
-    // Tổng tiền
+    }
+    // Tổng tiền thanh toán
     const allToatal = () => {
         if (totalPay === 0) {
             return detailRoom.giaTien + serviceCharge
@@ -56,19 +61,36 @@ export default function DetailRoom() {
     }
     const onChangePeople = (value) => {
         setPeople(value)
-        console.log(`selected ${value}`);
     };
 
     const renderDetailRoom = () => {
-        const newRoom = { ...detailRoom, data: dataIMG[id] }
-        return <div>
+        let newRoom = {}
+        if (detailRoom?.id < 30) {
+            newRoom = { ...detailRoom, data: dataIMG[id - 1] }
+            console.log(1);
+        } else {
+            newRoom = {
+                ...detailRoom,
+                data: {
+                    img1: 'https://a0.muscache.com/im/pictures/d682f7bf-caa4-4433-9038-c5f81a01845b.jpg?im_w=1200',
+                    img2: 'https://a0.muscache.com/im/pictures/610236d1-a9e3-40cf-86a6-65616e8e6b80.jpg?im_w=720',
+                    img3: 'https://a0.muscache.com/im/pictures/113bd9ea-b92c-4ab1-81cd-13825260e442.jpg?im_w=720',
+                    img4: 'https://a0.muscache.com/im/pictures/8a704e59-1657-4c9f-b167-ceffc5f87d1d.jpg?im_w=720',
+                    img5: 'https://a0.muscache.com/im/pictures/0f5b258b-722a-4f50-b90a-fc43f972b476.jpg?im_w=720',
+                    start: "4,8",
+                }
+            }
+            console.log(2)
+        }
+
+        return <div className='room-item'>
             <h3 className='title-detail'>{newRoom?.tenPhong}</h3>
-            <div className='d-flex justify-content-between'>
-                <div className='rating' >
-                    <span className='rating__star'><AiFillStar />{newRoom?.data.start}<span>Đánh Giá</span></span>
+            <div className='d-flex justify-content-between flex-column flex-md-row'>
+                <div className='rating flex-column flex-md-row' >
+                    {/* <span className='rating__star'><AiFillStar />{newRoom?.data.start}<span>Đánh Giá</span></span> */}
                     <span className='rating__user'><FaHandHoldingHeart /><span>Chủ Nhà Siêu Thân Thiện</span></span>
                 </div>
-                <div className='share'>
+                <div className='share flex-column flex-md-row'>
                     <span className='share_item1'><FiShare /><span>Chia Sẻ</span> </span>
                     <span className='share_item2'><AiOutlineHeart /><span>Lưu</span> </span>
                 </div>
@@ -98,7 +120,7 @@ export default function DetailRoom() {
         <div className='container-detail'>
             {renderDetailRoom()}
             <Row gutter={[32, 16]}>
-                <Col span={16} className='col__left'>
+                <Col xs={24} md={12} lg={14} xl={16} className='col__left' >
                     <Row>
                         <Col span={22} className='col__left-1'>
                             <h4> Toàn bộ căn hộ condo. Chủ Nhà Phong</h4>
@@ -176,14 +198,12 @@ export default function DetailRoom() {
                             </Col>
                             <Col span={8}></Col>
                         </Row>
+                        <CommnetUser maPhong={id} />
                     </div>
-
-
                 </Col>
-                <Col span={8} className='col__right'>
+                <Col xs={24} md={12} lg={10} xl={8} className='col__right'>
                     <div className="ticket-pay">
                         <h6 className='title-pay'> <span>${detailRoom.giaTien}</span> đêm</h6>
-
                         <div className="input__choose-item">
                             <Space direction="vertical" size={12}>
                                 <RangePicker disabledDate={disabledDate} onChange={onChange} />
@@ -256,7 +276,6 @@ export default function DetailRoom() {
                     </div>
 
                 </Col>
-
             </Row>
         </div>
     )
