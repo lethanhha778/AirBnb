@@ -7,7 +7,7 @@ class CommentServices {
         return http.get(`/api/binh-luan`)
     }
     postCommentUser = (contentComment) => {
-        return http.post(`api/binh-luan`, contentComment)
+        return http.post(`/api/binh-luan`, contentComment)
     }
 }
 const commentServices = new CommentServices()

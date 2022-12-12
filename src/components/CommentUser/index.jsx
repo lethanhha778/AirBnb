@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getComment, postComment } from '../../redux/actions/CommentAction'
+import { postComment } from '../../redux/actions/CommentAction'
 import { listUserAction } from '../../redux/actions/UserAction'
 import { Rate, Input, Form, Button } from 'antd';
 import { AiFillStar } from "react-icons/ai";
@@ -8,25 +8,23 @@ import { useNavigate } from 'react-router-dom';
 import './style.scss'
 
 
-export default function CommnetUser(props) {
+function CommnetUser(props) {
   const navigate = useNavigate()
   const loggedIn = useSelector((state) => state.AuthReducer.loggedIn);
-  const user = (JSON.parse(localStorage.getItem('USER_INFO')))
-  const maPhong = Number(props.maPhong)
   const dispatch = useDispatch()
-  useEffect(() => {
-    const action = getComment()
-    dispatch(action)
-  }, [])
   useEffect(() => {
     console.log('render');
     const action = listUserAction()
     dispatch(action)
   }, [])
-  const { arrComment } = useSelector(state => state.CommentReducer)
+
   const { arrUser } = useSelector(state => state.userReducer)
   const [form] = Form.useForm();
+  const user = (JSON.parse(localStorage.getItem('USER_INFO')))
   const arrCM = []
+  const maPhong = Number(props.maPhong)
+  let arrComment = props.arr
+  console.log(props);
   let arrCommentUser = []
 
   // duyệt lấy cmt của phòng từ data all comment
@@ -43,7 +41,6 @@ export default function CommnetUser(props) {
         // console.log()
         let arr = { ...arrUser[i], title: arrCM[j] }
         arrCommentUser.push(arr)
-
       }
     }
   }
@@ -113,3 +110,4 @@ export default function CommnetUser(props) {
     </div>
   )
 }
+export default memo(CommnetUser)

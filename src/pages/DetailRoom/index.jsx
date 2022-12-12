@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Col, Row, Select, DatePicker, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import "antd/dist/reset.css";
 import { useParams } from 'react-router-dom';
 import moment from 'moment/moment';
 import { getDetailRoom } from '../../redux/actions/RoomAction'
-import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { GiNetworkBars, GiBusDoors, GiThermometerCold, GiWashingMachine } from "react-icons/gi";
 import { FiShare } from "react-icons/fi";
 import { FaHandHoldingHeart, FaParking } from "react-icons/fa";
@@ -17,9 +17,11 @@ import { TbToolsKitchen } from "react-icons/tb";
 import { dataIMG } from '../../components/CardRoom/dataImg';
 import './style.scss'
 import CommnetUser from '../../components/CommentUser';
+import { getComment } from '../../redux/actions/CommentAction';
 
 export default function DetailRoom() {
     let { id } = useParams()
+    console.log(id);
     const serviceCharge = Number(5)
     const [datePicker, setDatePicker] = useState([0, 0])
     const [date, setDate] = useState(1)
@@ -29,9 +31,16 @@ export default function DetailRoom() {
     useEffect(() => {
         dispatch(getDetailRoom(id))
     }, [])
+    useEffect(() => {
+        const action = getComment()
+        dispatch(action)
+    }, [])
+    const { arrComment } = useSelector(state => state.CommentReducer)
     const { detailRoom } = useSelector(state => state.RoomReducer)
+    let commentMemo = useMemo(() => arrComment, [arrComment])
     console.log(detailRoom);
-    // chọn ngày 
+    console.log(arrComment);
+
     const { RangePicker } = DatePicker;
     const disabledDate = (current) => {
         // set disabled ngày đã qua
@@ -39,11 +48,13 @@ export default function DetailRoom() {
         return current && current < moment(customDate, "YYYY-MM-DD");
     };
     const onChange = (date, dateString) => {
+        //! case: lấy data của phòng check vs ngày dataString 
+        //! nếu có ng đặt r thì thông báo faile, chọn ngày khác 
         setDatePicker(dateString)
         totalPriceOfDays(dateString)
 
     };
-    // tính tiền theo ngày chọn
+    // tính tiền theo số ngày chọn
     const totalPriceOfDays = (date) => {
         const totalMilisecond = Date.parse(`${date[1]}`) - Date.parse(`${date[0]}`)
         const totalDate = Number(totalMilisecond / 86400000)
@@ -60,14 +71,18 @@ export default function DetailRoom() {
         return totalPay + serviceCharge
     }
     const onChangePeople = (value) => {
-        setPeople(value)
+        setPeople(Number(value))
     };
+    const postDataBook = () => {
+        // cần lấy data phòng check xem có ng đặt phòng ngày đó chưa 
+        // nếu có ng đặt thì thông báo ngày đó hết phòng
+        console.log('số người', people, 'date', datePicker);
+    }
 
     const renderDetailRoom = () => {
         let newRoom = {}
         if (detailRoom?.id < 30) {
             newRoom = { ...detailRoom, data: dataIMG[id - 1] }
-            console.log(1);
         } else {
             newRoom = {
                 ...detailRoom,
@@ -80,7 +95,6 @@ export default function DetailRoom() {
                     start: "4,8",
                 }
             }
-            console.log(2)
         }
 
         return <div className='room-item'>
@@ -120,6 +134,7 @@ export default function DetailRoom() {
         <div className='container-detail'>
             {renderDetailRoom()}
             <Row gutter={[32, 16]}>
+                {/* nên đưa col này thành cpn để tránh render lại */}
                 <Col xs={24} md={12} lg={14} xl={16} className='col__left' >
                     <Row>
                         <Col span={22} className='col__left-1'>
@@ -198,7 +213,7 @@ export default function DetailRoom() {
                             </Col>
                             <Col span={8}></Col>
                         </Row>
-                        <CommnetUser maPhong={id} />
+                        <CommnetUser maPhong={id} arr={commentMemo} />
                     </div>
                 </Col>
                 <Col xs={24} md={12} lg={10} xl={8} className='col__right'>
@@ -242,7 +257,9 @@ export default function DetailRoom() {
                                 ]}
                             />
                         </div>
-                        <button className='btn-bookingRoom'>
+                        <button
+                            onClick={() => { postDataBook() }}
+                            className='btn-bookingRoom'>
                             <span>Đặt Phòng</span>
                         </button>
                         <p className='text-center'>Bạn Vẫn Chưa Bị Trừ Tiền</p>
@@ -272,9 +289,7 @@ export default function DetailRoom() {
                                 <h6>${allToatal()}</h6>
                             </div>
                         </div>
-
                     </div>
-
                 </Col>
             </Row>
         </div>

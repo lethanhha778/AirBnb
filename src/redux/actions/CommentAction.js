@@ -7,7 +7,6 @@ export const getComment = () => {
     return (dispatch) => {
         let promise = commentServices.getAllComment()
         promise.then((res) => {
-            console.log(res.data.content);
             const action = {
                 type: GET_ALL_COMMENT,
                 listComment: res.data.content
@@ -20,9 +19,9 @@ export const getComment = () => {
     }
 }
 
-
 export const postComment = (contentComment) => {
     return (dispatch) => {
+        dispatch(loadingAction)
         let promise = commentServices.postCommentUser(contentComment)
         promise.then((res) => {
             console.log(res.data.content)
@@ -31,6 +30,7 @@ export const postComment = (contentComment) => {
                 data: res.data.content
             }
             dispatch(action)
+            dispatch(hiddenLoadingAction)
         })
         promise.catch((err) => {
             console.log(err)
