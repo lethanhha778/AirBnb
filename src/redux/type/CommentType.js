@@ -1,0 +1,2 @@
+export const POST_COMMENT = 'POST_COMMENT'
+export const GET_ALL_COMMENT= 'GET_ALL_COMMENT'

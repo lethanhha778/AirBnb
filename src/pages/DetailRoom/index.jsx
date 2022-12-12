@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { Col, Row } from 'antd';
+import React, { useEffect, useMemo, useState } from 'react'
+import { Col, Row, Select, DatePicker, Space } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import "antd/dist/reset.css";
-import { useParams } from 'react-router-dom'
-import { dataIMG } from '../../components/CardRoom/dataImg'
-import { DatePicker, Space } from 'antd'
+import { useParams } from 'react-router-dom';
+import moment from 'moment/moment';
 import { getDetailRoom } from '../../redux/actions/RoomAction'
-import { AiFillStar, AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart } from "react-icons/ai";
 import { GiNetworkBars, GiBusDoors, GiThermometerCold, GiWashingMachine } from "react-icons/gi";
 import { FiShare } from "react-icons/fi";
 import { FaHandHoldingHeart, FaParking } from "react-icons/fa";
@@ -15,42 +14,97 @@ import { MdIron } from "react-icons/md";
 import { BiSwim } from "react-icons/bi";
 import { CgScreen } from "react-icons/cg";
 import { TbToolsKitchen } from "react-icons/tb";
-import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
+import { dataIMG } from '../../components/CardRoom/dataImg';
 import './style.scss'
+import CommnetUser from '../../components/CommentUser';
+import { getComment } from '../../redux/actions/CommentAction';
 
 export default function DetailRoom() {
-    dayjs.extend(customParseFormat);
     let { id } = useParams()
     console.log(id);
+    const serviceCharge = Number(5)
+    const [datePicker, setDatePicker] = useState([0, 0])
+    const [date, setDate] = useState(1)
+    const [totalPay, setTotalPay] = useState(0)
+    const [people, setPeople] = useState(0)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getDetailRoom(id))
     }, [])
+    useEffect(() => {
+        const action = getComment()
+        dispatch(action)
+    }, [])
+    const { arrComment } = useSelector(state => state.CommentReducer)
     const { detailRoom } = useSelector(state => state.RoomReducer)
+    let commentMemo = useMemo(() => arrComment, [arrComment])
     console.log(detailRoom);
-    // chọn ngày
-    const [dateStar, setDateStar] = useState('')
-    const [dateEnd, setDateEnd] = useState('')
-    const onChangeStartDay = (date, dateString) => {
-        console.log('start', dateString);
-        setDateStar(dateString)
+    console.log(arrComment);
+
+    const { RangePicker } = DatePicker;
+    const disabledDate = (current) => {
+        // set disabled ngày đã qua
+        let customDate = moment().format("YYYY-MM-DD");
+        return current && current < moment(customDate, "YYYY-MM-DD");
     };
-    const onChangeEndDay = (date, dateString) => {
-        console.log(dateString);
-        setDateEnd(dateString)
+    const onChange = (date, dateString) => {
+        //! case: lấy data của phòng check vs ngày dataString 
+        //! nếu có ng đặt r thì thông báo faile, chọn ngày khác 
+        setDatePicker(dateString)
+        totalPriceOfDays(dateString)
+
     };
+    // tính tiền theo số ngày chọn
+    const totalPriceOfDays = (date) => {
+        const totalMilisecond = Date.parse(`${date[1]}`) - Date.parse(`${date[0]}`)
+        const totalDate = Number(totalMilisecond / 86400000)
+        const totalPay = detailRoom.giaTien * totalDate
+        console.log(totalPay)
+        setDate(totalDate)
+        setTotalPay(totalPay)
+    }
+    // Tổng tiền thanh toán
+    const allToatal = () => {
+        if (totalPay === 0) {
+            return detailRoom.giaTien + serviceCharge
+        }
+        return totalPay + serviceCharge
+    }
+    const onChangePeople = (value) => {
+        setPeople(Number(value))
+    };
+    const postDataBook = () => {
+        // cần lấy data phòng check xem có ng đặt phòng ngày đó chưa 
+        // nếu có ng đặt thì thông báo ngày đó hết phòng
+        console.log('số người', people, 'date', datePicker);
+    }
 
     const renderDetailRoom = () => {
-        const newRoom = { ...detailRoom, data: dataIMG[id] }
-        return <div>
+        let newRoom = {}
+        if (detailRoom?.id < 30) {
+            newRoom = { ...detailRoom, data: dataIMG[id - 1] }
+        } else {
+            newRoom = {
+                ...detailRoom,
+                data: {
+                    img1: 'https://a0.muscache.com/im/pictures/d682f7bf-caa4-4433-9038-c5f81a01845b.jpg?im_w=1200',
+                    img2: 'https://a0.muscache.com/im/pictures/610236d1-a9e3-40cf-86a6-65616e8e6b80.jpg?im_w=720',
+                    img3: 'https://a0.muscache.com/im/pictures/113bd9ea-b92c-4ab1-81cd-13825260e442.jpg?im_w=720',
+                    img4: 'https://a0.muscache.com/im/pictures/8a704e59-1657-4c9f-b167-ceffc5f87d1d.jpg?im_w=720',
+                    img5: 'https://a0.muscache.com/im/pictures/0f5b258b-722a-4f50-b90a-fc43f972b476.jpg?im_w=720',
+                    start: "4,8",
+                }
+            }
+        }
+
+        return <div className='room-item'>
             <h3 className='title-detail'>{newRoom?.tenPhong}</h3>
-            <div className='d-flex justify-content-between'>
-                <div className='rating' >
-                    <span className='rating__star'><AiFillStar />{newRoom?.data.start}<span>Đánh Giá</span></span>
+            <div className='d-flex justify-content-between flex-column flex-md-row'>
+                <div className='rating flex-column flex-md-row' >
+                    {/* <span className='rating__star'><AiFillStar />{newRoom?.data.start}<span>Đánh Giá</span></span> */}
                     <span className='rating__user'><FaHandHoldingHeart /><span>Chủ Nhà Siêu Thân Thiện</span></span>
                 </div>
-                <div className='share'>
+                <div className='share flex-column flex-md-row'>
                     <span className='share_item1'><FiShare /><span>Chia Sẻ</span> </span>
                     <span className='share_item2'><AiOutlineHeart /><span>Lưu</span> </span>
                 </div>
@@ -74,14 +128,14 @@ export default function DetailRoom() {
                 </div>
             </div>
         </div>
-
     }
 
     return (
         <div className='container-detail'>
             {renderDetailRoom()}
-            <Row gutter={[48, 16]}>
-                <Col span={16} className='col__left'>
+            <Row gutter={[32, 16]}>
+                {/* nên đưa col này thành cpn để tránh render lại */}
+                <Col xs={24} md={12} lg={14} xl={16} className='col__left' >
                     <Row>
                         <Col span={22} className='col__left-1'>
                             <h4> Toàn bộ căn hộ condo. Chủ Nhà Phong</h4>
@@ -159,29 +213,84 @@ export default function DetailRoom() {
                             </Col>
                             <Col span={8}></Col>
                         </Row>
-                    </div>
-
-
-                </Col>
-                <Col span={8} className='col__right'>
-                    <h6>${detailRoom.giaTien} đêm</h6>
-                    <div className="input__choose-item">
-                        <Space direction="vertical" size={12}>
-                            <DatePicker
-                                placeholder="Ngày Bắt Đầu"
-                                onChange={onChangeStartDay} />
-
-
-                        </Space>
-                        <Space direction="vertical" size={12}>
-                            <DatePicker
-                                placeholder="Ngày Kết Thúc"
-                                onChange={onChangeEndDay} />
-                        </Space>
-
+                        <CommnetUser maPhong={id} arr={commentMemo} />
                     </div>
                 </Col>
-
+                <Col xs={24} md={12} lg={10} xl={8} className='col__right'>
+                    <div className="ticket-pay">
+                        <h6 className='title-pay'> <span>${detailRoom.giaTien}</span> đêm</h6>
+                        <div className="input__choose-item">
+                            <Space direction="vertical" size={12}>
+                                <RangePicker disabledDate={disabledDate} onChange={onChange} />
+                            </Space>
+                        </div>
+                        <div className="input__choose-item">
+                            <Select
+                                showSearch
+                                placeholder="Số Người"
+                                optionFilterProp="children"
+                                onChange={onChangePeople}
+                                filterOption={(input, option) =>
+                                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
+                                }
+                                options={[
+                                    {
+                                        value: '1',
+                                        label: '1 Người',
+                                    },
+                                    {
+                                        value: '2',
+                                        label: '2 Người',
+                                    },
+                                    {
+                                        value: '3',
+                                        label: '3 Người',
+                                    },
+                                    {
+                                        value: '4',
+                                        label: '4 Người',
+                                    },
+                                    {
+                                        value: '5',
+                                        label: '5 Người',
+                                    }
+                                ]}
+                            />
+                        </div>
+                        <button
+                            onClick={() => { postDataBook() }}
+                            className='btn-bookingRoom'>
+                            <span>Đặt Phòng</span>
+                        </button>
+                        <p className='text-center'>Bạn Vẫn Chưa Bị Trừ Tiền</p>
+                        <div className='total__pay'>
+                            <div>
+                                <h6>${detailRoom.giaTien} x {date} đêm</h6>
+                            </div>
+                            <div>
+                                {totalPay === 0
+                                    ? <h6> ${detailRoom.giaTien} </h6>
+                                    : <h6> ${totalPay}</h6>}
+                            </div>
+                        </div>
+                        <div className='total__service'>
+                            <div>
+                                <h6>Phí Dịch Vụ</h6>
+                            </div>
+                            <div>
+                                <h6>${serviceCharge}</h6>
+                            </div>
+                        </div>
+                        <div className='total__pay total-end'>
+                            <div>
+                                <h4>Tổng Trước Thuế</h4>
+                            </div>
+                            <div>
+                                <h6>${allToatal()}</h6>
+                            </div>
+                        </div>
+                    </div>
+                </Col>
             </Row>
         </div>
     )

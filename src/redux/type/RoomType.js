@@ -1,5 +1,6 @@
 export const GET_LIST_ROOM = "GET_LIST_ROOM";
 export const GET_DETAIL_ROOM = "GET_DETAIL_ROOM";
+export const SET_INDEX= "SET_INDEX"
 //admin
 export const GET_LIST_ROOM_AD = "GET_LIST_ROOM_AD";
 export const GET_DETAIL_ROOM_AD = "GET_DETAIL_ROOM_AD";

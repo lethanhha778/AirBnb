@@ -11,18 +11,20 @@ import { bookingReducer } from './reducer/BookingReducer';
 import { locationReducer } from './reducer/LocationReducer';
 import { roomReducer } from './reducer/RoomReducer';
 import { userReducer } from "./reducer/UserReducer";
+import { CommentReducer } from './reducer/CommentReducer';
 
 const RootReducer = combineReducers({
-    
+
     // reducer 
     LocationReducer,
     AuthReducer,
     BookingReducer,
     RoomReducer,
     LoadingReducer,
+    CommentReducer,
 
     // reducer admin 
-    userReducer, 
+    userReducer,
     locationReducer,
     roomReducer,
     bookingReducer

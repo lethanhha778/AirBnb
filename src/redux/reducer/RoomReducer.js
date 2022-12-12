@@ -1,4 +1,4 @@
-import { GET_DETAIL_ROOM, GET_LIST_ROOM } from "../type/RoomType"
+import { GET_DETAIL_ROOM, GET_LIST_ROOM, SET_INDEX } from "../type/RoomType"
 import { ADD_ROOM, DEL_ROOM, GET_DETAIL_ROOM_AD, GET_LIST_ROOM_AD, SET_ALERT, UPDATE_ROOM, UP_IMAGE_ROOM } from "../type/RoomType";
 
 const initialState = {
@@ -17,7 +17,8 @@ export const RoomReducer = (state = initialState, action) => {
             return { ...state }
         case GET_DETAIL_ROOM:
             state.detailRoom = action.detailRoom
-            return {...state}
+            return { ...state }
+
         default:
             return state
     }

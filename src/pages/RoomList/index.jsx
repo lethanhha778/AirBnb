@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Row } from 'antd';
-import './style.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllRoom } from '../../redux/actions/RoomAction';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import GoogleMapReact from 'google-map-react';
 import { dataIMG } from '../../components/CardRoom/dataImg';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import './style.scss'
 
-
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 export default function RoomList() {
   let { id } = useParams()
@@ -18,9 +16,15 @@ export default function RoomList() {
   useEffect(() => {
     dispatch(getAllRoom(id))
   }, [id])
-
+  const navigate = useNavigate()
+  const AnyReactComponent = ({ text }) => <div>{text}</div>;
+  let newArr = []
   const { arrRoom } = useSelector(state => state.RoomReducer)
-  console.log(arrRoom);
+  for (let index = 0; index < arrRoom.length; index++) {
+    if (arrRoom[index].id < 20) {
+      newArr.push(arrRoom[index])
+    }
+  }
   const defaultProps = {
     center: {
       lat: 21.1010564,
@@ -29,8 +33,8 @@ export default function RoomList() {
     zoom: 12
   };
   const renderRoomItem = () => {
-    let room = arrRoom?.map((item, index) => {
-      return { ...item, data: dataIMG[index] };
+    let room = newArr?.map((item, index) => {
+      return { ...item, data: dataIMG[item.id - 1] };
     });
     console.log(room)
     return room?.slice(0, 16).map((item, index) => {
@@ -46,7 +50,6 @@ export default function RoomList() {
             clickable: true,
           }}
           modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-
         >
           <SwiperSlide style={{ width: '300px' }}>
             <img
@@ -58,7 +61,6 @@ export default function RoomList() {
             <img
               src={`${item.data?.img2}`}
               alt=""
-
             />
           </SwiperSlide>
           <SwiperSlide>
@@ -75,7 +77,7 @@ export default function RoomList() {
           </SwiperSlide>
         </Swiper>
         <div className="room__item-describe">
-          <h5>{item.tenPhong}</h5>
+          <h5 onClick={() => { navigate(`/detailRoom/${item.id}`) }}>{item.tenPhong}</h5>
           <div className='d-flex justify-content-between'>
             <p>{item.giuong} giường</p>
             <p>Số người ở: {item.khach} người</p>
@@ -90,7 +92,7 @@ export default function RoomList() {
     <div className='room-container mb-4'>
       <Row gutter={[24, 16]}>
         <Col xs={24} lg={12}>
-          <h6>Có  {arrRoom?.length} Kết Quả Được Tìm Thấy</h6>
+          <h6>Có  {newArr?.length} Kết Quả Được Tìm Thấy</h6>
           <h4 className='title'>Chỗ ở tại khu vực bản đồ đã chọn</h4>
           <Row gutter={[32, 16]}>
             {renderRoomItem()}
