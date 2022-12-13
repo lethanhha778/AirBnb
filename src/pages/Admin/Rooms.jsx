@@ -6,15 +6,15 @@ import { Button, Table, Modal } from 'antd';
 import { listRoomAction, removeRoomAction, setAlertRoomAction } from '../../redux/actions/RoomAction';
 
 export default function Location() {
-    const navigate = useNavigate();
-    let { arrRoom, arletContent } = useSelector(state => state.roomReducer);
+    let { arrRoom, arletContent } = useSelector(state => state.roomAdminReducer);
     let dispatch = useDispatch();
+    const navigate = useNavigate();
     useEffect(() => {
         getListRoomAPI()
     }, []);
 
     useEffect(() => {
-        if (arletContent !== '') {
+        if (arletContent[0] !== '') {
             info()
         }
     }, [arletContent]);
@@ -23,18 +23,11 @@ export default function Location() {
         {
             title: 'ID',
             dataIndex: 'id',
-            sorter: {
-                compare: (a, b) => a.math - b.math,
-                multiple: 2,
-            },
+            sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'Tên phòng',
             dataIndex: 'tenPhong',
-            sorter: {
-                compare: (a, b) => a.chinese - b.chinese,
-                multiple: 3,
-            },
         },
         {
             title: 'Mô tả',
@@ -57,7 +50,7 @@ export default function Location() {
             render: (t, r) => <div>
                 <EditFilled style={{ fontSize: '16px', color: '#1677ff', marginRight:'10px' }} onClick={() => {
                     navigate(`/admin/editRoom/${r.id}`);
-                }} className='btn btn-info'/>
+                }}/>
                 <DeleteFilled style={{ fontSize: '16px', color: '#ff4d4f' }} onClick={() => {
                     let action = removeRoomAction(r.id);
                     dispatch(action);
@@ -66,18 +59,16 @@ export default function Location() {
         },
     ];
 
-
-
     let info = () => {
         Modal.info({
             title: 'Thông báo',
             content: (
                 <div>
-                    <p>{arletContent}</p>
+                    <p>{arletContent[0]}</p>
                 </div>
             ),
             onOk() {
-                let action = setAlertRoomAction('');
+                let action = setAlertRoomAction(['', 0]);
                 dispatch(action);
             },
         });
@@ -93,7 +84,7 @@ export default function Location() {
             <h2 >Quản lý phòng</h2>
             <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
                 navigate('/admin/addroom');
-            }} className="btn btn-success m-3">Thêm phòng</Button>
+            }}>Thêm phòng</Button>
             <Table rowKey='id' columns={columns} dataSource={arrRoom} />
         </div>
     )

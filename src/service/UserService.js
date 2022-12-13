@@ -36,6 +36,10 @@ class UserService {
         return http.put(`/api/users/${id}`, user);
     }
 
+    searchUser= (name)=>{
+        return http.get(`/api/users/search/${name}`);
+    }
+
 }
 
 const userService = new UserService()

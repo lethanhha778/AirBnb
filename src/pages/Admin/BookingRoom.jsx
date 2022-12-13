@@ -6,15 +6,15 @@ import { Button, Table, Modal } from 'antd';
 import { listBookingAction, removeBookingAction, setAlertBookingAction } from '../../redux/actions/BookingRoomAction';
 
 export default function BookingRoom() {
-    const navigate = useNavigate();
-    let { arrBooking, arletContent } = useSelector(state => state.bookingReducer);
+    let { arrBooking, arletContent } = useSelector(state => state.bookingAdminReducer);
     let dispatch = useDispatch();
+    const navigate = useNavigate();
     useEffect(() => {
-        getListUserAPI()
+        getListBookingAPI();
     }, []);
 
     useEffect(() => {
-        if (arletContent !== '') {
+        if (arletContent[0] !== '') {
             info()
         }
     }, [arletContent]);
@@ -23,18 +23,11 @@ export default function BookingRoom() {
         {
             title: 'ID',
             dataIndex: 'id',
-            sorter: {
-                compare: (a, b) => a.math - b.math,
-                multiple: 2,
-            },
+            sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'Mã phòng',
             dataIndex: 'maPhong',
-            sorter: {
-                compare: (a, b) => a.chinese - b.chinese,
-                multiple: 3,
-            },
         },
         {
             title: 'Ngày đến',
@@ -58,7 +51,7 @@ export default function BookingRoom() {
             render: (t, r) => <div>
                 <EditFilled style={{ fontSize: '16px', color: '#1677ff', marginRight:'10px' }} onClick={() => {
                     navigate(`/admin/editbookingroom/${r.id}`);
-                }} className='btn btn-info'/>
+                }}/>
                 <DeleteFilled style={{ fontSize: '16px', color: '#ff4d4f' }} onClick={() => {
                     let action = removeBookingAction(r.id);
                     dispatch(action);
@@ -74,17 +67,17 @@ export default function BookingRoom() {
             title: 'Thông báo',
             content: (
                 <div>
-                    <p>{arletContent}</p>
+                    <p>{arletContent[0]}</p>
                 </div>
             ),
             onOk() {
-                let action = setAlertBookingAction('');
+                let action = setAlertBookingAction(['', 0]);
                 dispatch(action);
             },
         });
     }
 
-    let getListUserAPI = () => {
+    let getListBookingAPI = () => {
         let action = listBookingAction();
         dispatch(action);
     }
@@ -93,7 +86,7 @@ export default function BookingRoom() {
             <h2 >Quản lý đặt phòng</h2>
             <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
                 navigate('/admin/addbookingroom');
-            }} className="btn btn-success m-3">Đặt phòng</Button>
+            }}>Đặt phòng</Button>
             <Table rowKey='id' columns={columns} dataSource={arrBooking} />
         </div>
     )

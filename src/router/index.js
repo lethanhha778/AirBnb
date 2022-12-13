@@ -25,6 +25,10 @@ import EditRoom from '../pages/Admin/EditRoom';
 import BookingRoom from '../pages/Admin/BookingRoom';
 import AddBookingRoom from '../pages/Admin/AddBookingRoom';
 import EditBookingRoom from '../pages/Admin/EditBookingRoom';
+import Comments from "../pages/Admin/Comments";
+import AddComment from "../pages/Admin/AddComment";
+import EditComment from "../pages/Admin/EditComment";
+
 
 export default createBrowserRouter([
   {
@@ -78,6 +82,11 @@ export default createBrowserRouter([
     element: <AdminTemplate />,
     requiredLogin: false,
     children: [
+      {
+        path: '/admin',
+        element: <Users />,
+        requiredLogin: false
+      },
       {
         path: "users",
         element: <Users />,
@@ -138,7 +147,21 @@ export default createBrowserRouter([
         element: <EditBookingRoom />,
         requiredLogin: false
       },
-
+      {
+        path: "comments",
+        element: <Comments />,
+        requiredLogin: false
+      },
+      {
+        path: "addComment",
+        element: <AddComment />,
+        requiredLogin: false
+      },
+      {
+        path: "editComment/:id",
+        element: <EditComment />,
+        requiredLogin: false
+      },
     ]
   },
 

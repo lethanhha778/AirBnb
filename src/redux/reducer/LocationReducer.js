@@ -5,7 +5,7 @@ import { ADD_LOCATION, DEL_LOCATION, GET_DETAIL_LOCATION_AD, GET_LIST_LOCATION_A
 const initialState = {
     arrLocation: [],
     location: {},
-    arletContent: '',
+    arletContent: ['', 0],
     arrayLocation: [],
     allLocation: {}
 }
@@ -25,9 +25,8 @@ export const LocationReducer = (state = initialState, action) => {
     }
 }
 
-export const locationReducer = (state = initialState, action) => {
+export const locationAdminReducer = (state = initialState, action) => {
     switch (action.type) {
-
         //admin
         case GET_LIST_LOCATION_AD:
             state.arrLocation = action.arrLocation;

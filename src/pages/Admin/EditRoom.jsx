@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
-import { Col, Row, Form, Input, InputNumber, Switch, Button,Upload, Modal } from 'antd';
+import { Col, Row, Form, Input, InputNumber, Switch, Button, Upload, Modal } from 'antd';
 import { getRoomAction, setAlertRoomAction, updateRoomAction, upImageRoomAction } from '../../redux/actions/RoomAction';
 const { TextArea } = Input;
 
 export default function EditLocation() {
     let { id } = useParams()
-    let { room, arletContent } = useSelector(state => state.roomReducer);
+    let { room, arletContent } = useSelector(state => state.roomAdminReducer);
     let dispatch = useDispatch();
-    
+    const navigate = useNavigate();
     let [fileList, setfileList] = useState([
         {
             uid: '-1',
@@ -42,7 +42,7 @@ export default function EditLocation() {
     }, [room]);
 
     useEffect(() => {
-        if (arletContent !== '') {
+        if (arletContent[0] !== '') {
             info()
         }
     }, [arletContent])
@@ -62,7 +62,7 @@ export default function EditLocation() {
             phongTam: '',
             moTa: '',
             giaTien: '',
-            mayGiat:'',
+            mayGiat: '',
             banLa: '',
             tivi: '',
             dieuHoa: '',
@@ -75,7 +75,13 @@ export default function EditLocation() {
             hinhAnh: '',
         },
         validationSchema: Yup.object({
-            tenPhong: Yup.string().required("Vị trí không được để trống"),
+            tenPhong: Yup.string().required("Tên phòng không được để trống"),
+            moTa: Yup.string().required("Mô tả không được để trống"),
+            khach: Yup.number().typeError("Số lượng khách không đúng định dạng").min(1, "Số lượng khách phải lớn hơn 0"),
+            phongNgu: Yup.number().typeError("Số lượng phòng ngủ không đúng định dạng").min(1, "Số lượng phòng ngủ phải lớn hơn 0"),
+            giuong: Yup.number().typeError("Số lượng giường không đúng định dạng").min(1, "Số lượng giường phải lớn hơn 0"),
+            phongTam: Yup.number().typeError("Số lượng phòng tắm không đúng định dạng").min(1, "Số lượng phòng tắm phải lớn hơn 0"),
+            maViTri: Yup.number().typeError("Mã vị trí không đúng định dạng").min(1, "Mã vị trí phải lớn hơn 0"),
         }),
         onSubmit: values => {
             let action = updateRoomAction(values, room.id);
@@ -88,12 +94,15 @@ export default function EditLocation() {
             title: 'Thông báo',
             content: (
                 <div>
-                    <p>{arletContent}</p>
+                    <p>{arletContent[0]}</p>
                 </div>
             ),
             onOk() {
-                let action = setAlertRoomAction('');
+                let action = setAlertRoomAction(['', 0]);
                 dispatch(action);
+                if (arletContent[1] === 200) {
+                    navigate('/admin/rooms');
+                }
             },
         });
     };
@@ -112,19 +121,19 @@ export default function EditLocation() {
 
     return (
         <div style={{ padding: '15px' }}>
-            <h2 >Cập nhập thông tin vị trí</h2>
+            <h2 >Cập nhập thông tin phòng</h2>
             <Form layout="horizontal" onFinish={formik.handleSubmit}
                 form={form}>
                 <div style={{ padding: '0 3rem' }}>
                     <Row justify="center">
                         <Col span={24}>
                             <Form.Item label="Tên phòng" name="tenPhong" validateStatus="error" help={formik.touched.tenPhong && formik.errors.tenPhong ? (formik.errors.tenPhong) : null}>
-                                <Input onChange={formik.handleChange} />
+                                <Input onChange={formik.handleChange} onBlur={formik.handleBlur}/>
                             </Form.Item>
                         </Col>
                         <Col span={24}>
-                            <Form.Item label="Mô tả" name="moTa">
-                                <TextArea rows={4} onChange={formik.handleChange} />
+                            <Form.Item label="Mô tả" name="moTa" validateStatus="error" help={formik.touched.moTa && formik.errors.moTa ? (formik.errors.moTa) : null}>
+                                <TextArea rows={4} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
                             </Form.Item>
                         </Col>
                         <Col span={24}>
@@ -152,23 +161,23 @@ export default function EditLocation() {
                     </Row>
                     <Row justify="center">
                         <Col span={12} >
-                            <Form.Item label="Số khách" name="khach">
-                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('khach', value)} />
+                            <Form.Item label="Số khách" name="khach" validateStatus="error" help={formik.touched.khach && formik.errors.khach ? (formik.errors.khach) : null}>
+                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('khach', value)} onBlur={formik.handleBlur}/>
                             </Form.Item>
                         </Col>
                         <Col span={12} >
-                            <Form.Item label="Số phòng ngủ" name="phongNgu">
-                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('phongNgu', value)} />
+                            <Form.Item label="Số phòng ngủ" name="phongNgu" validateStatus="error" help={formik.touched.phongNgu && formik.errors.phongNgu ? (formik.errors.phongNgu) : null}>
+                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('phongNgu', value)} onBlur={formik.handleBlur}/>
                             </Form.Item>
                         </Col>
                         <Col span={12} >
-                            <Form.Item label="Số giường" name="giuong">
-                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('giuong', value)} />
+                            <Form.Item label="Số giường" name="giuong" validateStatus="error" help={formik.touched.giuong && formik.errors.giuong ? (formik.errors.giuong) : null}>
+                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('giuong', value)} onBlur={formik.handleBlur}/>
                             </Form.Item>
                         </Col>
                         <Col span={12} >
-                            <Form.Item label="Số phòng tắm" name="phongTam">
-                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('phongTam', value)} />
+                            <Form.Item label="Số phòng tắm" name="phongTam" validateStatus="error" help={formik.touched.phongTam && formik.errors.phongTam ? (formik.errors.phongTam) : null}>
+                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('phongTam', value)} onBlur={formik.handleBlur}/>
                             </Form.Item>
                         </Col>
                         <Col span={12} >
@@ -177,8 +186,8 @@ export default function EditLocation() {
                             </Form.Item>
                         </Col>
                         <Col span={12} >
-                            <Form.Item label="Mã vị trí" name="maViTri">
-                                <InputNumber min={0} onChange={(value) => formik.setFieldValue('phongTam', value)} />
+                            <Form.Item label="Mã vị trí" name="maViTri" validateStatus="error" help={formik.touched.maViTri && formik.errors.maViTri ? (formik.errors.maViTri) : null}>
+                                <InputNumber min={0} onChange={(value) => formik.setFieldValue('maViTri', value)} onBlur={formik.handleBlur}/>
                             </Form.Item>
                         </Col>
                     </Row>
