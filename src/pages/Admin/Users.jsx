@@ -1,20 +1,21 @@
 import React, { useEffect } from 'react';
+import { useFormik } from 'formik';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { listUserAction, removeUserAction, setAlertUserAction } from '../../redux/actions/UserAction'
+import { listUserAction, removeUserAction, searchUserAction, setAlertUserAction } from '../../redux/actions/UserAction'
 import { EditFilled, DeleteFilled } from '@ant-design/icons';
-import { Button, Table, Modal } from 'antd';
+import { Form, Input, Button, Table, Modal } from 'antd';
 
 export default function Users() {
-    const navigate = useNavigate();
-    let { arrUser, arletContent } = useSelector(state => state.userReducer);
+    let { arrUser, arletContent } = useSelector(state => state.userAdminReducer);
     let dispatch = useDispatch();
+    const navigate = useNavigate();
     useEffect(() => {
         getListUserAPI()
     }, []);
 
     useEffect(() => {
-        if (arletContent !== '') {
+        if (arletContent[0] !== '') {
             info()
         }
     }, [arletContent]);
@@ -23,36 +24,19 @@ export default function Users() {
         {
             title: 'ID',
             dataIndex: 'id',
-            sorter: {
-                compare: (a, b) => a.math - b.math,
-                multiple: 2,
-            },
+            sorter: (a, b) => a.id - b.id,
         },
         {
             title: 'Tên',
             dataIndex: 'name',
-            sorter: {
-                compare: (a, b) => a.chinese - b.chinese,
-                multiple: 3,
-            },
         },
         {
             title: 'Email',
             dataIndex: 'email'
         },
         {
-            title: 'Số điện thoại',
-            dataIndex: 'phone'
-        },
-        {
             title: 'Ngày sinh',
             dataIndex: 'birthday'
-        },
-        {
-            title: 'avatar',
-            dataIndex: 'avatar',
-            width: '10%',
-            render: (t, r) => <img className='img-fluid' src={`${r.avatar}`} alt="" />
         },
         {
             title: 'Giới tính',
@@ -69,7 +53,7 @@ export default function Users() {
             render: (t, r) => <div>
                 <EditFilled style={{ fontSize: '16px', color: '#1677ff', marginRight: '10px' }} onClick={() => {
                     navigate(`/admin/edituser/${r.id}`);
-                }} className='btn btn-info' />
+                }} />
                 <DeleteFilled style={{ fontSize: '16px', color: '#ff4d4f' }} onClick={() => {
                     let action = removeUserAction(r.id);
                     dispatch(action);
@@ -78,18 +62,33 @@ export default function Users() {
         },
     ];
 
-
+    const formik = useFormik({
+        initialValues: {
+            name: '',
+        },
+        onSubmit: values => {
+            console.log(values.name)
+            if(values.name.trim() !== ''){
+                let action = searchUserAction(values.name);
+                dispatch(action);
+            }
+            else{
+                getListUserAPI();
+            }
+            
+        },
+    });
 
     let info = () => {
         Modal.info({
             title: 'Thông báo',
             content: (
                 <div>
-                    <p>{arletContent}</p>
+                    <p>{arletContent[0]}</p>
                 </div>
             ),
             onOk() {
-                let action = setAlertUserAction('');
+                let action = setAlertUserAction(['', 0]);
                 dispatch(action);
             },
         });
@@ -104,7 +103,16 @@ export default function Users() {
             <h2 >Quản lý người dùng</h2>
             <Button type="primary" style={{ marginBottom: '10px' }} onClick={() => {
                 navigate('/admin/adduser');
-            }} className="btn btn-success m-3">Thêm người dùng</Button>
+            }}>Thêm người dùng</Button>
+            <Form layout="horizontal" onFinish={formik.handleSubmit}>
+                <Form.Item name="name" style={{ display: 'inline-block', width: '80%' }}>
+                    <Input onChange={formik.handleChange} placeholder="Tên người dùng"/>
+                </Form.Item>
+                <Form.Item style={{ display: 'inline-block', marginLeft:'10px'}}>
+                    <Button type="default" htmlType="submit">Tìm kiếm</Button>
+                </Form.Item>
+
+            </Form>
             <Table rowKey='id' columns={columns} dataSource={arrUser} />
         </div>
     )

@@ -5,7 +5,7 @@ const initialState = {
     arrRoom: [],
     detailRoom: {},
     room: {},
-    arletContent: '',
+    arletContent: ['', 0],
 
 }
 
@@ -24,7 +24,7 @@ export const RoomReducer = (state = initialState, action) => {
     }
 }
 
-export const roomReducer = (state = initialState, action) => {
+export const roomAdminReducer = (state = initialState, action) => {
     switch (action.type) {
 
         //admin

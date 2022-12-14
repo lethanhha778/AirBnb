@@ -35,7 +35,7 @@ export const listBookingAction = () => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         });
@@ -50,12 +50,12 @@ export const getBookingAction = (id = '') => {
                 type: GET_DETAIL_BOOKING_AD,
                 booking: result.data.content,
             }
-            dispatch2(action2)
+            dispatch2(action2);
         })
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -68,15 +68,15 @@ export const removeBookingAction = (id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: DEL_BOOKING,
-                arletContent: result.data.message,
                 bookingId: id,
+                arletContent: [result.data.message, 201],
             }
             dispatch2(action2);
         })
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -90,16 +90,16 @@ export const addBookingAction = (booking = {}) => {
             let action2 = {
                 type: ADD_BOOKING,
                 addBooking: result.data.content,
-                arletContent:  result.data.message,
+                arletContent:  [result.data.message, 200],
             }
-            dispatch2(action2)
+            dispatch2(action2);
         })
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
-            dispatch2(action2)
+            dispatch2(action2);
         })
     }
 }
@@ -110,27 +110,27 @@ export const updateBookingAction = (booking = {}, id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: UPDATE_BOOKING,
-                arletContent: "Cập nhập đặt phòng thành công",
                 updateBooking: result.data.content,
+                arletContent: ["Cập nhập đặt phòng thành công", 200],
             }
             dispatch2(action2)
         })
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
-            dispatch2(action2)
+            dispatch2(action2);
         })
     }
 }
 
-export const setAlertBookingAction = (arletContent = '') => {
+export const setAlertBookingAction = (arletContent = []) => {
     return (dispatch2) => {
         let action2 = {
             type: SET_ALERT,
-            arletContent: arletContent
+            arletContent: arletContent,
         }
-        dispatch2(action2)
+        dispatch2(action2);
     }
 }

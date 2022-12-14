@@ -56,7 +56,7 @@ export const listRoomAction = () => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         });
@@ -76,7 +76,7 @@ export const getRoomAction = (id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -89,7 +89,7 @@ export const removeRoomAction = (id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: DEL_ROOM,
-                arletContent: result.data.message,
+                arletContent: [result.data.message, 201],
                 roomId: id,
             }
             dispatch2(action2);
@@ -97,7 +97,7 @@ export const removeRoomAction = (id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -108,17 +108,18 @@ export const addRoomAction = (room = {}) => {
     return (dispatch2) => {
         let promise = roomService.addRoom(room);
         promise.then((result) => {
+            console.log(result)
             let action2 = {
                 type: ADD_ROOM,
                 addRoom: result.data.content,
-                arletContent:  result.data.message,
+                arletContent:  [result.data.message, 200],
             }
             dispatch2(action2);
         })
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -131,7 +132,7 @@ export const updateRoomAction = (room = {}, id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: UPDATE_ROOM,
-                arletContent: "Cập nhập phòng thành công",
+                arletContent: ["Cập nhập phòng thành công", 200],
                 updateRoom: result.data.content,
             }
             dispatch2(action2);
@@ -139,7 +140,7 @@ export const updateRoomAction = (room = {}, id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -152,7 +153,7 @@ export const upImageRoomAction = (file = [], id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: UP_IMAGE_ROOM,
-                arletContent: "Cập nhập ảnh thành công",
+                arletContent: ["Cập nhập hình ảnh thành công", 201],
                 upImageRoom: result.data.content,
             }
             dispatch2(action2);
@@ -160,14 +161,14 @@ export const upImageRoomAction = (file = [], id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
     }
 }
 
-export const setAlertRoomAction = (arletContent = '') => {
+export const setAlertRoomAction = (arletContent = []) => {
     return (dispatch2) => {
         let action2 = {
             type: SET_ALERT,

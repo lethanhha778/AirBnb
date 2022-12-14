@@ -54,7 +54,7 @@ export const listLocationAction = () => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         });
@@ -74,7 +74,7 @@ export const getLocationAction = (id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -87,7 +87,7 @@ export const removeLocationAction = (id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: DEL_LOCATION,
-                arletContent: result.data.message,
+                arletContent: [result.data.message, 201],
                 locationId: id
             }
             dispatch2(action2);
@@ -95,7 +95,7 @@ export const removeLocationAction = (id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -108,7 +108,7 @@ export const addLocationAction = (location = {}) => {
         promise.then((result) => {
             let action2 = {
                 type: ADD_LOCATION,
-                arletContent: "Thêm vị trí thành công",
+                arletContent: ["Thêm vị trí thành công", 200],
                 addLocation: result.data.content,
             }
             dispatch2(action2);
@@ -116,7 +116,7 @@ export const addLocationAction = (location = {}) => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -129,7 +129,7 @@ export const updateLocationAction = (location = {}, id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: UPDATE_LOCATION,
-                arletContent: "Cập nhập vị trí thành công",
+                arletContent: ["Cập nhập vị trí thành công", 200],
                 updateLocation: result.data.content,
             }
             dispatch2(action2);
@@ -137,7 +137,7 @@ export const updateLocationAction = (location = {}, id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -150,7 +150,7 @@ export const upImageLocationAction = (file = [], id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: UP_IMAGE_LOCATION,
-                arletContent: "Cập nhập ảnh thành công",
+                arletContent: ["Cập nhập hình ảnh thành công", 201],
                 upImageLocation: result.data.content,
             }
             dispatch2(action2);
@@ -158,14 +158,14 @@ export const upImageLocationAction = (file = [], id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
     }
 }
 
-export const setAlertLocationAction = (arletContent = '') => {
+export const setAlertLocationAction = (arletContent = []) => {
     return (dispatch2) => {
         let action2 = {
             type: SET_ALERT,

@@ -2,19 +2,20 @@ import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Modal } from 'antd';
 import { addLocationAction, setAlertLocationAction } from '../../redux/actions/LocationAction';
 
 export default function AddLocation() {
-    let { arletContent } = useSelector(state => state.locationReducer)
-
+    let { arletContent } = useSelector(state => state.locationAdminReducer);
     let dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (arletContent !== '') {
+        if (arletContent[0] !== '') {
             info()
         }
-    }, [arletContent])
+    }, [arletContent]);
 
     const formik = useFormik({
         initialValues: {
@@ -25,6 +26,8 @@ export default function AddLocation() {
         },
         validationSchema: Yup.object({
             tenViTri: Yup.string().required("Vị trí không được để trống"),
+            tinhThanh: Yup.string().required("Tỉnh thành không được để trống"),
+            quocGia: Yup.string().required("Quốc gia không được để trống"),
         }),
         onSubmit: values => {
             console.log(values);
@@ -38,12 +41,15 @@ export default function AddLocation() {
             title: 'Thông báo',
             content: (
                 <div>
-                    <p>{arletContent}</p>
+                    <p>{arletContent[0]}</p>
                 </div>
             ),
             onOk() {
-                let action = setAlertLocationAction('');
+                let action = setAlertLocationAction(['', 0]);
                 dispatch(action);
+                if (arletContent[1] === 200) {
+                    navigate('/admin/locations');
+                }
             },
         });
     };
@@ -54,13 +60,13 @@ export default function AddLocation() {
             <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} layout="horizontal" onFinish={formik.handleSubmit}
                 initialValues={formik.values}>
                 <Form.Item label="Vị trí" name="tenViTri" validateStatus="error" help={formik.touched.tenViTri && formik.errors.tenViTri ? (formik.errors.tenViTri) : null}>
+                    <Input onChange={formik.handleChange} onBlur={formik.handleBlur} />
+                </Form.Item>
+                <Form.Item label="Tỉnh thành" name="tinhThanh" validateStatus="error" help={formik.touched.tinhThanh && formik.errors.tinhThanh ? (formik.errors.tinhThanh) : null}>
                     <Input onChange={formik.handleChange} onBlur={formik.handleBlur}/>
                 </Form.Item>
-                <Form.Item label="Tỉnh thành" name="tinhThanh">
-                    <Input onChange={formik.handleChange} />
-                </Form.Item>
-                <Form.Item label="Quốc gia" name="quocGia">
-                    <Input onChange={formik.handleChange} />
+                <Form.Item label="Quốc gia" name="quocGia" validateStatus="error" help={formik.touched.quocGia && formik.errors.quocGia ? (formik.errors.quocGia) : null}>
+                    <Input onChange={formik.handleChange} onBlur={formik.handleBlur}/>
                 </Form.Item>
                 <Form.Item label="Button">
                     <Button htmlType="submit">Thêm vị trí</Button>

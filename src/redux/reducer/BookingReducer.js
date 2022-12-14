@@ -2,13 +2,11 @@ import { DATA_SEARCH, GET_ALL_ROOM, } from "../type/BookingRoomType"
 import { ADD_BOOKING, DEL_BOOKING, GET_DETAIL_BOOKING_AD, GET_LIST_BOOKING_AD, SET_ALERT, UPDATE_BOOKING } from "../type/BookingRoomType";
 
 const initialState = {
-    dataSearch: {
-
-    },
+    dataSearch: {},
     arrRoom: [],
     arrBooking: [],
     booking: {},
-    arletContent: '',
+    arletContent: ['', 0],
 }
 
 export const BookingReducer = (state = initialState, action) => {
@@ -27,7 +25,7 @@ export const BookingReducer = (state = initialState, action) => {
     }
 }
 
-export const bookingReducer = (state = initialState, action) => {
+export const bookingAdminReducer = (state = initialState, action) => {
 
     //admin
     switch (action.type) {
