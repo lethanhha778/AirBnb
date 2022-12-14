@@ -1,11 +1,48 @@
-import commentService from "../../service/CommentService";
+import commentServices from "../../service/CommentService";
 import { ADD_COMMENT, DEL_COMMENT, GET_DETAIL_COMMENT_AD, GET_LIST_COMMENT_AD, SET_ALERT, UPDATE_COMMENT } from "../type/CommentType";
+import { GET_ALL_COMMENT, POST_COMMENT } from "../type/CommentType"
+import { hiddenLoadingAction, loadingAction } from "./LoadingAction"
 
+
+export const postComment = (contentComment) => {
+    return (dispatch) => {
+        dispatch(loadingAction)
+        let promise = commentServices.postCommentUser(contentComment)
+        promise.then((res) => {
+            console.log(res.data.content)
+            const action = {
+                type: POST_COMMENT,
+                data: res.data.content
+            }
+            dispatch(action)
+            dispatch(hiddenLoadingAction)
+        })
+        promise.catch((err) => {
+            console.log(err)
+        })
+    }
+}
+
+export const getComment = () => {
+    return (dispatch) => {
+        let promise = commentServices.getAllComment()
+        promise.then((res) => {
+            const action = {
+                type: GET_ALL_COMMENT,
+                listComment: res.data.content
+            }
+            dispatch(action)
+        })
+        promise.catch((err) => {
+            console.log(err)
+        })
+    }
+}
 
 //admin
 export const listCommentAction = () => {
     return (dispatch2) => {
-        let promise = commentService.listComment();
+        let promise = commentServices.listComment();
         promise.then((result) => {
             let action2 = {
                 type: GET_LIST_COMMENT_AD,
@@ -35,7 +72,7 @@ export const getCommentAction = (id = '') => {
 
 export const removeCommentAction = (id = '') => {
     return (dispatch2) => {
-        let promise = commentService.removeComment(id);
+        let promise = commentServices.removeComment(id);
         promise.then((result) => {
             let action2 = {
                 type: DEL_COMMENT,
@@ -56,7 +93,7 @@ export const removeCommentAction = (id = '') => {
 
 export const addCommentAction = (comment = {}) => {
     return (dispatch2) => {
-        let promise = commentService.addComment(comment);
+        let promise = commentServices.addComment(comment);
         promise.then((result) => {
             let action2 = {
                 type: ADD_COMMENT,
@@ -77,7 +114,7 @@ export const addCommentAction = (comment = {}) => {
 
 export const updateCommentAction = (comment = {}, id = '') => {
     return (dispatch2) => {
-        let promise = commentService.updateComment(comment, id);
+        let promise = commentServices.updateComment(comment, id);
         promise.then((result) => {
             let action2 = {
                 type: UPDATE_COMMENT,
@@ -104,4 +141,5 @@ export const setAlertCommentAction = (arletContent = []) => {
         }
         dispatch2(action2);
     }
+
 }

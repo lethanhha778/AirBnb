@@ -3,8 +3,11 @@ import { http } from "../util/config";
 
 class BookingRoomService {
     // lấy cái api này render ra từng phòng ở home
-    getAllRoom = ()=>{
-        return http.get(`api/phong-thue`)
+    getAllRoom = () => {
+        return http.get(`/api/phong-thue`)
+    }
+    postBookRoom = (maPhong) => {
+        return http.post(`/api/dat-phong`, maPhong)
     }
 
     //admin
@@ -12,7 +15,7 @@ class BookingRoomService {
         return http.get(`/api/dat-phong`)
     }
 
-    detailBooking = (id)=>{
+    detailBooking = (id) => {
         return http.get(`/api/dat-phong/${id}`)
     }
 

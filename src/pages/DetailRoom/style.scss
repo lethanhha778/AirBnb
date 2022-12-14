@@ -6,6 +6,9 @@
         padding: 8px 0;
         margin-bottom: 0;
     }
+    .room-item{
+        width: 100%;
+    }
 }
 .rating,
 .share {
@@ -15,6 +18,7 @@
     .rating__user,
     .share_item1,
     .share_item2 {
+        font-size: 1.15rem;
         margin-right: 8px;
         display: flex;
         align-items: center;
@@ -29,9 +33,10 @@
 
 .grid-container {
     display: grid;
-    grid-template-columns: 50% 25% 25%;
+    grid-template-columns: 50% 23% 23%;
     gap: 18px;
     margin: 30px 0 50px;
+    width: 100%;
     img {
         max-height: 400px;
         object-fit: cover;
@@ -106,6 +111,7 @@
     .col__left-1 {
         h4 {
             font-size: 1.6rem;
+            font-weight: bold;
         }
         .content {
             font-size: 1.2rem;
@@ -146,12 +152,83 @@
         }
     }
 }
+.col__right {
+    position: -webkit-sticky;
+    position: sticky !important;
+    z-index: 1;
+    width: 100%;
+    height: 300px;
+    margin-bottom: 80px;
+    top: 70px;
+    .ticket-pay {
+        box-shadow: rgb(0 0 0 / 12%) 0px 6px 16px;
+        border-radius: 12px;
+        padding: 12px 24px;
+        .title-pay {
+            font-size: 1.2rem;
+            padding: 10px 0;
+            span {
+                font-size: 1.6rem;
+                font-weight: bold;
+            }
+        }
+        .input__choose-item {
+            width: 100%;
+            .ant-select {
+                width: 100%;
+                margin: 10px 0;
+            }
+        }
+        .css-dev-only-do-not-override-8uvayj {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .ant-select-selector {
+            border-radius: 8px !important;
+        }
+        .btn-bookingRoom {
+            width: 100%;
+            padding: 5px 0;
+            margin: 10px 0;
+            border-radius: 8px;
+            background-color: $color-AirBnb;
+            border: 2px solid $color-AirBnb;
+            transition: ease-in 0.3s;
+            &:hover {
+                background-color: rgb(224, 23, 96);
+                border: 2px solid rgb(224, 23, 96);
+            }
+            span {
+                font-weight: bold;
+                font-size: 1.2rem;
+                color: white;
+            }
+        }
+        .total__pay,
+        .total__service {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 4px 0;
+            cursor: pointer;
+            h6 {
+                font-size: 1.2rem;
+            }
+        }
+        .total__service {
+            border-bottom: 1px solid #e9e9e9;
+        }
+        .total-end {
+            padding-top: 12px;
+        }
+    }
+}
 .aircover {
     padding: 20px 0;
     border-bottom: 1px solid #e9e9e9;
     img {
-        width: 25%;
-        padding: 10px 0 20px;
+        width: 18%;
+        padding-bottom: 20px;
     }
     p {
         font-size: 1.2rem;
@@ -177,14 +254,19 @@
     padding: 20px 0;
     border-bottom: 1px solid #e9e9e9;
     font-size: 1.2rem;
-    .icon__room-item{
+    .icon__room-item {
         font-size: 1.4rem;
         display: flex;
         align-items: center;
-        svg{
+        svg {
             font-size: 1.6rem;
             margin-right: 12px;
         }
+    }
+}
+@media screen and (max-width: 1439px) {
+    .container-detail {
+        width: 90%;
     }
 }
 

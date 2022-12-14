@@ -1,4 +1,5 @@
 import { ADD_COMMENT, DEL_COMMENT, GET_DETAIL_COMMENT_AD, GET_LIST_COMMENT_AD, SET_ALERT, UPDATE_COMMENT } from "../type/CommentType";
+import { GET_ALL_COMMENT, POST_COMMENT } from "../type/CommentType"
 
 const initialState = {
     arrComment: [],
@@ -6,8 +7,22 @@ const initialState = {
     arletContent: ['', 0],
 }
 
-export const commentAdminReducer = (state = initialState, action) => {
+export const CommentReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case GET_ALL_COMMENT:
+            state.arrComment = action.listComment
+            return { ...state }
+        case POST_COMMENT:
+            console.log(action.data)
+            state.arrComment = [...state.arrComment, action.data]
+            console.log(state.arrComment);
+            return { ...state }
+        default:
+            return state
+    }
+}
 
+export const commentAdminReducer = (state = initialState, action) => {
     //admin
     switch (action.type) {
         case GET_LIST_COMMENT_AD:
@@ -20,7 +35,6 @@ export const commentAdminReducer = (state = initialState, action) => {
             if (indexDet > -1) {
                 state.comment = state.arrComment[indexDet];
             }
-            
             return { ...state }
 
         case DEL_COMMENT:
@@ -29,7 +43,7 @@ export const commentAdminReducer = (state = initialState, action) => {
             return { ...state }
 
         case ADD_COMMENT:
-            console.log(action.addComment, action.arletContent )
+            console.log(action.addComment, action.arletContent)
             state.arrComment = [...state.arrComment, action.addComment];
             state.arletContent = action.arletContent;
             return { ...state }

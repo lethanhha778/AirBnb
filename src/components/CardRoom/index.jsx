@@ -12,6 +12,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { roomList } from '../../redux/actions/BookingRoomAction';
+import { SET_INDEX } from '../../redux/type/RoomType';
 
 export default function CardRoom() {
   const navigate = useNavigate()
@@ -26,8 +27,8 @@ export default function CardRoom() {
     let room = arrRoom?.map((item, index) => {
       return { ...item, data: dataIMG[index] };
     });
-
-    return room?.slice(0, 20).map((item, index) => {
+    console.log(room)
+    return room?.slice(0, 30).map((item, index) => {
       return <Col
         className="gutter-row" xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }} lg={{ span: 8 }} xl={{ span: 6 }} key={index} data-aos="flip-left" data-aos-duration="800" >
         <Swiper
@@ -74,7 +75,7 @@ export default function CardRoom() {
             <h5 onClick={() => {
               navigate(`/detailRoom/${item.id}`)
             }}
-              className='room__decripton-sites' ><span>{item.tenPhong}</span></h5>   
+              className='room__decripton-sites' ><span>{item.tenPhong}</span></h5>
           </div>
           <div className='room__area'>
             <span>{item.giaTien} $/ đêm</span>
@@ -91,7 +92,6 @@ export default function CardRoom() {
       <Row className='mt-5'
         gutter={[24, 24]}
       >
-
         {renderRoomItem()}
       </Row>
     </div>

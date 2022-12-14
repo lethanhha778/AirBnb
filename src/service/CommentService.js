@@ -1,11 +1,17 @@
 // api bình luận
 import { http } from "../util/config";
 
-class CommentService {
-    
+class CommentServices {
+    // user
+    getAllComment = () => {
+        return http.get(`/api/binh-luan`)
+    }
+    postCommentUser = (contentComment) => {
+        return http.post(`/api/binh-luan`, contentComment)
+    }
 
-    //admin
-    listComment = () => {
+     //admin
+     listComment = () => {
         return http.get(`/api/binh-luan`)
     }
 
@@ -20,8 +26,6 @@ class CommentService {
     updateComment = (comment, id) => {
         return http.put(`/api/binh-luan/${id}`, comment);
     }
-
 }
-
-const commentService = new CommentService()
-export default commentService
+const commentServices = new CommentServices()
+export default commentServices
