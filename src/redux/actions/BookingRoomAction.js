@@ -110,7 +110,6 @@ export const addBookingAction = (booking = {}) => {
             let action2 = {
                 type: ADD_BOOKING,
                 addBooking: result.data.content,
-                arletContent: result.data.message,
                 arletContent:  [result.data.message, 200],
             }
             dispatch2(action2);
