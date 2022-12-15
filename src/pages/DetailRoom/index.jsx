@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { Col, Row, Select, DatePicker, Space } from 'antd';
+import { Col, Row, Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import "antd/dist/reset.css";
-import { useParams } from 'react-router-dom';
-import moment from 'moment/moment';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getDetailRoom } from '../../redux/actions/RoomAction'
 import { AiOutlineHeart } from "react-icons/ai";
 import { GiNetworkBars, GiBusDoors, GiThermometerCold, GiWashingMachine } from "react-icons/gi";
@@ -15,18 +14,20 @@ import { BiSwim } from "react-icons/bi";
 import { CgScreen } from "react-icons/cg";
 import { TbToolsKitchen } from "react-icons/tb";
 import { dataIMG } from '../../components/CardRoom/dataImg';
-import './style.scss'
 import CommnetUser from '../../components/CommentUser';
 import { getComment } from '../../redux/actions/CommentAction';
+import CardBooking from './CardBooking';
+import './style.scss'
+import { HIDEN_MODAL } from '../../redux/type/BookingRoomType';
 
 export default function DetailRoom() {
+    useEffect(() => {
+        // 👇️ scroll to top on page load
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }, []);
     let { id } = useParams()
+    const navigation = useNavigate()
     console.log(id);
-    const serviceCharge = Number(5)
-    const [datePicker, setDatePicker] = useState([0, 0])
-    const [date, setDate] = useState(1)
-    const [totalPay, setTotalPay] = useState(0)
-    const [people, setPeople] = useState(0)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getDetailRoom(id))
@@ -37,47 +38,21 @@ export default function DetailRoom() {
     }, [])
     const { arrComment } = useSelector(state => state.CommentReducer)
     const { detailRoom } = useSelector(state => state.RoomReducer)
+    const { modal, infoBookingRoom } = useSelector(state => state.BookingReducer)
+
     let commentMemo = useMemo(() => arrComment, [arrComment])
-    console.log(detailRoom);
-    console.log(arrComment);
 
-    const { RangePicker } = DatePicker;
-    const disabledDate = (current) => {
-        // set disabled ngày đã qua
-        let customDate = moment().format("YYYY-MM-DD");
-        return current && current < moment(customDate, "YYYY-MM-DD");
-    };
-    const onChange = (date, dateString) => {
-        //! case: lấy data của phòng check vs ngày dataString 
-        //! nếu có ng đặt r thì thông báo faile, chọn ngày khác 
-        setDatePicker(dateString)
-        totalPriceOfDays(dateString)
+    // gọi action check role là gì để showw modal 
+    const isModalOpen = modal
+    const handleOk = () => {
+        dispatch({ type: HIDEN_MODAL })
+        navigation('/home')
 
     };
-    // tính tiền theo số ngày chọn
-    const totalPriceOfDays = (date) => {
-        const totalMilisecond = Date.parse(`${date[1]}`) - Date.parse(`${date[0]}`)
-        const totalDate = Number(totalMilisecond / 86400000)
-        const totalPay = detailRoom.giaTien * totalDate
-        console.log(totalPay)
-        setDate(totalDate)
-        setTotalPay(totalPay)
-    }
-    // Tổng tiền thanh toán
-    const allToatal = () => {
-        if (totalPay === 0) {
-            return detailRoom.giaTien + serviceCharge
-        }
-        return totalPay + serviceCharge
-    }
-    const onChangePeople = (value) => {
-        setPeople(Number(value))
+    const handleCancel = () => {
+        dispatch({ type: HIDEN_MODAL })
     };
-    const postDataBook = () => {
-        // cần lấy data phòng check xem có ng đặt phòng ngày đó chưa 
-        // nếu có ng đặt thì thông báo ngày đó hết phòng
-        console.log('số người', people, 'date', datePicker);
-    }
+
 
     const renderDetailRoom = () => {
         let newRoom = {}
@@ -217,81 +192,15 @@ export default function DetailRoom() {
                     </div>
                 </Col>
                 <Col xs={24} md={12} lg={10} xl={8} className='col__right'>
-                    <div className="ticket-pay">
-                        <h6 className='title-pay'> <span>${detailRoom.giaTien}</span> đêm</h6>
-                        <div className="input__choose-item">
-                            <Space direction="vertical" size={12}>
-                                <RangePicker disabledDate={disabledDate} onChange={onChange} />
-                            </Space>
-                        </div>
-                        <div className="input__choose-item">
-                            <Select
-                                showSearch
-                                placeholder="Số Người"
-                                optionFilterProp="children"
-                                onChange={onChangePeople}
-                                filterOption={(input, option) =>
-                                    (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
-                                }
-                                options={[
-                                    {
-                                        value: '1',
-                                        label: '1 Người',
-                                    },
-                                    {
-                                        value: '2',
-                                        label: '2 Người',
-                                    },
-                                    {
-                                        value: '3',
-                                        label: '3 Người',
-                                    },
-                                    {
-                                        value: '4',
-                                        label: '4 Người',
-                                    },
-                                    {
-                                        value: '5',
-                                        label: '5 Người',
-                                    }
-                                ]}
-                            />
-                        </div>
-                        <button
-                            onClick={() => { postDataBook() }}
-                            className='btn-bookingRoom'>
-                            <span>Đặt Phòng</span>
-                        </button>
-                        <p className='text-center'>Bạn Vẫn Chưa Bị Trừ Tiền</p>
-                        <div className='total__pay'>
-                            <div>
-                                <h6>${detailRoom.giaTien} x {date} đêm</h6>
-                            </div>
-                            <div>
-                                {totalPay === 0
-                                    ? <h6> ${detailRoom.giaTien} </h6>
-                                    : <h6> ${totalPay}</h6>}
-                            </div>
-                        </div>
-                        <div className='total__service'>
-                            <div>
-                                <h6>Phí Dịch Vụ</h6>
-                            </div>
-                            <div>
-                                <h6>${serviceCharge}</h6>
-                            </div>
-                        </div>
-                        <div className='total__pay total-end'>
-                            <div>
-                                <h4>Tổng Trước Thuế</h4>
-                            </div>
-                            <div>
-                                <h6>${allToatal()}</h6>
-                            </div>
-                        </div>
-                    </div>
+                    <CardBooking data={detailRoom} id={id} />
                 </Col>
             </Row>
+            <Modal title="Đặt Phòng Thành Công" okText="Về Trang Chủ" open={isModalOpen} onOk={handleOk} cancelButtonProps={{ style: { display: 'none' } }}>
+                <h6>Ngày Nhận Phòng: {infoBookingRoom?.ngayDen}</h6>
+                <h6>Ngày Trả Phòng: {infoBookingRoom?.ngayDi}</h6>
+                <h6>Số Người: {infoBookingRoom?.soLuongKhach}</h6>
+            </Modal>
+
         </div>
     )
 }

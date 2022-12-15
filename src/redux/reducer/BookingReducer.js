@@ -1,27 +1,31 @@
-import { DATA_SEARCH, GET_ALL_ROOM, } from "../type/BookingRoomType"
+import { BOOKING_ROOM, DATA_SEARCH, GET_ALL_ROOM, HIDEN_MODAL, SHOW_MODAL, } from "../type/BookingRoomType"
 import { ADD_BOOKING, DEL_BOOKING, GET_DETAIL_BOOKING_AD, GET_LIST_BOOKING_AD, SET_ALERT, UPDATE_BOOKING } from "../type/BookingRoomType";
 
 const initialState = {
-    dataSearch: {
-
-    },
     arrRoom: [],
     arrBooking: [],
     booking: {},
     arletContent: '',
+    infoBookingRoom: {},
+    modal: false,
 }
 
 export const BookingReducer = (state = initialState, action) => {
     switch (action.type) {
-        // lấy ds vị trí 
-        case DATA_SEARCH:
-            state.dataSearch = action.dataSearch
-            // console.log(state.dataSearch)
-            return { ...state }
         case GET_ALL_ROOM:
             state.arrRoom = action.arrRoom
-            return {...state}
-
+            return { ...state }
+        case BOOKING_ROOM:
+            console.log(action.infoBooking);
+            state.infoBookingRoom = action.infoBooking.infoRoom
+            state.modal = action.infoBooking.modal
+            return { ...state }
+        case SHOW_MODAL:
+            state.modal = true
+            return { ...state }
+        case HIDEN_MODAL:
+            state.modal = false
+            return { ...state }
         default:
             return state
     }

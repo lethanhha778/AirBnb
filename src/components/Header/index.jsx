@@ -63,16 +63,16 @@ export default function Header() {
     window.addEventListener('scroll', closeNav);
     const btnSearch = () => {
         if (idViTri !== 0) {
-            const action = {
-                type: DATA_SEARCH,
-                dataSearch: {
-                    location: idViTri,
-                    dateStart: dateStar,
-                    dateEnd: dateEnd,
-                    people: people
-                }
-            }
-            dispatch(action)
+            // const action = {
+            //     type: DATA_SEARCH,
+            //     dataSearch: {
+            //         location: idViTri,
+            //         dateStart: dateStar,
+            //         dateEnd: dateEnd,
+            //         people: people
+            //     }
+            // }
+            // dispatch(action)
             navigate(`/roomList/${idViTri}`);
         }
         else {
