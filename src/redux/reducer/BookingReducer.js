@@ -31,7 +31,7 @@ export const BookingReducer = (state = initialState, action) => {
     }
 }
 
-export const bookingReducer = (state = initialState, action) => {
+export const bookingAdminReducer = (state = initialState, action) => {
 
     //admin
     switch (action.type) {

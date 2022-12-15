@@ -1,12 +1,12 @@
-import { ADD_USER, DEL_USER, GET_DETAIL_USER, GET_LIST_USER, SET_ALERT, UPDATE_USER } from "../type/UserType";
+import { ADD_USER, DEL_USER, GET_DETAIL_USER, GET_LIST_USER, GET_SEARCH_USER, SET_ALERT, UPDATE_USER } from "../type/UserType";
 
 const initialState = {
     arrUser: [],
     user: {},
-    arletContent: '',
+    arletContent: ['', 0],
 }
 
-export const userReducer = (state = initialState, action) => {
+export const userAdminReducer = (state = initialState, action) => {
     switch (action.type) {
 
         //admin
@@ -26,9 +26,13 @@ export const userReducer = (state = initialState, action) => {
         case ADD_USER:
             state.arletContent = action.arletContent;
             return { ...state }
-            
+
         case UPDATE_USER:
             state.arletContent = action.arletContent;
+            return { ...state }
+
+        case GET_SEARCH_USER:
+            state.arrUser = action.arrUser;
             return { ...state }
 
         case SET_ALERT:

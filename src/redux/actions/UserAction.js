@@ -1,5 +1,5 @@
 import userService from "../../service/UserService";
-import { ADD_USER, DEL_USER, GET_DETAIL_USER, GET_LIST_USER, SET_ALERT, UPDATE_USER } from "../type/UserType";
+import { ADD_USER, DEL_USER, GET_DETAIL_USER, GET_LIST_USER, GET_SEARCH_USER, SET_ALERT, UPDATE_USER } from "../type/UserType";
 
 
 //admin
@@ -16,7 +16,7 @@ export const listUserAction = () => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         });
@@ -36,7 +36,7 @@ export const getUserAction = (id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -49,7 +49,7 @@ export const removeUserAction = (id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: DEL_USER,
-                arletContent: result.data.message,
+                arletContent: [result.data.message, 201],
                 userId: id,
             }
             dispatch2(action2);
@@ -57,7 +57,7 @@ export const removeUserAction = (id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
             }
             dispatch2(action2);
         })
@@ -70,7 +70,7 @@ export const addUserAction = (user = {}) => {
         promise.then((result) => {
             let action2 = {
                 type: ADD_USER,
-                arletContent: "Thêm tài khoản thành công",
+                arletContent: ["Thêm tài khoản thành công", 200],
                 addUser: result.data.content,
             }
             dispatch2(action2);
@@ -78,7 +78,7 @@ export const addUserAction = (user = {}) => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content
+                arletContent: [error.response?.data.content, error.response?.data.statusCode]
             }
             dispatch2(action2);
         })
@@ -91,7 +91,7 @@ export const updateUserAction = (user = {}, id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: UPDATE_USER,
-                arletContent: "Cập nhập tài khoản thành công",
+                arletContent: ["Cập nhập tài khoản thành công", 200],
                 updateUser: result.data.content,
             }
             dispatch2(action2);
@@ -99,14 +99,35 @@ export const updateUserAction = (user = {}, id = '') => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: error.response?.data.content
+                arletContent: [error.response?.data.content, error.response?.data.statusCode]
             }
             dispatch2(action2);
         })
     }
 }
 
-export const setAlertUserAction = (arletContent = '') => {
+export const searchUserAction = (name = '') => {
+    return (dispatch2) => {
+        let promise = userService.searchUser(name);
+        promise.then((result) => {
+            let action2 = {
+                type: GET_SEARCH_USER,
+                arrUser: result.data.content,
+            }
+            dispatch2(action2);
+        })
+        promise.catch((error) => {
+            console.log(error)
+            let action2 = {
+                type: SET_ALERT,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
+            }
+            dispatch2(action2);
+        })
+    }
+}
+
+export const setAlertUserAction = (arletContent = []) => {
     return (dispatch2) => {
         let action2 = {
             type: SET_ALERT,

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { PlusOutlined } from '@ant-design/icons';
 import { Form, Input, Button, Upload, Modal } from 'antd';
 import { getLocationAction, setAlertLocationAction, updateLocationAction, upImageLocationAction } from '../../redux/actions/LocationAction';
@@ -10,8 +10,9 @@ import { getLocationAction, setAlertLocationAction, updateLocationAction, upImag
 
 export default function EditLocation() {
   let { id } = useParams();
-  let { location, arletContent } = useSelector(state => state.locationReducer);
+  let { location, arletContent } = useSelector(state => state.locationAdminReducer);
   let dispatch = useDispatch();
+  const navigate = useNavigate();
   let [fileList, setfileList] = useState([
     {
       uid: '-1',
@@ -41,7 +42,7 @@ export default function EditLocation() {
   }, [location]);
 
   useEffect(() => {
-    if (arletContent !== '') {
+    if (arletContent[0] !== '') {
       info()
     }
   }, [arletContent])
@@ -61,6 +62,8 @@ export default function EditLocation() {
     },
     validationSchema: Yup.object({
       tenViTri: Yup.string().required("Vị trí không được để trống"),
+      tinhThanh: Yup.string().required("Tỉnh thành không được để trống"),
+      quocGia: Yup.string().required("Quốc gia không được để trống"),
     }),
     onSubmit: values => {
       let action = updateLocationAction(values, location.id);
@@ -73,12 +76,15 @@ export default function EditLocation() {
       title: 'Thông báo',
       content: (
         <div>
-          <p>{arletContent}</p>
+          <p>{arletContent[0]}</p>
         </div>
       ),
       onOk() {
-        let action = setAlertLocationAction('');
+        let action = setAlertLocationAction(['', 0]);
         dispatch(action);
+        if (arletContent[1] === 200) {
+          navigate('/admin/locations');
+        }
       },
     });
   };
@@ -103,11 +109,11 @@ export default function EditLocation() {
         <Form.Item label="Vị trí" name="tenViTri" validateStatus="error" help={formik.touched.tenViTri && formik.errors.tenViTri ? (formik.errors.tenViTri) : null}>
           <Input onChange={formik.handleChange} onBlur={formik.handleBlur} />
         </Form.Item>
-        <Form.Item label="Tỉnh thành" name="tinhThanh">
-          <Input onChange={formik.handleChange} />
+        <Form.Item label="Tỉnh thành" name="tinhThanh" validateStatus="error" help={formik.touched.tinhThanh && formik.errors.tinhThanh ? (formik.errors.tinhThanh) : null}>
+          <Input onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         </Form.Item>
-        <Form.Item label="Quốc gia" name="quocGia">
-          <Input onChange={formik.handleChange} />
+        <Form.Item label="Quốc gia" name="quocGia" validateStatus="error" help={formik.touched.quocGia && formik.errors.quocGia ? (formik.errors.quocGia) : null}>
+          <Input onChange={formik.handleChange} onBlur={formik.handleBlur}/>
         </Form.Item>
         <Form.Item label="Hình ảnh" valuePropName="fileList">
           <Upload
