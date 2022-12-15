@@ -18,6 +18,7 @@ const RootReducer = combineReducers({
     RoomReducer,
     LoadingReducer,
     CommentReducer,
+    
 
     // reducer admin 
     userAdminReducer, 

@@ -11,6 +11,9 @@ import './style.scss'
 
 
 export default function RoomList() {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
   let { id } = useParams()
   const dispatch = useDispatch()
   useEffect(() => {

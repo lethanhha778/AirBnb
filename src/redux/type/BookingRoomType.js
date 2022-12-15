@@ -1,5 +1,8 @@
 export const DATA_SEARCH ='DATA_SEARCH'
 export const GET_ALL_ROOM = 'GET_ALL_ROOM'
+export const BOOKING_ROOM = 'BOOKING_ROOM'
+export const SHOW_MODAL = 'SHOW_MODAL'
+export const HIDEN_MODAL = 'HIDEN_MODAL'
 
 //admin
 export const GET_LIST_BOOKING_AD = "GET_LIST_BOOKING_AD";

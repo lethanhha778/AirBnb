@@ -6,8 +6,8 @@ class BookingRoomService {
     getAllRoom = () => {
         return http.get(`/api/phong-thue`)
     }
-    postBookRoom = (maPhong) => {
-        return http.post(`/api/dat-phong`, maPhong)
+    postBookingRoom = (info) => {
+        return http.post(`/api/dat-phong`, info)
     }
 
     //admin
