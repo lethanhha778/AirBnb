@@ -18,7 +18,8 @@ function CommnetUser(props) {
     dispatch(action)
   }, [])
 
-  const { arrUser } = useSelector(state => state.userReducer)
+  const { arrUser } = useSelector(state => state.userAdminReducer)
+  console.log(arrUser)
   const [form] = Form.useForm();
   const user = (JSON.parse(localStorage.getItem('USER_INFO')))
   const arrCM = []

@@ -1,4 +1,4 @@
-import { GET_ALL_ROOM, } from "../type/BookingRoomType";
+import { GET_ALL_ROOM, BOOKING_ROOM } from "../type/BookingRoomType";
 import { hiddenLoadingAction, loadingAction } from "./LoadingAction";
 import bookingRoomService from "../../service/BookingRoomService";
 import { ADD_BOOKING, DEL_BOOKING, GET_DETAIL_BOOKING_AD, GET_LIST_BOOKING_AD, SET_ALERT, UPDATE_BOOKING } from "../type/BookingRoomType";
@@ -17,6 +17,26 @@ export const roomList = () => {
         })
         promise.catch((err) => {
             console.log(err);
+        })
+    }
+}
+export const bookingRoomAction = (info) => {
+    return (dispatch) => {
+        console.log(info);
+        let promise = bookingRoomService.postBookingRoom(info)
+        promise.then((res) => {
+            console.log(res.data);
+            const action = {
+                type: BOOKING_ROOM,
+                infoBooking: {
+                    infoRoom: info,
+                    modal: true
+                }
+            }
+            dispatch(action)
+        })
+        promise.catch((err) => {
+            console.log(err)
         })
     }
 }
