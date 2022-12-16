@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { FileOutlined, UserOutlined, DownOutlined } from '@ant-design/icons';
-import { Layout, Menu, Space } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { Layout, Menu } from 'antd';
+import { useSelector } from 'react-redux';
+import { ACCESS_TOKEN, USER_INFO } from '../util/setting';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
     return {
@@ -36,13 +37,14 @@ const items = [
 
 const AdminTemplate = () => {
     let { user } = useSelector(state => state.AuthReducer);
+    console.log(user);
     const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
     const [current, setCurrent] = useState('/admin');
 
     const dropItems = [
         {
-            label: (<div style={{paddingRight:'18px'}}>{user.name}<DownOutlined style= {{ position: 'absolute', top: '26px', right: '0'}}/></div>),
+            label: (<div style={{ paddingRight: '18px' }}>{user.name}<DownOutlined style={{ position: 'absolute', top: '26px', right: '0' }} /></div>),
             key: 'SubMenu',
             children: [
                 {
@@ -52,22 +54,27 @@ const AdminTemplate = () => {
                 },
                 {
                     label: 'Đăng xuất',
-                    key: 'logout',
+                    key: '/home',
                     style: { paddingLeft: '10px' },
                 },
             ],
         },
     ];
 
-    if (user.role !== 'ADMIN') {
-        navigate('/auth/login');
-    }
+    useEffect(() => {
+        if (Object.keys(user).length === 0) {
+            navigate('/auth/login');
+        }
+        else if (user.role !== 'ADMIN') {
+            navigate('/home');
+        }
+    },[user]);
 
     return <Fragment>
         <Layout style={{ minHeight: '100vh', }}>
             <Sider width='220px' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-                <div style={{height:'64px', textAlign:'center', lineHeight: '64px'}}>
-                    <NavLink to="/home"><img style={{ width: '102px', height: '32px'}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png" alt /></NavLink>
+                <div style={{ height: '64px', textAlign: 'center', lineHeight: '64px' }}>
+                    <NavLink to="/home"><img style={{ width: '102px', height: '32px' }} src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Airbnb_Logo_B%C3%A9lo.svg/2560px-Airbnb_Logo_B%C3%A9lo.svg.png" alt="logo" /></NavLink>
                 </div>
                 <Menu onClick={(link) => {
                     navigate(link.key);
@@ -77,6 +84,10 @@ const AdminTemplate = () => {
             <Layout className="site-layout">
                 <Header>
                     <Menu style={{ marginLeft: 'auto', width: 'fit-content', }} onClick={(drop) => {
+                        if (drop.key === '/home') {
+                            localStorage.removeItem(ACCESS_TOKEN);
+                            localStorage.removeItem(USER_INFO);
+                        }
                         navigate(drop.key);
                     }} theme="dark" mode="horizontal" items={dropItems} />
                 </Header>
