@@ -4,7 +4,7 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
 import { FileOutlined, UserOutlined, DownOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ACCESS_TOKEN, USER_INFO } from '../util/setting';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
