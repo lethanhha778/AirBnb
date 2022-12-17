@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Col, Row, Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import "antd/dist/reset.css";
@@ -22,35 +22,25 @@ import { HIDEN_MODAL } from '../../redux/type/BookingRoomType';
 
 export default function DetailRoom() {
     useEffect(() => {
-        // 👇️ scroll to top on page load
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
     let { id } = useParams()
     const navigation = useNavigate()
-    console.log(id);
     const dispatch = useDispatch();
     useEffect(() => {
+        dispatch(getComment())
         dispatch(getDetailRoom(id))
-    }, [])
-    useEffect(() => {
-        const action = getComment()
-        dispatch(action)
-    }, [])
+    }, [dispatch, id])
+
     const { arrComment } = useSelector(state => state.CommentReducer)
     const { detailRoom } = useSelector(state => state.RoomReducer)
     const { modal, infoBookingRoom } = useSelector(state => state.BookingReducer)
+    const commentMemo = useMemo(() => arrComment, [arrComment])
 
-    let commentMemo = useMemo(() => arrComment, [arrComment])
-
-    // gọi action check role là gì để showw modal 
     const isModalOpen = modal
     const handleOk = () => {
         dispatch({ type: HIDEN_MODAL })
         navigation('/home')
-
-    };
-    const handleCancel = () => {
-        dispatch({ type: HIDEN_MODAL })
     };
 
 
@@ -113,7 +103,7 @@ export default function DetailRoom() {
                 <Col xs={24} md={12} lg={14} xl={16} className='col__left' >
                     <Row>
                         <Col span={22} className='col__left-1'>
-                            <h4> Toàn bộ căn hộ condo. Chủ Nhà Phong</h4>
+                            <h4> Toàn bộ căn hộ condo.</h4>
                             <span className='content'>{detailRoom.khach} Khách</span> -
                             <span className='content'>{detailRoom.phongNgu} Phòng ngủ</span> -
                             <span className='content'>{detailRoom.giuong} Giường</span> -
@@ -153,6 +143,7 @@ export default function DetailRoom() {
                         <a href="https://www.airbnb.com.vn/help?audience=guest">Tìm Hiểu Thêm</a>
                     </div>
                     <div className='room-describe'>
+                        <h3>Chi Tiết Phòng</h3>
                         <span>{detailRoom.moTa}</span>
                     </div>
                     <div className='icon-room'>

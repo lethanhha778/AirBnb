@@ -10,42 +10,40 @@ import './style.scss'
 
 function CommnetUser(props) {
   const navigate = useNavigate()
-  const loggedIn = useSelector((state) => state.AuthReducer.loggedIn);
-  const dispatch = useDispatch()
-  useEffect(() => {
-    console.log('render');
-    const action = listUserAction()
-    dispatch(action)
-  }, [])
-
+  const { loggedIn } = useSelector((state) => state.AuthReducer);
   const { arrUser } = useSelector(state => state.userAdminReducer)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(listUserAction())
+  }, [dispatch])
+
   console.log(arrUser)
   const [form] = Form.useForm();
   const user = (JSON.parse(localStorage.getItem('USER_INFO')))
-  const arrCM = []
+  const arrCMFilter = []
   const maPhong = Number(props.maPhong)
-  let arrComment = props.arr
-  console.log(props);
+  const arrComment = props.arr
   let arrCommentUser = []
 
   // duyệt lấy cmt của phòng từ data all comment
   for (let i = 0; i < arrComment?.length; i++) {
     if (arrComment[i].maPhong === maPhong) {
-      arrCM.push(arrComment[i])
+      arrCMFilter.push(arrComment[i])
     }
   }
 
   // lọc ra comment có user còn tồn tại để render
   for (let i = 0; i < arrUser?.length; i++) {
-    for (let j = 0; j < arrCM?.length; j++) {
-      if (arrUser[i].id === arrCM[j].maNguoiBinhLuan) {
-        // console.log()
-        let arr = { ...arrUser[i], title: arrCM[j] }
+    for (let j = 0; j < arrCMFilter?.length; j++) {
+      if (arrUser[i].id === arrCMFilter[j].maNguoiBinhLuan) {
+        let arr = { ...arrUser[i], title: arrCMFilter[j] }
         arrCommentUser.push(arr)
       }
     }
   }
-  console.log('mảng CM', arrCommentUser);
+
+  
   const current = new Date();
   const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 

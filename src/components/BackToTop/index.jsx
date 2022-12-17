@@ -1,6 +1,5 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { FaAngleDoubleUp } from 'react-icons/fa';
 import './style.scss'
 
 export default function BackToTop() {

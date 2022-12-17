@@ -64,7 +64,7 @@ export default createBrowserRouter([
         requiredLogin: false
       },
       {
-        path: "roomList/:id",
+        path: "SearchPage/:id",
         element: <RoomList />,
         requiredLogin: false
       },

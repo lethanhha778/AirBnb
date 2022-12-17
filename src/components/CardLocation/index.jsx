@@ -11,7 +11,6 @@ import 'swiper/css/scrollbar';
 import { dataLocation } from './dataLocation'
 import { getAllLocation } from '../../redux/actions/LocationAction';
 import './style.scss'
-import { json } from 'react-router-dom';
 
 
 export default function CardLocation() {

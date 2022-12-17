@@ -1,4 +1,4 @@
-import { BOOKING_ROOM, DATA_SEARCH, GET_ALL_ROOM, HIDEN_MODAL, SHOW_MODAL, } from "../type/BookingRoomType"
+import { BOOKING_ROOM, GET_ALL_ROOM, HIDEN_MODAL, SHOW_MODAL, } from "../type/BookingRoomType"
 import { ADD_BOOKING, DEL_BOOKING, GET_DETAIL_BOOKING_AD, GET_LIST_BOOKING_AD, SET_ALERT, UPDATE_BOOKING } from "../type/BookingRoomType";
 
 const initialState = {

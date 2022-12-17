@@ -27,6 +27,7 @@ export const getComment = () => {
     return (dispatch) => {
         let promise = commentServices.getAllComment()
         promise.then((res) => {
+            console.log(res.data.content)
             const action = {
                 type: GET_ALL_COMMENT,
                 listComment: res.data.content

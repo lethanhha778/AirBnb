@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Divider, Row } from 'antd';
+import { Col, Row } from 'antd';
 import { BsGlobe2 } from "react-icons/bs";
 import { AiOutlineTwitter, AiFillInstagram } from "react-icons/ai";
 import { FaFacebookF } from "react-icons/fa";

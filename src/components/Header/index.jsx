@@ -10,7 +10,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getListLocation } from "../../redux/actions/LocationAction";
 import { openCustomNotificationWithIcon } from "../../util/func";
-import { DATA_SEARCH } from "../../redux/type/BookingRoomType";
+import { ACCESS_TOKEN, USER_INFO } from "../../util/setting"
 import "./style.scss";
 
 export default function Header() {
@@ -20,16 +20,12 @@ export default function Header() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(getListLocation());
-    }, []);
+    }, [dispatch]);
     const { arrayLocation } = useSelector(state => state.LocationReducer)
     const [idViTri, setIdViTri] = useState(0);
-    const [dateStar, setDateStar] = useState('')
-    const [dateEnd, setDateEnd] = useState('')
-
-    const [people, setPeople] = useState(0)
-    const [bg, setBg] = useState(true);
-    // check user login hay chưa
-    const [userLogin, setUserLogin] = useState(true)
+    // const [dateStar, setDateStar] = useState('')
+    // const [dateEnd, setDateEnd] = useState('')
+    // const [people, setPeople] = useState(0)
     const onChange = (value) => {
         setIdViTri(value)
         console.log(`valueChange ${value}`);
@@ -38,17 +34,18 @@ export default function Header() {
         setIdViTri(value)
         console.log('search:', value);
     };
-    const onChangePeople = (value) => {
-        setPeople(value)
-        console.log(`selected ${value}`);
-    };
+    // const onChangePeople = (value) => {
+    //     setPeople(value)
+    //     console.log(`selected ${value}`);
+    // };
 
-    const onChangeStartDay = (date, dateString) => {
-        setDateStar(dateString)
-    };
-    const onChangeEndDay = (date, dateString) => {
-        setDateEnd(dateString)
-    };
+    // const onChangeStartDay = (date, dateString) => {
+    //     setDateStar(dateString)
+    // };
+    // const onChangeEndDay = (date, dateString) => {
+    //     setDateEnd(dateString)
+    // };
+    const [bg, setBg] = useState(true);
     const { Option } = Select;
     const closeNav = () => {
         if (window.scrollY === 0) {
@@ -63,17 +60,7 @@ export default function Header() {
     window.addEventListener('scroll', closeNav);
     const btnSearch = () => {
         if (idViTri !== 0) {
-            // const action = {
-            //     type: DATA_SEARCH,
-            //     dataSearch: {
-            //         location: idViTri,
-            //         dateStart: dateStar,
-            //         dateEnd: dateEnd,
-            //         people: people
-            //     }
-            // }
-            // dispatch(action)
-            navigate(`/roomList/${idViTri}`);
+            navigate(`/SearchPage/${idViTri}`);
         }
         else {
             openCustomNotificationWithIcon(
@@ -129,13 +116,15 @@ export default function Header() {
                                         <Space direction="vertical" size={12}>
                                             <DatePicker
                                                 placeholder="Ngày Bắt Đầu"
-                                                onChange={onChangeStartDay} />
+                                            // onChange={onChangeStartDay} 
+                                            />
 
                                         </Space>
                                         <Space direction="vertical" size={12}>
                                             <DatePicker
                                                 placeholder="Ngày Kết Thúc"
-                                                onChange={onChangeEndDay} />
+                                            // onChange={onChangeEndDay} 
+                                            />
                                         </Space>
 
                                     </div>
@@ -144,7 +133,7 @@ export default function Header() {
                                             showSearch
                                             placeholder="Số Người"
                                             optionFilterProp="children"
-                                            onChange={onChangePeople}
+                                            // onChange={onChangePeople}
                                             filterOption={(input, option) =>
                                                 (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                                             }
@@ -195,14 +184,20 @@ export default function Header() {
                         </button>
                         {openDrop ?
                             <div className="dropdownUser__menu ">
-                                {userLogin ? <ul>
-                                    <NavLink className="dropdownUser__item "><FaUserEdit />  User</NavLink>
-                                    <NavLink className="dropdownUser__item"> <ImExit /> Đăng Xuất</NavLink>
-                                </ul> : <ul>
-                                    <NavLink to="/auth/login" className="dropdownUser__item" >Đăng Nhập</NavLink>
-                                    <NavLink to="/auth/register" className="dropdownUser__item fw-bold">Đăng Ký</NavLink>
-                                </ul>}
+                                <ul>
+                                    {localStorage.getItem(USER_INFO) && localStorage.getItem(ACCESS_TOKEN) ? <>
+                                        <NavLink className="dropdownUser__item user"><FaUserEdit /> {JSON.parse(localStorage.getItem(USER_INFO)).name.substr(0, 5)}</NavLink>
+                                        <NavLink className="dropdownUser__item underlined"> <ImExit /> Đăng Xuất</NavLink>
+                                    </> : <>
+                                        <NavLink to="/auth/login" className="dropdownUser__item" >Đăng Nhập</NavLink>
+                                        <NavLink to="/auth/register" className="dropdownUser__item underlined">Đăng Ký</NavLink>
+                                    </>}
+                                    <li className="dropdownUser__item ">Cho Thuê Chỗ Ở</li>
+                                    <li className="dropdownUser__item ">Tổ Chức Trải Nghiệm</li>
+                                    <li className="dropdownUser__item ">Trợ Giúp</li>
+                                </ul>
                             </div>
+
                             : " "
                         }
                     </Navbar>
@@ -237,12 +232,14 @@ export default function Header() {
                                 <Space direction="vertical" size={12}>
                                     <DatePicker
                                         placeholder="Ngày Bắt Đầu"
-                                        onChange={onChangeStartDay} />
+                                        // onChange={onChangeStartDay} 
+                                        />
                                 </Space>
                                 <Space direction="vertical" size={12}>
                                     <DatePicker
                                         placeholder="Ngày Kết Thúc"
-                                        onChange={onChangeEndDay} />
+                                        // onChange={onChangeEndDay} 
+                                        />
 
                                 </Space>
                             </div>
@@ -251,7 +248,7 @@ export default function Header() {
                                     showSearch
                                     placeholder="Số Người"
                                     optionFilterProp="children"
-                                    onChange={onChangePeople}
+                                    // onChange={onChangePeople}
                                     filterOption={(input, option) =>
                                         (option?.label ?? '').toLowerCase().includes(input.toLowerCase())
                                     }
@@ -297,9 +294,9 @@ export default function Header() {
                 <ul className="menu__bottom">
                     <NavLink to="/" className="menu__bottom-item"><AiTwotoneHome style={{ color: '#FF385C' }} />Home</NavLink>
                     <li className="menu__bottom-item"><AiOutlineHeart />Yêu Thích</li>
-                    {userLogin
-                        ? <>
-                            <NavLink className="menu__bottom-item"><FaUserCircle />UserName</NavLink>
+                    {localStorage.getItem(USER_INFO) && localStorage.getItem(ACCESS_TOKEN) ?
+                        <>
+                            <NavLink className="menu__bottom-item"><FaUserCircle />{JSON.parse(localStorage.getItem(USER_INFO)).name.substr(0, 5)}</NavLink>
                             <NavLink className="menu__bottom-item"><ImExit />Đăng Xuất</NavLink>
                         </>
                         : <>
