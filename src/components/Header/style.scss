@@ -16,7 +16,7 @@
 }
 
 .btn-search {
-    @include styleBtnHeader(40px, 8px, 12px, transparent);
+    @include styleBtnHeader(40px, 8px, 12px, rgba(255, 255, 255, 0.846));
     border: 1px solid #e1e1e1;
     box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
     transition: box-shadow 0.2s ease;
@@ -29,7 +29,7 @@
     .icon__search {
         border-radius: 50px;
         background-color: $color-AirBnb;
-        padding: 4px;
+        padding: 7px;
         font-size: 28px;
         color: white;
     }
@@ -44,11 +44,9 @@
     }
 }
 .btn-user {
-    @include styleBtnHeader(40px, 8px, 10px, transparent);
+    @include styleBtnHeader(40px, 8px, 10px, rgba(255, 255, 255, 0.846));
     font-size: 1.7rem;
     border: 1px solid #e1e1e1;
-
-    // transition:ease-in 2s ;
     .user {
         color: #717171;
     }
@@ -73,7 +71,7 @@
 }
 .dropdownUser__menu {
     position: absolute;
-    width: 150px;
+    width: 200px;
     top: 70px;
     right: 0;
     border: 1px solid #e1e1e1;
@@ -85,18 +83,34 @@
         width: 200px;
         display: flex;
         flex-direction: column;
+        margin-bottom: 0;
     }
     .dropdownUser__item {
         list-style: none;
         padding: 4px 0;
-        font-size: 1.2rem;
+        font-size: 1.15rem;
         color: black;
         text-decoration: none;
         transition: linear 0.3s;
         -webkit-transition: linear 0.3s;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
         &:hover {
             color: $color-AirBnb;
         }
+        svg {
+            margin-right: 6px;
+        }
+    }
+    .user {
+        text-transform: capitalize;
+        color: #717171;
+    }
+    .underlined {
+        border-bottom: 1px solid #9a9a9a;
+        font-weight: bold;
+        color: #717171;
     }
 }
 .select-location {
@@ -148,7 +162,8 @@
     padding: 0 4px;
 }
 .header__mobile-top {
-    width: 100%;
+    width: 95%;
+    margin: 0 auto;
     background-color: white;
     border: 2px solid rgb(229, 216, 216);
     border-radius: 40px;
@@ -163,7 +178,7 @@
 }
 .header__mobile-location {
     background-color: white;
-    width: 100%;
+    width:100%;
     padding: 0 10px;
     box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
     .menu__mobile-select {
@@ -181,13 +196,15 @@
 }
 .header__mobile-bottom {
     width: 100%;
+    margin: 0 auto;
     padding: 4px 6px;
     background-color: white;
     z-index: 10;
     border-top: 1px solid #717171;
     .menu__bottom {
-        width: 100%;
-        padding:0;
+        width: 90%;
+        margin: 0 auto;
+        padding: 0;
         list-style: none;
         display: flex;
         justify-content: space-between;

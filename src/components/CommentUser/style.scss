@@ -1,7 +1,7 @@
 @import "../../scss/index.scss";
 .comment-container {
     padding: 20px 0;
-    .item-comment{
+    .item-comment {
         border-bottom: 1px solid #e9e9e9;
     }
     .comment {
@@ -26,15 +26,15 @@
         }
     }
 }
-.rate-comment{
-    .ant-input-textarea{
+.rate-comment {
+    .ant-input-textarea {
         margin: 20px 0;
     }
 }
 .btn-comment {
     width: 20%;
-    padding:0px 4px 4px;
-    margin: 10px 0 ;
+    padding: 0px 4px 4px;
+    margin: 10px 0;
     border-radius: 8px;
     background-color: $color-AirBnb;
     border: 2px solid $color-AirBnb;
@@ -47,5 +47,10 @@
         font-weight: bold;
         font-size: 1.2rem;
         color: white;
+    }
+}
+@media screen and (max-width: 768px) {
+    .btn-comment {
+        width: 30%;
     }
 }

@@ -5,22 +5,21 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
-import './style.scss'
 import { dataIMG } from './dataImg';
+import { roomList } from '../../redux/actions/BookingRoomAction';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { roomList } from '../../redux/actions/BookingRoomAction';
-import { SET_INDEX } from '../../redux/type/RoomType';
+import './style.scss'
+
 
 export default function CardRoom() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   useEffect(() => {
-    const action = roomList()
-    dispatch(action)
-  }, [])
+    dispatch(roomList())
+  }, [dispatch])
   const { arrRoom } = useSelector(state => state.BookingReducer)
   console.log(arrRoom);
   const renderRoomItem = () => {
@@ -78,7 +77,7 @@ export default function CardRoom() {
               className='room__decripton-sites' ><span>{item.tenPhong}</span></h5>
           </div>
           <div className='room__area'>
-            <span>{item.giaTien} $/ đêm</span>
+            <span> <span className='price'>{item.giaTien}</span> $/ đêm</span>
             <span className='star '><AiFillStar />{`${item.data?.start}`}</span>
           </div>
         </div>

@@ -23,7 +23,7 @@ export default function Login() {
         "Congratulations, you have successfully logged in"
       );
 
-      navigate("/home");
+      navigate(-1);
     }
   }, [loggedIn, navigate]);
 
