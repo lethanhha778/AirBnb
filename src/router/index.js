@@ -28,6 +28,7 @@ import EditBookingRoom from '../pages/Admin/EditBookingRoom';
 import Comments from "../pages/Admin/Comments";
 import AddComment from "../pages/Admin/AddComment";
 import EditComment from "../pages/Admin/EditComment";
+import HostHome from "../pages/HostHome";
 
 
 export default createBrowserRouter([
@@ -71,8 +72,13 @@ export default createBrowserRouter([
       {
         path: "detailRoom/:id",
         element: <DetailRoom />,
-        requiredLogin: false
+        requiredLogin: false,
       },
+      {
+        path: "hostHome",
+        element: <HostHome />,
+        requiredLogin: false
+      }
 
     ]
   },
