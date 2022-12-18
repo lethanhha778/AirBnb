@@ -1,7 +1,7 @@
 import { createBrowserHistory } from 'history';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'antd/dist/antd.css';
+import 'antd/dist/antd.css';
 import router from "./router";
 import { useDispatch, useSelector } from "react-redux";
 import { CHECK_LOGIN } from "./redux/actions/AuthAction"

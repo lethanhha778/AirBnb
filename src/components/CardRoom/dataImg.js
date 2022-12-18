@@ -232,5 +232,13 @@ export let dataIMG = [
         img5: 'https://a0.muscache.com/im/pictures/547da593-703e-46b6-bf62-8b9e58bfd28a.jpg?im_w=720',
         start: "4,7",
     },
+    {
+        img1: 'https://a0.muscache.com/im/pictures/miso/Hosting-53266181/original/bd8c6af3-0148-48a2-a09f-35d71febe6d5.jpeg?im_w=1200',
+        img2: 'https://a0.muscache.com/im/pictures/miso/Hosting-53266181/original/6f5f7065-5e09-41bc-9d3c-702c342a5b05.jpeg?im_w=720',
+        img3: 'https://a0.muscache.com/im/pictures/miso/Hosting-53266181/original/f402ef8c-ae52-4082-94e2-c100029fe461.jpeg?im_w=720',
+        img4: 'https://a0.muscache.com/im/pictures/miso/Hosting-53266181/original/cfc45401-b532-4f33-baae-b014b2682efb.jpeg?im_w=720',
+        img5: 'https://a0.muscache.com/im/pictures/miso/Hosting-53266181/original/46a14c18-48f7-4b0b-b342-6be6eaa136a6.jpeg?im_w=720',
+        start: "4,85",
+    },
 
 ];

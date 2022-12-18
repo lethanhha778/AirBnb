@@ -1,5 +1,5 @@
 import React from 'react'
-import { Space, Spin } from 'antd';
+import { Spin } from 'antd';
 import { useSelector } from 'react-redux';
 import './style.scss'
 import { Fragment } from 'react';

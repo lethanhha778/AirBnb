@@ -178,7 +178,9 @@ export default function Header() {
                         }
                     </Navbar>
                     <Navbar className='px-3 px-md-0 justify-content-end  d-flex align-items-center position-relative'>
-                        <button className="btn-header btn__no-boder d-none d-lg-block ">Cho Thuê Chỗ Ở Qua AirBnb</button>
+                        <button
+                            onClick={ () => { navigate('hostHome') }}
+                            className="btn-header btn__no-boder d-none d-lg-block ">Cho Thuê Chỗ Ở Qua AirBnb</button>
                         <button onClick={() => { setOpenDrop(!openDrop) }} className="d-flex justify-content-between btn-user">
                             <AiOutlineMenu className="mx-1" /><HiUserCircle className="mx-1 user" />
                         </button>
@@ -232,14 +234,14 @@ export default function Header() {
                                 <Space direction="vertical" size={12}>
                                     <DatePicker
                                         placeholder="Ngày Bắt Đầu"
-                                        // onChange={onChangeStartDay} 
-                                        />
+                                    // onChange={onChangeStartDay} 
+                                    />
                                 </Space>
                                 <Space direction="vertical" size={12}>
                                     <DatePicker
                                         placeholder="Ngày Kết Thúc"
-                                        // onChange={onChangeEndDay} 
-                                        />
+                                    // onChange={onChangeEndDay} 
+                                    />
 
                                 </Space>
                             </div>

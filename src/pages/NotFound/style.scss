@@ -1,0 +1,35 @@
+@import "../../scss/index.scss";
+.container-notFound {
+    width: 70%;
+    margin: 10px auto 0;
+    .description-404 {
+        .title {
+            font-size: 145px;
+            font-weight: 700;
+            text-rendering: optimizeLegibility;
+            color: #484848;
+        }
+        h2 {
+            margin-bottom: 20px;
+        }
+        .btn__back--home {
+            padding: 4px 18px;
+            border-radius: 40px;
+            font-weight: bold;
+            background-color: $color-AirBnb;
+            border: 2px solid $color-AirBnb;
+            transition: ease-in 0.3s;
+            color: white;
+            &:hover {
+                background-color: rgb(224, 23, 96);
+                border: 2px solid rgb(224, 23, 96);
+            }
+        }
+    }
+    .col-img {
+        background: url("https://img.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_114360-5529.jpg?w=2000");
+        background-repeat: no-repeat;
+        background-position: top;
+        background-size: contain;
+    }
+}
