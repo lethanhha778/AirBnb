@@ -4,8 +4,8 @@
     position: relative;
     .icon-position {
         position: fixed;
-        bottom: 40px;
-        right: 25px;
+        bottom: 60px;
+        right: 10px;
         z-index: 20;
     }
     .icon-style {
@@ -31,7 +31,7 @@
         transform: translateY(0px);
     }
     50% {
-        transform: translateY(10px);
+        transform: translateY(5px);
     }
     100% {
         transform: translateY(0px);
