@@ -1,0 +1,11 @@
+.wrap-profile {
+  margin-top: 10rem;
+
+  &__wrap-action {
+    padding: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
