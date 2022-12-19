@@ -23,9 +23,6 @@ export default function Header() {
     }, [dispatch]);
     const { arrayLocation } = useSelector(state => state.LocationReducer)
     const [idViTri, setIdViTri] = useState(0);
-    // const [dateStar, setDateStar] = useState('')
-    // const [dateEnd, setDateEnd] = useState('')
-    // const [people, setPeople] = useState(0)
     const onChange = (value) => {
         setIdViTri(value)
         console.log(`valueChange ${value}`);
@@ -34,17 +31,7 @@ export default function Header() {
         setIdViTri(value)
         console.log('search:', value);
     };
-    // const onChangePeople = (value) => {
-    //     setPeople(value)
-    //     console.log(`selected ${value}`);
-    // };
-
-    // const onChangeStartDay = (date, dateString) => {
-    //     setDateStar(dateString)
-    // };
-    // const onChangeEndDay = (date, dateString) => {
-    //     setDateEnd(dateString)
-    // };
+   
     const [bg, setBg] = useState(true);
     const { Option } = Select;
     const closeNav = () => {
