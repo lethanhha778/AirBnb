@@ -37,7 +37,7 @@ export default function RoomList() {
         });
         console.log(room)
         return room?.slice(0, 16).map((item, index) => {
-            return <Col className="gutter-row" xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }} key={index} data-aos="zoom-out-up" data-aos-duration="1000">
+            return <Col className="gutter-row" xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }} key={index} data-aos="fade-in" data-aos-duration="2000">
                 <Swiper
                     loop={true}
                     cssMode={true}
