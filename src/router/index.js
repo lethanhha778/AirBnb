@@ -29,6 +29,7 @@ import Comments from "../pages/Admin/Comments";
 import AddComment from "../pages/Admin/AddComment";
 import EditComment from "../pages/Admin/EditComment";
 import HostHome from "../pages/HostHome";
+import Profile from "../pages/Profile";
 
 
 export default createBrowserRouter([
@@ -77,6 +78,11 @@ export default createBrowserRouter([
       {
         path: "hostHome",
         element: <HostHome />,
+        requiredLogin: false
+      },
+      {
+        path: "profile",
+        element: <Profile />,
         requiredLogin: false
       }
 
