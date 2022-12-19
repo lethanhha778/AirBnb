@@ -20,50 +20,6 @@ import { ACCESS_TOKEN, USER_INFO } from "../../util/setting";
 import "./style.scss";
 
 export default function Header() {
-<<<<<<< HEAD
-    const [openSelect, setOpenSelect] = useState(false)
-    const [openDrop, setOpenDrop] = useState(false)
-    const navigate = useNavigate();
-    const dispatch = useDispatch()
-    useEffect(() => {
-        dispatch(getListLocation());
-    }, [dispatch]);
-    const { arrayLocation } = useSelector(state => state.LocationReducer)
-    const [idViTri, setIdViTri] = useState(0);
-    const onChange = (value) => {
-        setIdViTri(value)
-        console.log(`valueChange ${value}`);
-    };
-    const onSearch = (value) => {
-        setIdViTri(value)
-        console.log('search:', value);
-    };
-   
-    const [bg, setBg] = useState(true);
-    const { Option } = Select;
-    const closeNav = () => {
-        if (window.scrollY === 0) {
-            setBg(true);
-        }
-        if (window.scrollY >= 100) {
-            setOpenSelect(false);
-            setOpenDrop(false)
-            setBg(false);
-        }
-    };
-    window.addEventListener('scroll', closeNav);
-    const btnSearch = () => {
-        if (idViTri !== 0) {
-            navigate(`/SearchPage/${idViTri}`);
-        }
-        else {
-            openCustomNotificationWithIcon(
-                "error",
-                "Search Fail",
-                "Please select the location to search!"
-            );
-        }
-=======
   const [openSelect, setOpenSelect] = useState(false);
   const [openDrop, setOpenDrop] = useState(false);
   const navigate = useNavigate();
@@ -74,7 +30,6 @@ export default function Header() {
   useEffect(() => {
     if (!loggedIn) {
       navigate("/auth/login");
->>>>>>> 566e61a59331567bfff9818dff6172b03d812874
     }
   }, [loggedIn, navigate]);
 
@@ -83,9 +38,7 @@ export default function Header() {
   }, [dispatch]);
   const { arrayLocation } = useSelector((state) => state.LocationReducer);
   const [idViTri, setIdViTri] = useState(0);
-  // const [dateStar, setDateStar] = useState('')
-  // const [dateEnd, setDateEnd] = useState('')
-  // const [people, setPeople] = useState(0)
+
   const onChange = (value) => {
     setIdViTri(value);
     console.log(`valueChange ${value}`);
@@ -94,17 +47,7 @@ export default function Header() {
     setIdViTri(value);
     console.log("search:", value);
   };
-  // const onChangePeople = (value) => {
-  //     setPeople(value)
-  //     console.log(`selected ${value}`);
-  // };
 
-  // const onChangeStartDay = (date, dateString) => {
-  //     setDateStar(dateString)
-  // };
-  // const onChangeEndDay = (date, dateString) => {
-  //     setDateEnd(dateString)
-  // };
   const [bg, setBg] = useState(true);
   const { Option } = Select;
   const closeNav = () => {
@@ -148,9 +91,8 @@ export default function Header() {
       {/* Navbar Pc */}
       <Navbar
         fixed="top"
-        className={`d-none d-md-flex header-airbnb ${
-          bg ? "bg-transparent" : "bg-white"
-        } `}
+        className={`d-none d-md-flex header-airbnb ${bg ? "bg-transparent" : "bg-white"
+          } `}
       >
         <Container>
           <Navbar.Brand href="/" className="d-none d-md-block">
@@ -196,13 +138,13 @@ export default function Header() {
                     <Space direction="vertical" size={12}>
                       <DatePicker
                         placeholder="Ngày Bắt Đầu"
-                        // onChange={onChangeStartDay}
+                      // onChange={onChangeStartDay}
                       />
                     </Space>
                     <Space direction="vertical" size={12}>
                       <DatePicker
                         placeholder="Ngày Kết Thúc"
-                        // onChange={onChangeEndDay}
+                      // onChange={onChangeEndDay}
                       />
                     </Space>
                   </div>
@@ -289,7 +231,7 @@ export default function Header() {
               <div className="dropdownUser__menu ">
                 <ul>
                   {localStorage.getItem(USER_INFO) &&
-                  localStorage.getItem(ACCESS_TOKEN) ? (
+                    localStorage.getItem(ACCESS_TOKEN) ? (
                     <>
                       <NavLink
                         to="/profile"
@@ -369,13 +311,13 @@ export default function Header() {
                 <Space direction="vertical" size={12}>
                   <DatePicker
                     placeholder="Ngày Bắt Đầu"
-                    // onChange={onChangeStartDay}
+                  // onChange={onChangeStartDay}
                   />
                 </Space>
                 <Space direction="vertical" size={12}>
                   <DatePicker
                     placeholder="Ngày Kết Thúc"
-                    // onChange={onChangeEndDay}
+                  // onChange={onChangeEndDay}
                   />
                 </Space>
               </div>
@@ -450,7 +392,7 @@ export default function Header() {
             Yêu Thích
           </li>
           {localStorage.getItem(USER_INFO) &&
-          localStorage.getItem(ACCESS_TOKEN) ? (
+            localStorage.getItem(ACCESS_TOKEN) ? (
             <>
               <NavLink className="menu__bottom-item">
                 <FaUserCircle />
