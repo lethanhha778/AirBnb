@@ -1,5 +1,4 @@
 import { createBrowserHistory } from 'history';
-
 import router from "./router";
 import { useDispatch, useSelector } from "react-redux";
 import { CHECK_LOGIN } from "./redux/actions/AuthAction"
