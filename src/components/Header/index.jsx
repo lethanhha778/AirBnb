@@ -20,6 +20,50 @@ import { ACCESS_TOKEN, USER_INFO } from "../../util/setting";
 import "./style.scss";
 
 export default function Header() {
+<<<<<<< HEAD
+    const [openSelect, setOpenSelect] = useState(false)
+    const [openDrop, setOpenDrop] = useState(false)
+    const navigate = useNavigate();
+    const dispatch = useDispatch()
+    useEffect(() => {
+        dispatch(getListLocation());
+    }, [dispatch]);
+    const { arrayLocation } = useSelector(state => state.LocationReducer)
+    const [idViTri, setIdViTri] = useState(0);
+    const onChange = (value) => {
+        setIdViTri(value)
+        console.log(`valueChange ${value}`);
+    };
+    const onSearch = (value) => {
+        setIdViTri(value)
+        console.log('search:', value);
+    };
+   
+    const [bg, setBg] = useState(true);
+    const { Option } = Select;
+    const closeNav = () => {
+        if (window.scrollY === 0) {
+            setBg(true);
+        }
+        if (window.scrollY >= 100) {
+            setOpenSelect(false);
+            setOpenDrop(false)
+            setBg(false);
+        }
+    };
+    window.addEventListener('scroll', closeNav);
+    const btnSearch = () => {
+        if (idViTri !== 0) {
+            navigate(`/SearchPage/${idViTri}`);
+        }
+        else {
+            openCustomNotificationWithIcon(
+                "error",
+                "Search Fail",
+                "Please select the location to search!"
+            );
+        }
+=======
   const [openSelect, setOpenSelect] = useState(false);
   const [openDrop, setOpenDrop] = useState(false);
   const navigate = useNavigate();
@@ -30,6 +74,7 @@ export default function Header() {
   useEffect(() => {
     if (!loggedIn) {
       navigate("/auth/login");
+>>>>>>> 566e61a59331567bfff9818dff6172b03d812874
     }
   }, [loggedIn, navigate]);
 
