@@ -10,9 +10,9 @@ const HomeLayout = () => {
   }, []);
   return (
     <div className="wrapper-page home-layout">
-      <Header></Header>
+      <Header />
       <Outlet />
-      <Footer></Footer>
+      <Footer />
       <BackToTop />
     </div>
   );

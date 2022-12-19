@@ -25,14 +25,6 @@ export default function Header() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const loggedIn = useSelector((state) => state.AuthReducer.loggedIn);
-
-  useEffect(() => {
-    if (!loggedIn) {
-      navigate("/auth/login");
-    }
-  }, [loggedIn, navigate]);
-
   useEffect(() => {
     dispatch(getListLocation());
   }, [dispatch]);
