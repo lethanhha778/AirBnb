@@ -1,10 +1,15 @@
 @import "../../scss/index.scss";
 .container-detail {
     width: 70%;
-    margin: 70px auto 0;
+    margin: 80px auto 0;
     .title-detail {
         padding: 8px 0;
         margin-bottom: 0;
+        font-size: 2rem;
+        cursor: pointer;
+        &:hover {
+            color: $color-AirBnb;
+        }
     }
     .room-item {
         width: 100%;
@@ -25,6 +30,9 @@
         cursor: pointer;
         text-decoration: underline;
         font-weight: 700;
+        &:hover {
+            color: $color-AirBnb;
+        }
         svg {
             margin-right: 4px;
         }
@@ -35,7 +43,7 @@
     display: grid;
     grid-template-columns: 50% 23% 23%;
     gap: 18px;
-    margin: 30px 0 50px;
+    margin: 20px 0 30px;
     width: 100%;
     img {
         max-height: 400px;
@@ -174,7 +182,7 @@
         }
         .input__choose-item {
             width: 100%;
-            .ant-space{
+            .ant-space {
                 width: 100%;
             }
             .ant-select {

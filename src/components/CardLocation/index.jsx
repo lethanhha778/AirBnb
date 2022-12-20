@@ -19,6 +19,7 @@ export default function CardLocation() {
         const action = getAllLocation()
         dispatch(action)
     }, [dispatch])
+
     const { allLocation } = useSelector(state => state.LocationReducer)
     const renderRoomItem = () => {
         let room = allLocation.data?.map((item, index) => {
@@ -28,7 +29,7 @@ export default function CardLocation() {
         return room?.slice(1, 9).map((item, index) => {
             return <Col
                 className="gutter-row"
-                xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }} lg={{ span: 8 }} xl={{ span: 6 }}
+                xs={24} sm={12} md={12} lg={8} xl={6}
                 key={index}
                 data-aos="flip-left" data-aos-duration="800" >
                 <Swiper
@@ -73,15 +74,15 @@ export default function CardLocation() {
                 <div data-aos="flip-left" data-aos-duration="1000">
                     <div className='location__decripton'>
                         <h5 className='location__decripton-sites' ><span>{item.tenViTri}</span></h5>
-                        <span className='search '><FaSearchLocation />{`${item.data?.search}`}</span>
+                        <span className='search'><FaSearchLocation />{`${item.data?.search}`}</span>
                     </div>
                     <div className='location__area'>
                         <span>{item.tinhThanh} - {item.quocGia}</span>
                     </div>
                 </div>
-            </Col >;
-        });
-    };
+            </Col >
+        })
+    }
 
     return (
         <div className='cardLocaTion'>
@@ -90,7 +91,6 @@ export default function CardLocation() {
                 gutter={[24, 24]}
             >
                 {renderRoomItem()}
-
             </Row>
         </div>
     )

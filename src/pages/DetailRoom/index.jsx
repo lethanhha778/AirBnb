@@ -17,8 +17,8 @@ import { dataIMG } from '../../components/CardRoom/dataImg';
 import CommnetUser from '../../components/CommentUser';
 import { getComment } from '../../redux/actions/CommentAction';
 import CardBooking from './CardBooking';
-import './style.scss'
 import { HIDEN_MODAL } from '../../redux/type/BookingRoomType';
+import './style.scss'
 
 export default function DetailRoom() {
     useEffect(() => {
