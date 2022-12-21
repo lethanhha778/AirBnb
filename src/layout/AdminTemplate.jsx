@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { Outlet, useLocation} from 'react-router-dom';
-import { FileOutlined, UserOutlined, DownOutlined } from '@ant-design/icons';
+import { Outlet, useLocation } from 'react-router-dom';
+import { FileOutlined, UserOutlined} from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { useSelector } from 'react-redux';
 import { ACCESS_TOKEN, USER_INFO } from '../util/setting';
+import Dropdown from 'react-bootstrap/Dropdown';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
     return {
@@ -39,35 +40,16 @@ const AdminTemplate = () => {
     let { user } = useSelector(state => state.AuthReducer);
     const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
-    const fixchangeMenu = (url) => { 
-        if(url === '/admin' || '/admin/'){
+    const fixchangeMenu = (url) => {
+        if (url === '/admin' || '/admin/') {
             return '/admin/users';
         }
-        if(url.indexOf('edit') !== -1){
+        if (url.indexOf('edit') !== -1) {
             return `/admin/${url.split('/')[2].substr(4)}s`;
         }
         return url;
-     }
+    }
     const [current, setCurrent] = useState(fixchangeMenu(useLocation().pathname));
-
-    const dropItems = [
-        {
-            label: (<div style={{ paddingRight: '18px' }}>{user.name}<DownOutlined style={{ position: 'absolute', top: '26px', right: '0' }} /></div>),
-            key: 'SubMenu',
-            children: [
-                {
-                    label: 'Cập nhập thông tin',
-                    key: `/admin/edituser/${user.id}`,
-                    style: { paddingLeft: '10px' },
-                },
-                {
-                    label: 'Đăng xuất',
-                    key: '/home',
-                    style: { paddingLeft: '10px' },
-                },
-            ],
-        },
-    ];
 
     useEffect(() => {
         if (Object.keys(user).length === 0) {
@@ -76,7 +58,7 @@ const AdminTemplate = () => {
         else if (user.role !== 'ADMIN') {
             navigate('/home');
         }
-    },[user]);
+    }, [user]);
 
     return <Fragment>
         <Layout style={{ minHeight: '100vh', }}>
@@ -90,15 +72,23 @@ const AdminTemplate = () => {
                 }} theme="dark" selectedKeys={[current]} mode="inline" items={items} />
             </Sider>
             <Layout className="site-layout">
-                <Header>
-                    <Menu style={{ marginLeft: 'auto', width: 'fit-content', }} onClick={(drop) => {
-                        if (drop.key === '/home') {
-                            localStorage.removeItem(ACCESS_TOKEN);
-                            localStorage.removeItem(USER_INFO);
-                        }
-                        navigate(drop.key);
-                        setCurrent('/admin/users');
-                    }} theme="dark" mode="horizontal" items={dropItems} />
+                <Header style={{ textAlign: 'right'}}>
+                    <Dropdown>
+                        <Dropdown.Toggle style={{border: 'none',fontSize: '1.2rem', background:'transparent', color:'rgba(255, 255, 255, 0.65)'}} id="dropdown-basic">
+                        {user.name}
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu style={{ lineHeight: '1.5rem',fontSize: '1.2rem'}}>
+                            <Dropdown.Item  onClick={() => { 
+                                navigate(`/admin/edituser/${user.id}`);
+                                setCurrent('/admin/users');
+                             }}>Cập nhập thông tin</Dropdown.Item>
+                            <Dropdown.Item onClick={() => { 
+                                localStorage.removeItem(ACCESS_TOKEN);
+                                localStorage.removeItem(USER_INFO);
+                                navigate('/home');
+                             }}>Đăng xuất</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Header>
                 <Content style={{ margin: '0 16px', }}>
                     <Outlet />
