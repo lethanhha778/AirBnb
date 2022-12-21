@@ -23,10 +23,16 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import './style.scss'
 
 export default function DetailRoom() {
+    const { arrComment } = useSelector(state => state.CommentReducer)
+    const { detailRoom } = useSelector(state => state.RoomReducer)
+    const { modal, infoBookingRoom } = useSelector(state => state.BookingReducer)
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
     let { id } = useParams()
+    console.log(id)
+    let url = useParams()
+    console.log(url)
     const navigation = useNavigate()
     const dispatch = useDispatch();
     useEffect(() => {
@@ -34,11 +40,7 @@ export default function DetailRoom() {
         dispatch(getDetailRoom(id))
     }, [dispatch, id])
 
-    const { arrComment } = useSelector(state => state.CommentReducer)
-    const { detailRoom } = useSelector(state => state.RoomReducer)
-    const { modal, infoBookingRoom } = useSelector(state => state.BookingReducer)
     const commentMemo = useMemo(() => arrComment, [arrComment])
-
     const isModalOpen = modal
     const handleOk = () => {
         dispatch({ type: HIDEN_MODAL })
