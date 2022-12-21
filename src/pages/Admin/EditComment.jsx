@@ -12,8 +12,11 @@ export default function EditComment() {
   let { id } = useParams();
   const navigate = useNavigate();
   let { arrComment, comment, arletContent } = useSelector(state => state.commentAdminReducer);
-  if (arrComment.length === 0 ) navigate('/admin/comments');
   let dispatch = useDispatch();
+  useEffect(() => {
+    if (arrComment.length === 0) navigate('/admin/comments');
+  }, [arrComment.length]);
+
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -104,7 +107,7 @@ export default function EditComment() {
           <InputNumber min={0} max={5} onChange={(value) => formik.setFieldValue('saoBinhLuan', value)} onBlur={formik.handleBlur} />
         </Form.Item>
         <Form.Item label="Button">
-          <Button htmlType="submit">Cập nhập bình luận</Button>
+          <Button htmlType="submit">Cập nhập</Button>
         </Form.Item>
       </Form>
     </div>

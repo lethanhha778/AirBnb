@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Col, Row, Form, Input, InputNumber, Switch, Button, Modal } from 'antd';
 import { addRoomAction, setAlertRoomAction } from '../../redux/actions/RoomAction';
+import locationService from '../../service/LocationService';
 const { TextArea } = Input;
 
 export default function AddLocation() {
@@ -42,11 +43,18 @@ export default function AddLocation() {
         validationSchema: Yup.object({
             tenPhong: Yup.string().required("Tên phòng không được để trống"),
             moTa: Yup.string().required("Mô tả không được để trống"),
-            khach: Yup.number().typeError("Số lượng khách không đúng định dạng").min(1, "Số lượng khách phải lớn hơn 0"),
-            phongNgu: Yup.number().typeError("Số lượng phòng ngủ không đúng định dạng").min(1, "Số lượng phòng ngủ phải lớn hơn 0"),
-            giuong: Yup.number().typeError("Số lượng giường không đúng định dạng").min(1, "Số lượng giường phải lớn hơn 0"),
-            phongTam: Yup.number().typeError("Số lượng phòng tắm không đúng định dạng").min(1, "Số lượng phòng tắm phải lớn hơn 0"),
-            maViTri: Yup.number().typeError("Mã vị trí không đúng định dạng").min(1, "Mã vị trí phải lớn hơn 0"),
+            khach: Yup.number().typeError("Số lượng khách không đúng định dạng").min(1, "Số lượng khách không hợp lệ"),
+            phongNgu: Yup.number().typeError("Số lượng phòng ngủ không đúng định dạng").min(1, "Số lượng phòng ngủ không hợp lệ"),
+            giuong: Yup.number().typeError("Số lượng giường không đúng định dạng").min(1, "Số lượng giường không hợp lệ"),
+            phongTam: Yup.number().typeError("Số lượng phòng tắm không đúng định dạng").min(1, "Số lượng phòng tắm không hợp lệ"),
+            maViTri: Yup.number().typeError("Mã vị trí không đúng định dạng").min(1, "Mã vị trí không hợp lệ")
+                .test("Mã vị trí", "Mã vị trí không tồn tại", async (values) => {
+                    return await locationService.detailLocation(values).then((result) => {
+                        return true;
+                    }).catch((err) => {
+                        return false;
+                    });
+                }),
         }),
         onSubmit: values => {
             console.log(values);
@@ -82,34 +90,34 @@ export default function AddLocation() {
                     <Row justify="center">
                         <Col span={24}>
                             <Form.Item label="Tên phòng" name="tenPhong" validateStatus="error" help={formik.touched.tenPhong && formik.errors.tenPhong ? (formik.errors.tenPhong) : null}>
-                                <Input onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+                                <Input onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             </Form.Item>
                         </Col>
                         <Col span={24}>
                             <Form.Item label="Mô tả" name="moTa" validateStatus="error" help={formik.touched.moTa && formik.errors.moTa ? (formik.errors.moTa) : null}>
-                                <TextArea rows={4} onChange={formik.handleChange} onBlur={formik.handleBlur}/>
+                                <TextArea rows={4} onChange={formik.handleChange} onBlur={formik.handleBlur} />
                             </Form.Item>
                         </Col>
                     </Row>
                     <Row justify="center">
                         <Col span={12} >
                             <Form.Item label="Số khách" name="khach" validateStatus="error" help={formik.touched.khach && formik.errors.khach ? (formik.errors.khach) : null}>
-                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('khach', value)} onBlur={formik.handleBlur}/>
+                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('khach', value)} onBlur={formik.handleBlur} />
                             </Form.Item>
                         </Col>
                         <Col span={12} >
                             <Form.Item label="Số phòng ngủ" name="phongNgu" validateStatus="error" help={formik.touched.phongNgu && formik.errors.phongNgu ? (formik.errors.phongNgu) : null}>
-                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('phongNgu', value)} onBlur={formik.handleBlur}/>
+                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('phongNgu', value)} onBlur={formik.handleBlur} />
                             </Form.Item>
                         </Col>
                         <Col span={12} >
                             <Form.Item label="Số giường" name="giuong" validateStatus="error" help={formik.touched.giuong && formik.errors.giuong ? (formik.errors.giuong) : null}>
-                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('giuong', value)} onBlur={formik.handleBlur}/>
+                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('giuong', value)} onBlur={formik.handleBlur} />
                             </Form.Item>
                         </Col>
                         <Col span={12} >
                             <Form.Item label="Số phòng tắm" name="phongTam" validateStatus="error" help={formik.touched.phongTam && formik.errors.phongTam ? (formik.errors.phongTam) : null}>
-                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('phongTam', value)} onBlur={formik.handleBlur}/>
+                                <InputNumber min={0} max={10} onChange={(value) => formik.setFieldValue('phongTam', value)} onBlur={formik.handleBlur} />
                             </Form.Item>
                         </Col>
                         <Col span={12} >
@@ -119,7 +127,7 @@ export default function AddLocation() {
                         </Col>
                         <Col span={12} >
                             <Form.Item label="Mã vị trí" name="maViTri" validateStatus="error" help={formik.touched.maViTri && formik.errors.maViTri ? (formik.errors.maViTri) : null}>
-                                <InputNumber min={0} onChange={(value) => formik.setFieldValue('maViTri', value)} onBlur={formik.handleBlur}/>
+                                <InputNumber min={0} onChange={(value) => formik.setFieldValue('maViTri', value)} onBlur={formik.handleBlur} />
                             </Form.Item>
                         </Col>
                     </Row>

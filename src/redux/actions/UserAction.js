@@ -1,5 +1,5 @@
 import userService from "../../service/UserService";
-import { ADD_USER, DEL_USER, GET_DETAIL_USER, GET_LIST_USER, GET_SEARCH_USER, SET_ALERT, UPDATE_USER } from "../type/UserType";
+import { ADD_USER, DEL_USER, GET_DETAIL_USER, GET_LIST_USER, GET_SEARCH_USER, SET_ALERT, UPDATE_USER, UP_IMAGE_USER } from "../type/UserType";
 
 
 //admin
@@ -118,6 +118,27 @@ export const searchUserAction = (name = '') => {
         })
         promise.catch((error) => {
             console.log(error)
+            let action2 = {
+                type: SET_ALERT,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
+            }
+            dispatch2(action2);
+        })
+    }
+}
+
+export const upImageUserAction = (file = []) => {
+    return (dispatch2) => {
+        let promise = userService.upImageUser(file);
+        promise.then((result) => {
+            let action2 = {
+                type: UP_IMAGE_USER,
+                arletContent: ["Cập nhập hình ảnh thành công", 201],
+                upImageUser: result.data.content,
+            }
+            dispatch2(action2);
+        })
+        promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
                 arletContent: [error.response?.data.content, error.response?.data.statusCode],

@@ -62,20 +62,27 @@ export default function Users() {
         },
     ];
 
+    const searchName = (name) => {
+        if(name.trim() !== ''){
+            let action = searchUserAction(name);
+            dispatch(action);
+        }
+        else{
+            getListUserAPI();
+        }
+    }
+
+    const validate = values => {
+        searchName(values.name);
+    };
+
     const formik = useFormik({
         initialValues: {
             name: '',
         },
+        validate,
         onSubmit: values => {
-            console.log(values.name)
-            if(values.name.trim() !== ''){
-                let action = searchUserAction(values.name);
-                dispatch(action);
-            }
-            else{
-                getListUserAPI();
-            }
-            
+            searchName(values.name);
         },
     });
 
@@ -106,7 +113,7 @@ export default function Users() {
             }}>Thêm người dùng</Button>
             <Form layout="horizontal" onFinish={formik.handleSubmit}>
                 <Form.Item name="name" style={{ display: 'inline-block', width: '80%' }}>
-                    <Input onChange={formik.handleChange} placeholder="Tên người dùng"/>
+                    <Input onChange={formik.handleChange} placeholder="Tìm kiếm theo tên người dùng"/>
                 </Form.Item>
                 <Form.Item style={{ display: 'inline-block', marginLeft:'10px'}}>
                     <Button type="default" htmlType="submit">Tìm kiếm</Button>
