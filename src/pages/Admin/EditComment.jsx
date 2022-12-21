@@ -12,8 +12,11 @@ export default function EditComment() {
   let { id } = useParams();
   const navigate = useNavigate();
   let { arrComment, comment, arletContent } = useSelector(state => state.commentAdminReducer);
-  if (arrComment.length === 0 ) navigate('/admin/comments');
   let dispatch = useDispatch();
+  useEffect(() => {
+    if (arrComment.length === 0) navigate('/admin/comments');
+  }, [arrComment.length]);
+
   const [form] = Form.useForm();
 
   useEffect(() => {

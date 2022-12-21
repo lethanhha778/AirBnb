@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useFormik } from 'formik';
-import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { listUserAction, removeUserAction, searchUserAction, setAlertUserAction } from '../../redux/actions/UserAction'
