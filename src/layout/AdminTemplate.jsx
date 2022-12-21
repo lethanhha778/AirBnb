@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation} from 'react-router-dom';
 import { FileOutlined, UserOutlined, DownOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { useSelector } from 'react-redux';
@@ -18,29 +18,37 @@ function getItem(label, key, icon, children) {
 
 const items = [
     getItem('Quản lý người dùng', 'sub1', <UserOutlined />, [
-        getItem('Người dùng', '/admin/users'),
+        getItem('Danh sách người dùng', '/admin/users'),
         getItem('Thêm người dùng', '/admin/adduser'),
     ]),
     getItem('Quản lý vị trí', 'sub2', <FileOutlined />, [
-        getItem('Vị trí', '/admin/locations'),
+        getItem('Danh sách vị trí', '/admin/locations'),
         getItem('Thêm vị trí', '/admin/addlocation')]),
     getItem('Quản lý phòng', 'sub3', <FileOutlined />, [
-        getItem('Phòng', '/admin/rooms'),
+        getItem('Danh sách phòng', '/admin/rooms'),
         getItem('Thêm phòng', '/admin/addroom')]),
     getItem('Quản lý đặt phòng', 'sub4', <FileOutlined />, [
-        getItem('Đặt phòng', '/admin/bookingrooms'),
-        getItem('Đặt phòng mới', '/admin/addbookingroom')]),
+        getItem('Danh sách đặt phòng', '/admin/bookingrooms'),
+        getItem('Đặt phòng', '/admin/addbookingroom')]),
     getItem('Quản lý bình luận', 'sub5', <FileOutlined />, [
-        getItem('Bình luận', '/admin/comments'),
+        getItem('Danh sách bình luận', '/admin/comments'),
         getItem('Thêm bình luận', '/admin/addcomment')]),
 ];
 
 const AdminTemplate = () => {
     let { user } = useSelector(state => state.AuthReducer);
-    console.log(user);
     const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
-    const [current, setCurrent] = useState('/admin');
+    const fixchangeMenu = (url) => { 
+        if(url === '/admin' || '/admin/'){
+            return '/admin/users';
+        }
+        if(url.indexOf('edit') !== -1){
+            return `/admin/${url.split('/')[2].substr(4)}s`;
+        }
+        return url;
+     }
+    const [current, setCurrent] = useState(fixchangeMenu(useLocation().pathname));
 
     const dropItems = [
         {
@@ -89,6 +97,7 @@ const AdminTemplate = () => {
                             localStorage.removeItem(USER_INFO);
                         }
                         navigate(drop.key);
+                        setCurrent('/admin/users');
                     }} theme="dark" mode="horizontal" items={dropItems} />
                 </Header>
                 <Content style={{ margin: '0 16px', }}>

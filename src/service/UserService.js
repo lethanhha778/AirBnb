@@ -40,6 +40,10 @@ class UserService {
         return http.get(`/api/users/search/${name}`);
     }
 
+    upImageUser = (file) => {
+        return http.post(`api/users/upload-avatar`, file);
+    }
+
 }
 
 const userService = new UserService()

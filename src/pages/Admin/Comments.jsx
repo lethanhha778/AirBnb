@@ -30,7 +30,7 @@ export default function Comments() {
             dataIndex: 'maPhong',
         },
         {
-            title: 'Mã người bình luận',
+            title: 'Mã người dùng',
             dataIndex: 'maNguoiBinhLuan'
         },
         {

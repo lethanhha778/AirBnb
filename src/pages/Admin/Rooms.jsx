@@ -49,7 +49,7 @@ export default function Location() {
             dataIndex: '',
             render: (t, r) => <div>
                 <EditFilled style={{ fontSize: '16px', color: '#1677ff', marginRight:'10px' }} onClick={() => {
-                    navigate(`/admin/editRoom/${r.id}`);
+                    navigate(`/admin/editroom/${r.id}`);
                 }}/>
                 <DeleteFilled style={{ fontSize: '16px', color: '#ff4d4f' }} onClick={() => {
                     let action = removeRoomAction(r.id);
