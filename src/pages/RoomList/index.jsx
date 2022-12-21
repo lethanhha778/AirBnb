@@ -81,7 +81,7 @@ export default function RoomList() {
                         <p>{item.giuong} giường</p>
                         <p>Số người ở: {item.khach} người</p>
                     </div>
-                    <span className='fw-bold'> {item.giaTien} </span> <span>$ / đêm</span>
+                    <span className='price-room'> {item.giaTien} $</span> <span> / đêm</span>
                 </div>
             </Col >
         })
@@ -107,7 +107,7 @@ export default function RoomList() {
                             <AnyReactComponent
                                 lat={21.1010564}
                                 lng={105.5164893}
-                                text="My Marker"
+                                text="My Home"
                             />
                         </GoogleMapReact>
                     </div>

@@ -21,15 +21,14 @@ export default function CardRoom() {
     dispatch(roomList())
   }, [dispatch])
   const { arrRoom } = useSelector(state => state.BookingReducer)
-  console.log(arrRoom);
+
   const renderRoomItem = () => {
     let room = arrRoom?.map((item, index) => {
       return { ...item, data: dataIMG[index] };
     });
-    console.log(room)
     return room?.slice(0, 30).map((item, index) => {
       return <Col
-        className="gutter-row" xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }} lg={{ span: 8 }} xl={{ span: 6 }} key={index} data-aos="flip-left" data-aos-duration="800" >
+        className="gutter-row" xs={24} sm={12} md={12} lg={8} xl={6} key={index} data-aos="flip-left" data-aos-duration="800" >
         <Swiper
           loop={true}
           cssMode={true}
@@ -81,9 +80,9 @@ export default function CardRoom() {
             <span className='star '><AiFillStar />{`${item.data?.start}`}</span>
           </div>
         </div>
-      </Col >;
-    });
-  };
+      </Col >
+    })
+  }
 
   return (
     <div className='cardRoom'>

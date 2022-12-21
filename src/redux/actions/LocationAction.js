@@ -9,7 +9,6 @@ export const getListLocation = () => {
         dispatch(loadingAction)
         let promise = locationService.getLocationList()
         promise.then((res) => {
-            console.log(res.data.content);
             const action = {
                 type: GET_LIST_LOCATION,
                 arrayLocation: res.data.content
@@ -27,7 +26,6 @@ export const getAllLocation = ()=>{
     return(dispatch)=>{
         let promise = locationService.getAllLocation()
         promise.then((res) => { 
-            console.log(res.data.content);
             const action = {
                 type: GET_ALL_LOCATION,
                 allLocation: res.data.content

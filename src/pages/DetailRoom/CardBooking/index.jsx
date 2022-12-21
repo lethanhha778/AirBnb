@@ -32,7 +32,6 @@ export default function CardBooking(props) {
         setDatePicker(dateString)
         totalPriceOfDays(dateString)
     };
-
     const detailRoom = props.data
     const totalPriceOfDays = (date) => {
         const totalMilisecond = Date.parse(`${date[1]}`) - Date.parse(`${date[0]}`)

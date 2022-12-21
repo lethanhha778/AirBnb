@@ -1,4 +1,4 @@
-import { createBrowserHistory } from 'history';
+// import { createBrowserHistory } from 'history';
 import router from "./router";
 import { useDispatch, useSelector } from "react-redux";
 import { CHECK_LOGIN } from "./redux/actions/AuthAction"
@@ -8,7 +8,8 @@ import Loading from './components/isLoading';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'antd/dist/reset.css';
 import './App.css';
-export const history = createBrowserHistory()
+
+// export const history = createBrowserHistory()
 
 const App = () => {
   const dispatch = useDispatch();

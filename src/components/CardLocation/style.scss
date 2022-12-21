@@ -133,10 +133,13 @@
             color: $color-AirBnb;
         }
     }
-    .search{
+    .search {
         display: flex;
         align-items: center;
-        font-weight: bold;
+        font-weight: 500;
+        svg {
+            color: $color-AirBnb;
+        }
     }
 }
 .location__area {
@@ -145,7 +148,7 @@
     line-height: inherit;
     display: flex;
     justify-content: space-between;
-    .star{
+    .star {
         display: flex;
         align-items: center;
         font-weight: bold;
