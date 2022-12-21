@@ -22,8 +22,13 @@ export default function Login() {
         "Login Sucess",
         "Congratulations, you have successfully logged in"
       );
+      if (navigate(-1) === "detailRoom") {
+        navigate(-1)
+      }
+      else {
+        navigate("/home");
+      }
 
-      navigate(-1);
     }
   }, [loggedIn, navigate]);
 

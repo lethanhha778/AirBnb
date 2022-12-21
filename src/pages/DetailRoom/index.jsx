@@ -7,8 +7,8 @@ import { getDetailRoom } from '../../redux/actions/RoomAction'
 import { AiOutlineHeart } from "react-icons/ai";
 import { GiNetworkBars, GiBusDoors, GiThermometerCold, GiWashingMachine } from "react-icons/gi";
 import { FiShare } from "react-icons/fi";
-import { FaHandHoldingHeart, FaParking } from "react-icons/fa";
-import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import { FaHandHoldingHeart, FaParking, FaSwimmingPool } from "react-icons/fa";
+import { BsFillGrid3X3GapFill, BsFillTabletFill } from "react-icons/bs";
 import { MdIron } from "react-icons/md";
 import { BiSwim } from "react-icons/bi";
 import { CgScreen } from "react-icons/cg";
@@ -18,6 +18,8 @@ import CommnetUser from '../../components/CommentUser';
 import { getComment } from '../../redux/actions/CommentAction';
 import CardBooking from './CardBooking';
 import { HIDEN_MODAL } from '../../redux/type/BookingRoomType';
+import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import './style.scss'
 
 export default function DetailRoom() {
@@ -66,7 +68,6 @@ export default function DetailRoom() {
             <h3 className='title-detail'>{newRoom?.tenPhong}</h3>
             <div className='d-flex justify-content-between flex-column flex-md-row'>
                 <div className='rating flex-column flex-md-row' >
-                    {/* <span className='rating__star'><AiFillStar />{newRoom?.data.start}<span>Đánh Giá</span></span> */}
                     <span className='rating__user'><FaHandHoldingHeart /><span>Chủ Nhà Siêu Thân Thiện</span></span>
                 </div>
                 <div className='share flex-column flex-md-row'>
@@ -74,7 +75,7 @@ export default function DetailRoom() {
                     <span className='share_item2'><AiOutlineHeart /><span>Lưu</span> </span>
                 </div>
             </div>
-            <div className="grid-container">
+            <div className="img-pc">
                 <div className='item1'>
                     <img src={newRoom?.data.img1} alt="" />
                 </div>
@@ -91,6 +92,51 @@ export default function DetailRoom() {
                     <img src={newRoom?.data.img5} alt="" />
                     <span className='show-img'><BsFillGrid3X3GapFill />Hiển Thị Tất Cả Ảnh</span>
                 </div>
+            </div>
+            <div className='img-mobile'>
+                <Swiper
+                    loop={true}
+                    cssMode={true}
+                    navigation={true}
+                    mousewheel={true}
+                    keyboard={true}
+                    slidesPerView={1}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+                >
+                    <SwiperSlide style={{ width: '300px' }}>
+                        <img
+                            src={newRoom?.data.img1}
+                            alt=""
+                        />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img
+                            src={newRoom?.data.img2}
+                            alt=""
+                        />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img
+                            src={newRoom?.data.img3}
+                            alt=""
+                        />
+                    </SwiperSlide>
+                    <SwiperSlide >
+                        <img
+                            src={newRoom?.data.img4}
+                            alt=""
+                        />
+                    </SwiperSlide>
+                    <SwiperSlide >
+                        <img
+                            src={newRoom?.data.img5}
+                            alt=""
+                        />
+                    </SwiperSlide>
+                </Swiper>
             </div>
         </div>
     }
@@ -165,6 +211,9 @@ export default function DetailRoom() {
                                 {detailRoom.wifi ? <div className='icon__room-item'>
                                     <GiNetworkBars /> Wifi
                                 </div> : ''}
+                                {detailRoom.hoBoi ? <div className='icon__room-item'>
+                                    <FaSwimmingPool /> Hồ Bơi
+                                </div> : ''}
                             </Col>
                             <Col span={8}>
                                 {detailRoom.doXe ? <div className='icon__room-item'>
@@ -176,6 +225,10 @@ export default function DetailRoom() {
                                 {detailRoom.doXe ? <div className='icon__room-item'>
                                     <CgScreen /> Tivi
                                 </div> : ''}
+                                {detailRoom.mayGiat ? <div className='icon__room-item'>
+                                    <BsFillTabletFill /> Máy Giặt
+                                </div> : ''}
+
                             </Col>
                             <Col span={8}></Col>
                         </Row>

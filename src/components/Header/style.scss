@@ -8,18 +8,25 @@
 
 .header-airbnb {
     width: 100%;
-    height: 70px;
     transition: ease 1s;
     -webkit-transition: ease 1s;
-    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     .logo-airbnb {
         width: 102px;
         height: 32px;
     }
 }
+.bg-one {
+    background-color: transparent;
+    height: 80px;
+}
+.bg-two {
+    background-color: white;
+    height: 60px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+}
 
 .btn-search {
-    @include styleBtnHeader(40px, 8px, 12px, rgba(255, 255, 255, 0.846));
+    @include styleBtnHeader(40px, 4px, 12px, rgba(255, 255, 255, 0.846));
     border: 1px solid #e1e1e1;
     box-shadow: 0 1px 2px rgb(0 0 0 / 8%), 0 4px 12px rgb(0 0 0 / 5%);
     transition: box-shadow 0.2s ease;
@@ -56,7 +63,7 @@
         color: #717171;
     }
     &:hover {
-        background-color: #e1e1e1;
+        background-color: #f5f4f4;
     }
     svg {
         &:nth-child(1) {
@@ -76,7 +83,9 @@
         font-weight: 500;
     }
     .menu-active {
-        border-bottom: 2px solid black;
+        color: $color-AirBnb;
+        font-weight: 700;
+        border-bottom: 2px solid $color-AirBnb;
     }
 }
 .dropdownUser__menu {
@@ -129,9 +138,9 @@
     align-items: center;
     border: 2px solid rgb(229, 216, 216);
     border-radius: 40px;
-    padding: 8px 0;
     position: absolute;
-    top: 60px;
+    padding-left: 2px;
+    top: 50px;
     right: -75%;
     width: 720px;
     background-color: white;
@@ -161,7 +170,7 @@
         transition: linear 0.3s;
         -webkit-transition: linear 0.3s;
         &:hover {
-            background-color: #e1e1e1;
+            background-color: #fcf0f0;
         }
     }
 }

@@ -41,10 +41,8 @@ function CommnetUser(props) {
 			}
 		}
 	}
-
 	const current = new Date();
 	const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
-
 	const onFinish = (values) => {
 		if (!loggedIn) {
 			navigate("/auth/login")
@@ -66,7 +64,7 @@ function CommnetUser(props) {
 				<div className='user'>
 					<img className='img-user' src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQjYmlp9JDeNMaFZzw9S3G1dVztGqF_2vq9nA&usqp=CAU" alt="" />
 					<div className='user-name'>
-						<h5 className='d-flex'>{comment.name} <span className='d-flex align-items-center' >({comment.title.saoBinhLuan}<AiFillStar style={{ color: 'yellow' }} />) </span></h5>
+						<h5 className='d-flex'>{(comment.name).charAt(0).toUpperCase() + (comment.name).slice(1)}  <span className='d-flex align-items-center mx-1' > ({comment.title.saoBinhLuan}<AiFillStar style={{ color: 'yellow' }} />) </span></h5>
 						<h6>{comment.title.ngayBinhLuan}</h6>
 					</div>
 				</div>
