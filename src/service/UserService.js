@@ -20,7 +20,7 @@ class UserService {
         return http.get(`/api/users`);
     }
 
-    detailUser= (id)=>{
+    detailUser = (id) => {
         return http.get(`/api/users/${id}`);
     }
 
@@ -36,7 +36,7 @@ class UserService {
         return http.put(`/api/users/${id}`, user);
     }
 
-    searchUser= (name)=>{
+    searchUser = (name) => {
         return http.get(`/api/users/search/${name}`);
     }
 

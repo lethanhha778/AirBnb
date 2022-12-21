@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Col, Divider, Row } from 'antd';
 import './style.scss'
 export default function Destination() {

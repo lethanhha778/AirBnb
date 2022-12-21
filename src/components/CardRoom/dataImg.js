@@ -193,11 +193,11 @@ export let dataIMG = [
         start: "5,0",
     },
     {
-        img1: 'https://a0.muscache.com/im/pictures/cf27deda-3bfd-4249-aebb-06c652b86638.jpg?im_w=1200',
-        img2: 'https://a0.muscache.com/im/pictures/6f8d5405-069f-46a5-91c0-8cfae14801eb.jpg?im_w=720',
-        img3: 'https://a0.muscache.com/im/pictures/eb87afee-7c65-4cda-aeda-3a2185d2570a.jpg?im_w=720',
-        img4: 'https://a0.muscache.com/im/pictures/9a4dd371-5727-442a-a18b-5855406a15d3.jpg?im_w=720',
-        img5: 'https://a0.muscache.com/im/pictures/bbb70446-3585-4dfa-a951-0b90e636b271.jpg?im_w=720',
+        img1: 'https://a0.muscache.com/im/pictures/dd9e31a1-87cf-4700-9dd5-bd18308577ef.jpg?im_w=1200',
+        img2: 'https://a0.muscache.com/im/pictures/800abe9a-b7c9-4d48-a0e8-0f596b86f4d9.jpg?im_w=720',
+        img3: 'https://a0.muscache.com/im/pictures/47a51f1e-07cd-46bb-a5a9-6abcd6faaa16.jpg?im_w=720',
+        img4: 'https://a0.muscache.com/im/pictures/46da35e3-5a75-488f-930f-c09014f78a53.jpg?im_w=720',
+        img5: 'https://a0.muscache.com/im/pictures/46da35e3-5a75-488f-930f-c09014f78a53.jpg?im_w=720',
         start: "4,8",
     },
     {
@@ -231,6 +231,14 @@ export let dataIMG = [
         img4: 'https://a0.muscache.com/im/pictures/fc2339a5-1374-42cc-80e9-f3f7b054b4ec.jpg?im_w=720',
         img5: 'https://a0.muscache.com/im/pictures/547da593-703e-46b6-bf62-8b9e58bfd28a.jpg?im_w=720',
         start: "4,7",
+    },
+    {
+        img1: 'https://a0.muscache.com/im/pictures/miso/Hosting-53266181/original/bd8c6af3-0148-48a2-a09f-35d71febe6d5.jpeg?im_w=1200',
+        img2: 'https://a0.muscache.com/im/pictures/miso/Hosting-53266181/original/6f5f7065-5e09-41bc-9d3c-702c342a5b05.jpeg?im_w=720',
+        img3: 'https://a0.muscache.com/im/pictures/miso/Hosting-53266181/original/f402ef8c-ae52-4082-94e2-c100029fe461.jpeg?im_w=720',
+        img4: 'https://a0.muscache.com/im/pictures/miso/Hosting-53266181/original/cfc45401-b532-4f33-baae-b014b2682efb.jpeg?im_w=720',
+        img5: 'https://a0.muscache.com/im/pictures/miso/Hosting-53266181/original/46a14c18-48f7-4b0b-b342-6be6eaa136a6.jpeg?im_w=720',
+        start: "4,85",
     },
 
 ];

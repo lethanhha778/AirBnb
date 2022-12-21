@@ -10,7 +10,10 @@ export default function Register() {
 
   const onFinish = async (values) => {
     try {
-      const res = await AuthService.register(values);
+      const res = await AuthService.register({
+        ...values,
+        birthday: values.birthday.format("YYYY/MM/DD"),
+      });
       if (res.status === 200) {
         openCustomNotificationWithIcon(
           "success",

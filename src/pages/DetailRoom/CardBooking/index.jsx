@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Select, Space, DatePicker, } from 'antd';
 import moment from 'moment/moment';
 import { bookingRoomAction, listBookingAction } from '../../../redux/actions/BookingRoomAction';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { openCustomNotificationWithIcon } from '../../../util/func';
+import { useNavigate } from 'react-router-dom';
 dayjs.extend(customParseFormat);
-
 
 export default function CardBooking(props) {
     const serviceCharge = Number(5)
+    const navigate = useNavigate()
     const [datePicker, setDatePicker] = useState(['', ''])
+    const { loggedIn } = useSelector((state) => state.AuthReducer);
     const [date, setDate] = useState(1)
     const [totalPay, setTotalPay] = useState(0)
     const [people, setPeople] = useState(0)
     const dispatch = useDispatch()
     useEffect(() => {
-        const action = listBookingAction()
-        dispatch(action)
-    }, [])
+        dispatch(listBookingAction())
+    }, [dispatch])
     const idUser = JSON.parse(localStorage.getItem('USER_INFO'));
     const { RangePicker } = DatePicker;
     const disabledDate = (current) => {
@@ -31,7 +32,6 @@ export default function CardBooking(props) {
         setDatePicker(dateString)
         totalPriceOfDays(dateString)
     };
-
     const detailRoom = props.data
     const totalPriceOfDays = (date) => {
         const totalMilisecond = Date.parse(`${date[1]}`) - Date.parse(`${date[0]}`)
@@ -52,10 +52,13 @@ export default function CardBooking(props) {
     const BookRoom = () => {
         if (datePicker[0] === '' || datePicker[1] === '' || people === 0) {
             openCustomNotificationWithIcon(
-                "success",
+                "warning",
                 "Failed",
                 "Còn trường dữ liệu chưa hoàn thành"
             )
+        }
+        else if (!loggedIn) {
+            navigate("/auth/login")
         }
         else {
             const info = {

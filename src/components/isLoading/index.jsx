@@ -1,8 +1,8 @@
 import React from 'react'
-import { Space, Spin } from 'antd';
+import { Spin } from 'antd';
 import { useSelector } from 'react-redux';
-import './style.scss'
 import { Fragment } from 'react';
+import './style.scss'
 export default function Loading() {
     const { isLoading } = useSelector(state => state.LoadingReducer)
     return (

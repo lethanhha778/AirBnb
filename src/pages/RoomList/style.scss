@@ -2,13 +2,14 @@
 
 .room-container {
     width: 85%;
-    margin: 80px auto 0;
+    margin: 90px auto 0;
     h6 {
         font-size: 1.2rem;
     }
     .title {
         font-weight: bold;
-        font-size: 1.9rem;
+        font-size: 2rem;
+        padding-bottom: 10px;
         color: $color-AirBnb;
     }
 
@@ -43,8 +44,8 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
-        transition: linear .3s;
-        -webkit-transition: linear .3s;
+        transition: linear 0.3s;
+        -webkit-transition: linear 0.3s;
         &:hover {
             color: $color-AirBnb;
             -webkit-line-clamp: 2;
@@ -54,6 +55,15 @@
     p {
         color: #73787d;
         margin-bottom: 0;
+        font-weight: 400;
+    }
+    .price-room {
+        color: $color-AirBnb;
+        font-weight: bold;
     }
 }
-
+@media screen and (max-width: 1439px) {
+    .room-container {
+        width: 90%;
+    }
+}

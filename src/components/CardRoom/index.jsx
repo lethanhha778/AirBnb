@@ -5,32 +5,30 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
-import './style.scss'
 import { dataIMG } from './dataImg';
+import { roomList } from '../../redux/actions/BookingRoomAction';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { roomList } from '../../redux/actions/BookingRoomAction';
-import { SET_INDEX } from '../../redux/type/RoomType';
+import './style.scss'
+
 
 export default function CardRoom() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   useEffect(() => {
-    const action = roomList()
-    dispatch(action)
-  }, [])
+    dispatch(roomList())
+  }, [dispatch])
   const { arrRoom } = useSelector(state => state.BookingReducer)
-  console.log(arrRoom);
+
   const renderRoomItem = () => {
     let room = arrRoom?.map((item, index) => {
       return { ...item, data: dataIMG[index] };
     });
-    console.log(room)
     return room?.slice(0, 30).map((item, index) => {
       return <Col
-        className="gutter-row" xs={{ span: 24 }} sm={{ span: 12 }} md={{ span: 12 }} lg={{ span: 8 }} xl={{ span: 6 }} key={index} data-aos="flip-left" data-aos-duration="800" >
+        className="gutter-row" xs={24} sm={12} md={12} lg={8} xl={6} key={index} data-aos="flip-left" data-aos-duration="800" >
         <Swiper
           loop={true}
           cssMode={true}
@@ -78,13 +76,13 @@ export default function CardRoom() {
               className='room__decripton-sites' ><span>{item.tenPhong}</span></h5>
           </div>
           <div className='room__area'>
-            <span>{item.giaTien} $/ đêm</span>
+            <span> <span className='price'>{item.giaTien}</span> $/ đêm</span>
             <span className='star '><AiFillStar />{`${item.data?.start}`}</span>
           </div>
         </div>
-      </Col >;
-    });
-  };
+      </Col >
+    })
+  }
 
   return (
     <div className='cardRoom'>

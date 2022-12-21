@@ -141,9 +141,16 @@
     line-height: inherit;
     display: flex;
     justify-content: space-between;
-    .star{
+    .star {
         display: flex;
         align-items: center;
         font-weight: bold;
+        svg {
+            color: rgb(255, 255, 28);
+        }
+    }
+    .price {
+        font-weight: bold;
+        color: black;
     }
 }

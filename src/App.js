@@ -1,20 +1,23 @@
-import { createBrowserHistory } from 'history';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import 'antd/dist/antd.css';
 import router from "./router";
 import { useDispatch, useSelector } from "react-redux";
 import { CHECK_LOGIN } from "./redux/actions/AuthAction"
-import { RouterProvider,} from "react-router-dom";
+import { RouterProvider, } from "react-router-dom";
 import { useEffect } from 'react';
 import Loading from './components/isLoading';
-export const history = createBrowserHistory()
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'antd/dist/reset.css';
+import './App.css';
 
 const App = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+  }, []);
   const dispatch = useDispatch();
   const { navigate } = router
 
-  dispatch(CHECK_LOGIN())
+  useEffect(() => {
+    dispatch(CHECK_LOGIN())
+  }, [dispatch])
   const loggedIn = useSelector((state) => state.AuthReducer.loggedIn);
 
   useEffect(() => {
@@ -30,7 +33,7 @@ const App = () => {
 
   return (
     <>
-      <Loading/>
+      <Loading />
       <RouterProvider router={router} />
     </>
   );

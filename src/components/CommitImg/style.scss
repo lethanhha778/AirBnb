@@ -20,6 +20,7 @@
             width: 100%;
             object-fit: cover;
             vertical-align: bottom;
+            cursor: pointer;
             &:hover {
                 transition: 0.9s;
                 -webkit-transition: 0.9s;
@@ -38,6 +39,12 @@
     .title-home {
         font-size: 1.4rem;
         font-weight: 700;
+        cursor: pointer;
+        transition: linear 0.2s;
+        -webkit-transition: linear 0.2s;
+        &:hover{
+            color: $color-AirBnb;
+        }
     }
     .conection__customer {
         position: relative;
@@ -63,21 +70,25 @@
     h3 {
         color: white;
         font-size: 2.3rem;
+        cursor: pointer;
+        &:hover{
+            color: $color-AirBnb;
+        }
     }
     p {
         font-size: 1rem;
         color: white;
     }
     button {
-        padding: 2px 36px;
+        padding: 2px 40px;
         font-size: 1.1rem;
-        border: 1px solid $color-AirBnb;
+        border: 1.5px solid $color-AirBnb;
         color: $color-AirBnb;
         font-weight: bold;
         border-radius: 40px;
         &:hover {
             background-color: $color-AirBnb;
-            color: $text-color;
+            color: white;
         }
     }
 }

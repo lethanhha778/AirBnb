@@ -9,7 +9,6 @@ export const postComment = (contentComment) => {
         dispatch(loadingAction)
         let promise = commentServices.postCommentUser(contentComment)
         promise.then((res) => {
-            console.log(res.data.content)
             const action = {
                 type: POST_COMMENT,
                 data: res.data.content

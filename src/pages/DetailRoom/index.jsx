@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { Col, Row, Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
 import "antd/dist/reset.css";
@@ -7,8 +7,8 @@ import { getDetailRoom } from '../../redux/actions/RoomAction'
 import { AiOutlineHeart } from "react-icons/ai";
 import { GiNetworkBars, GiBusDoors, GiThermometerCold, GiWashingMachine } from "react-icons/gi";
 import { FiShare } from "react-icons/fi";
-import { FaHandHoldingHeart, FaParking } from "react-icons/fa";
-import { BsFillGrid3X3GapFill } from "react-icons/bs";
+import { FaHandHoldingHeart, FaParking, FaSwimmingPool } from "react-icons/fa";
+import { BsFillGrid3X3GapFill, BsFillTabletFill } from "react-icons/bs";
 import { MdIron } from "react-icons/md";
 import { BiSwim } from "react-icons/bi";
 import { CgScreen } from "react-icons/cg";
@@ -17,40 +17,32 @@ import { dataIMG } from '../../components/CardRoom/dataImg';
 import CommnetUser from '../../components/CommentUser';
 import { getComment } from '../../redux/actions/CommentAction';
 import CardBooking from './CardBooking';
-import './style.scss'
 import { HIDEN_MODAL } from '../../redux/type/BookingRoomType';
+import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import './style.scss'
 
 export default function DetailRoom() {
     useEffect(() => {
-        // 👇️ scroll to top on page load
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
     let { id } = useParams()
     const navigation = useNavigate()
-    console.log(id);
     const dispatch = useDispatch();
     useEffect(() => {
+        dispatch(getComment())
         dispatch(getDetailRoom(id))
-    }, [])
-    useEffect(() => {
-        const action = getComment()
-        dispatch(action)
-    }, [])
+    }, [dispatch, id])
+
     const { arrComment } = useSelector(state => state.CommentReducer)
     const { detailRoom } = useSelector(state => state.RoomReducer)
     const { modal, infoBookingRoom } = useSelector(state => state.BookingReducer)
+    const commentMemo = useMemo(() => arrComment, [arrComment])
 
-    let commentMemo = useMemo(() => arrComment, [arrComment])
-
-    // gọi action check role là gì để showw modal 
     const isModalOpen = modal
     const handleOk = () => {
         dispatch({ type: HIDEN_MODAL })
         navigation('/home')
-
-    };
-    const handleCancel = () => {
-        dispatch({ type: HIDEN_MODAL })
     };
 
 
@@ -76,7 +68,6 @@ export default function DetailRoom() {
             <h3 className='title-detail'>{newRoom?.tenPhong}</h3>
             <div className='d-flex justify-content-between flex-column flex-md-row'>
                 <div className='rating flex-column flex-md-row' >
-                    {/* <span className='rating__star'><AiFillStar />{newRoom?.data.start}<span>Đánh Giá</span></span> */}
                     <span className='rating__user'><FaHandHoldingHeart /><span>Chủ Nhà Siêu Thân Thiện</span></span>
                 </div>
                 <div className='share flex-column flex-md-row'>
@@ -84,7 +75,7 @@ export default function DetailRoom() {
                     <span className='share_item2'><AiOutlineHeart /><span>Lưu</span> </span>
                 </div>
             </div>
-            <div className="grid-container">
+            <div className="img-pc">
                 <div className='item1'>
                     <img src={newRoom?.data.img1} alt="" />
                 </div>
@@ -102,6 +93,51 @@ export default function DetailRoom() {
                     <span className='show-img'><BsFillGrid3X3GapFill />Hiển Thị Tất Cả Ảnh</span>
                 </div>
             </div>
+            <div className='img-mobile'>
+                <Swiper
+                    loop={true}
+                    cssMode={true}
+                    navigation={true}
+                    mousewheel={true}
+                    keyboard={true}
+                    slidesPerView={1}
+                    pagination={{
+                        clickable: true,
+                    }}
+                    modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+                >
+                    <SwiperSlide style={{ width: '300px' }}>
+                        <img
+                            src={newRoom?.data.img1}
+                            alt=""
+                        />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img
+                            src={newRoom?.data.img2}
+                            alt=""
+                        />
+                    </SwiperSlide>
+                    <SwiperSlide>
+                        <img
+                            src={newRoom?.data.img3}
+                            alt=""
+                        />
+                    </SwiperSlide>
+                    <SwiperSlide >
+                        <img
+                            src={newRoom?.data.img4}
+                            alt=""
+                        />
+                    </SwiperSlide>
+                    <SwiperSlide >
+                        <img
+                            src={newRoom?.data.img5}
+                            alt=""
+                        />
+                    </SwiperSlide>
+                </Swiper>
+            </div>
         </div>
     }
 
@@ -113,7 +149,7 @@ export default function DetailRoom() {
                 <Col xs={24} md={12} lg={14} xl={16} className='col__left' >
                     <Row>
                         <Col span={22} className='col__left-1'>
-                            <h4> Toàn bộ căn hộ condo. Chủ Nhà Phong</h4>
+                            <h4> Toàn bộ căn hộ condo.</h4>
                             <span className='content'>{detailRoom.khach} Khách</span> -
                             <span className='content'>{detailRoom.phongNgu} Phòng ngủ</span> -
                             <span className='content'>{detailRoom.giuong} Giường</span> -
@@ -153,6 +189,7 @@ export default function DetailRoom() {
                         <a href="https://www.airbnb.com.vn/help?audience=guest">Tìm Hiểu Thêm</a>
                     </div>
                     <div className='room-describe'>
+                        <h3>Chi Tiết Phòng</h3>
                         <span>{detailRoom.moTa}</span>
                     </div>
                     <div className='icon-room'>
@@ -174,6 +211,9 @@ export default function DetailRoom() {
                                 {detailRoom.wifi ? <div className='icon__room-item'>
                                     <GiNetworkBars /> Wifi
                                 </div> : ''}
+                                {detailRoom.hoBoi ? <div className='icon__room-item'>
+                                    <FaSwimmingPool /> Hồ Bơi
+                                </div> : ''}
                             </Col>
                             <Col span={8}>
                                 {detailRoom.doXe ? <div className='icon__room-item'>
@@ -185,6 +225,10 @@ export default function DetailRoom() {
                                 {detailRoom.doXe ? <div className='icon__room-item'>
                                     <CgScreen /> Tivi
                                 </div> : ''}
+                                {detailRoom.mayGiat ? <div className='icon__room-item'>
+                                    <BsFillTabletFill /> Máy Giặt
+                                </div> : ''}
+
                             </Col>
                             <Col span={8}></Col>
                         </Row>

@@ -7,6 +7,7 @@ const initialState = {
 };
 const reducer = (state = initialState, action) => {
   const { payload, type } = action
+  const userInfo = payload?.content || {}
 
   switch (type) {
     case 'LOGIN':
@@ -28,6 +29,25 @@ const reducer = (state = initialState, action) => {
 
     case "LOGIN_FAILED":
       return { ...state, error: payload, loading: false }
+
+    case "UPLOAD_SUCCESS":
+      localStorage.setItem(USER_INFO, JSON.stringify(userInfo))
+      return { ...state, user: userInfo }
+
+    case "EDIT_SUCCESS":
+      localStorage.setItem(USER_INFO, JSON.stringify(userInfo))
+      return { ...state, user: userInfo }
+
+    case "LOGOUT":
+      localStorage.removeItem(USER_INFO)
+      localStorage.removeItem(ACCESS_TOKEN)
+
+      return {
+        loggedIn: false,
+        user: {},
+        loading: false,
+        error: ""
+      }
     default:
       return state;
   }
