@@ -83,11 +83,11 @@ export default function Header() {
 			<Navbar
 				fixed="top"
 				className={`d-none d-md-flex header-airbnb 
-        ${bg ? "bg-transparent" : "bg-white"} `}
+        ${bg ? "bg-one" : "bg-two"} `}
 			>
 				<Container>
 					<Navbar.Brand
-						to="/"
+						href="/"
 						className="d-none d-md-block">
 						<img
 							className="logo-airbnb"

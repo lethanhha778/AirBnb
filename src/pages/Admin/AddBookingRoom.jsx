@@ -76,7 +76,7 @@ export default function AddBookingRoom() {
                     <InputNumber min={0} onChange={(value) => formik.setFieldValue('soLuongKhach', value)} onBlur={formik.handleBlur} />
                 </Form.Item>
                 <Form.Item label="Mã người dùng" name="maNguoiDung" validateStatus="error" help={formik.touched.maNguoiDung && formik.errors.maNguoiDung ? (formik.errors.maNguoiDung) : null}>
-                    <InputNumber min={0}  onChange={(value) => formik.setFieldValue('maNguoiDung', value)} onBlur={formik.handleBlur} />
+                    <InputNumber min={0} onChange={(value) => formik.setFieldValue('maNguoiDung', value)} onBlur={formik.handleBlur} />
                 </Form.Item>
                 <Form.Item label="Button">
                     <Button htmlType="submit">Đặt phòng</Button>
