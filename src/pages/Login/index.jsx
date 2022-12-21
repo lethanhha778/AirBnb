@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
-import "./style.scss";
-import "antd/dist/reset.css";
 import { Form, Input, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { LOGIN } from "../../redux/actions/AuthAction";
 import { useNavigate, NavLink } from "react-router-dom";
 import { openCustomNotificationWithIcon } from "../../util/func";
+import "antd/dist/reset.css";
+import "./style.scss";
 
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const loading = useSelector((state) => state.AuthReducer.loading);
   const error = useSelector((state) => state.AuthReducer.error);
   const loggedIn = useSelector((state) => state.AuthReducer.loggedIn);
-
   useEffect(() => {
     if (loggedIn) {
       openCustomNotificationWithIcon(
@@ -22,13 +20,13 @@ export default function Login() {
         "Login Sucess",
         "Congratulations, you have successfully logged in"
       );
-      if (navigate(-1) === "detailRoom") {
+      if (localStorage.getItem("urlRegister") === null) {
         navigate(-1)
       }
       else {
-        navigate("/home");
+        navigate('/home');
+        localStorage.removeItem('urlRegister')
       }
-
     }
   }, [loggedIn, navigate]);
 

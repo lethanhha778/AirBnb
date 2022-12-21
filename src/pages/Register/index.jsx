@@ -7,6 +7,8 @@ import { openCustomNotificationWithIcon } from "../../util/func";
 
 export default function Register() {
   const navigation = useNavigate();
+  console.log(window.location.href)
+  localStorage.setItem('urlRegister', JSON.stringify({ url: `${window.location.href}` }))
 
   const onFinish = async (values) => {
     try {

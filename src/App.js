@@ -23,6 +23,7 @@ const App = () => {
   useEffect(() => {
     const requiredLogin = router?.state?.matches.some(el => el.route.requiredLogin)
     console.log(requiredLogin)
+    console.log(loggedIn);
     if (requiredLogin && !loggedIn) {
       navigate("/auth/login");
     }
