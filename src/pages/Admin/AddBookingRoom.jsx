@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, DatePicker, InputNumber, Modal } from 'antd';
 import { addBookingAction, setAlertBookingAction } from '../../redux/actions/BookingRoomAction';
+import roomService from '../../service/RoomService';
 
 export default function AddBookingRoom() {
     let { arletContent } = useSelector(state => state.bookingAdminReducer);
@@ -27,7 +28,14 @@ export default function AddBookingRoom() {
             maNguoiDung: 0
         },
         validationSchema: Yup.object({
-            maPhong: Yup.number().typeError("Mã phòng không đúng định dạng").min(1, "Mã phòng phải lớn hơn 0"),
+            maPhong: Yup.number().typeError("Mã phòng không đúng định dạng").min(1, "Mã phòng không hợp lệ")
+                .test("Mã phòng", "Mã phòng không tồn tại", async (values) => {
+                    return await roomService.detailRoom(values).then((result) => {
+                        return true;
+                    }).catch((err) => {
+                        return false;
+                    });
+                }),
             ngayDen: Yup.string().required("Ngày đến không được để trống"),
             ngayDi: Yup.string().required("Ngày đi không được để trống"),
             soLuongKhach: Yup.number().typeError("Số lượng khách không đúng định dạng").min(1, "Số lượng khách phải lớn hơn 0"),

@@ -8,7 +8,7 @@ import { Form, Button, DatePicker, InputNumber, Modal } from 'antd';
 import { getBookingAction, setAlertBookingAction, updateBookingAction } from '../../redux/actions/BookingRoomAction';
 
 export default function EditBookingRoom() {
-    let { id } = useParams()
+    let { id } = useParams();
     let { booking, arletContent } = useSelector(state => state.bookingAdminReducer)
     let dispatch = useDispatch();
     const navigate = useNavigate();

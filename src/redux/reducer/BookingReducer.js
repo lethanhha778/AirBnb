@@ -5,7 +5,7 @@ const initialState = {
     arrRoom: [],
     arrBooking: [],
     booking: {},
-    arletContent: '',
+    arletContent: ['', 0],
     infoBookingRoom: {},
     modal: false,
 }

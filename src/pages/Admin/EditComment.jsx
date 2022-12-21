@@ -104,7 +104,7 @@ export default function EditComment() {
           <InputNumber min={0} max={5} onChange={(value) => formik.setFieldValue('saoBinhLuan', value)} onBlur={formik.handleBlur} />
         </Form.Item>
         <Form.Item label="Button">
-          <Button htmlType="submit">Cập nhập bình luận</Button>
+          <Button htmlType="submit">Cập nhập</Button>
         </Form.Item>
       </Form>
     </div>

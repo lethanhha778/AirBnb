@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Input, DatePicker, InputNumber, Modal } from 'antd';
 import { addCommentAction, setAlertCommentAction } from '../../redux/actions/CommentAction';
+import roomService from '../../service/RoomService';
+import userService from '../../service/UserService';
+
 const { TextArea } = Input;
 
 export default function AddBookingRoom() {
@@ -28,8 +31,22 @@ export default function AddBookingRoom() {
       saoBinhLuan: 0
     },
     validationSchema: Yup.object({
-      maPhong: Yup.number().typeError("Mã phòng không đúng định dạng").min(1, "Mã phòng phải lớn hơn 0"),
-      maNguoiBinhLuan: Yup.number().typeError("Mã người dùng không đúng định dạng").min(1, "Mã người dùng phải lớn hơn 0"),
+      maPhong: Yup.number().typeError("Mã phòng không đúng định dạng").min(1, "Mã phòng không hợp lệ")
+        .test("Mã phòng", "Mã phòng không tồn tại", async (values) => {
+          return await roomService.detailRoom(values).then((result) => {
+            return true;
+          }).catch((error) => {
+            return false;
+          });
+        }),
+      maNguoiBinhLuan: Yup.number().typeError("Mã người dùng không đúng định dạng").min(1, "Mã người dùng không hợp lệ")
+        .test("Mã người dùng", "Mã người dùng không tồn tại", async (values) => {
+          return await userService.detailUser(values).then((result) => {
+            return true;
+          }).catch((error) => {
+            return false;
+          });
+        }),
       ngayBinhLuan: Yup.string().required("Ngày bình luận không được để trống"),
       noiDung: Yup.string().required("Nội dung không được để trống"),
       saoBinhLuan: Yup.number().typeError("Sao bình chọn không đúng định dạng"),

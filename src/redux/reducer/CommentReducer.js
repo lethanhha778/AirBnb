@@ -31,7 +31,6 @@ export const commentAdminReducer = (state = initialState, action) => {
 
         case GET_DETAIL_COMMENT_AD:
             let indexDet = state.arrComment.findIndex((comment) => comment.id == action.commentId);
-            console.log(action.commentId, state.arrComment, indexDet)
             if (indexDet > -1) {
                 state.comment = state.arrComment[indexDet];
             }

@@ -1,34 +1,47 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
-import { EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons';
-import { Form, Input, Button, DatePicker, Select, Modal } from 'antd';
-import { getUserAction, setAlertUserAction, updateUserAction } from '../../redux/actions/UserAction';
+import { EyeInvisibleOutlined, EyeTwoTone, PlusOutlined } from '@ant-design/icons';
+import { Form, Input, Button, DatePicker, Select, Upload, Modal } from 'antd';
+import { getUserAction, setAlertUserAction, updateUserAction, upImageUserAction } from '../../redux/actions/UserAction';
 import { useParams } from 'react-router-dom';
 
 export default function EditUser() {
   let { id } = useParams();
   let { user, arletContent } = useSelector(state => state.userAdminReducer);
+  let idAuth = useSelector(state => state.AuthReducer).user.id;
   let dispatch = useDispatch();
   const navigate = useNavigate();
+  let [fileList, setfileList] = useState([
+    {
+      uid: '-1',
+      name: 'image.png',
+      status: 'done',
+      url: '',
+    },
+  ]);
   const [form] = Form.useForm();
   useEffect(() => {
     getUserAPI();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (Object.keys(user).length !== 0) {
-      console.log(user);
+      setfileList([{
+        uid: '-1',
+        name: 'image.png',
+        status: 'done',
+        url: user.avatar,
+      }]);
       form.setFieldsValue({
         name: user.name,
         email: user.email,
-        password: user.password,
+        password: '',
         phone: user.phone,
         birthday: dayjs(user.birthday, 'DD/MM/YYYY'),
-        avatar: user.avatar,
         gender: user.gender,
         role: user.role,
       });
@@ -66,6 +79,12 @@ export default function EditUser() {
     },
   });
 
+  const dummyRequest = ({ file, onSuccess }) => {
+    setTimeout(() => {
+      onSuccess("ok");
+    }, 0);
+  };
+
   let info = () => {
     Modal.info({
       title: 'Thông báo',
@@ -89,9 +108,16 @@ export default function EditUser() {
     dispatch(action);
   }
 
+  const uploadButton = (
+    <div>
+      <PlusOutlined />
+      <div className="ant-upload-text">Upload</div>
+    </div>
+  );
+
   return (
     <div style={{ padding: '15px' }}>
-      <h2 >Cập nhập thông tin</h2>
+      <h2 >Cập nhập thông tin người dùng</h2>
       <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} layout="horizontal" onFinish={formik.handleSubmit}
         form={form}>
         <Form.Item label="Tên" name="name" validateStatus="error" help={formik.touched.name && formik.errors.name ? (formik.errors.name) : null}>
@@ -104,7 +130,6 @@ export default function EditUser() {
           <Input.Password
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            placeholder="Nhập mật khẩu"
             iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
           />
         </Form.Item>
@@ -112,10 +137,34 @@ export default function EditUser() {
           <Input onChange={formik.handleChange} onBlur={formik.handleBlur} />
         </Form.Item>
         <Form.Item label="Sinh nhật" name="birthday" validateStatus="error" help={formik.touched.birthday && formik.errors.birthday ? (formik.errors.birthday) : null}>
-          <DatePicker onChange={(date) => formik.setFieldValue('birthday', date)} format='DD/MM/YYYY' onBlur={formik.handleBlur}/>
+          <DatePicker onChange={(date) => formik.setFieldValue('birthday', date)} format='DD/MM/YYYY' onBlur={formik.handleBlur} />
         </Form.Item>
-        <Form.Item label="Hình ảnh" name="avatar">
+        {/* <Form.Item label="Hình ảnh" name="avatar">
         <img style={{width: '150px'}} src={form.getFieldValue('avatar')} alt="" />
+        </Form.Item> */}
+        <Form.Item label="Hình ảnh" valuePropName="fileList">
+          <Upload
+            customRequest={dummyRequest}
+            listType="picture-card"
+            fileList={fileList}
+            beforeUpload={(file) => {
+              if (Number(id) === Number(idAuth)) {
+                let formData = new FormData();
+                formData.append('formFile', file, file.name);
+                let action = upImageUserAction(formData);
+                dispatch(action);
+              }
+              return false;
+            }}
+            onChange={(value) => {
+              if (Number(id) === Number(idAuth)) {
+                formik.setFieldValue('avatar', user.avatar);
+                setfileList(value.fileList);
+              }
+            }}
+          >
+            {fileList.length >= 1 ? null : uploadButton}
+          </Upload>
         </Form.Item>
         <Form.Item label="Giới tính" name="gender" >
           <Select
