@@ -381,12 +381,12 @@ export default function Header() {
 						<>
 							<NavLink
 								to="/profile"
-								className="menu__bottom-item">
+								className="menu__bottom-item user">
 								<FaUserCircle />{" "}
 								{JSON.parse(localStorage.getItem(USER_INFO)).name.substr(0, 5)}
 							</NavLink>
 							<NavLink onClick={() => handleLogout()}
-								className="menu__bottom-item">
+								className="menu__bottom-item underlined">
 								<ImExit />{" "}
 								Đăng Xuất
 							</NavLink>

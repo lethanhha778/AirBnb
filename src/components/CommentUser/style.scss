@@ -33,15 +33,20 @@
 }
 .btn-comment {
     width: 20%;
-    padding: 0px 4px 4px;
+    padding: 2px 4px;
     margin: 10px 0;
     border-radius: 8px;
     background-color: $color-AirBnb;
-    border: 2px solid $color-AirBnb;
-    transition: ease-in 0.3s;
+    border: none;
+    box-shadow: 0 5px 0 #bb2f34;
+    transition: 0.5s;
+    border-radius: 40px;
     &:hover {
         background-color: rgb(224, 23, 96);
-        border: 2px solid rgb(224, 23, 96);
+    }
+    &:active {
+        box-shadow: none;
+        transform: translateY(5px);
     }
     span {
         font-weight: bold;

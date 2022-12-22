@@ -74,7 +74,7 @@ export default createBrowserRouter([
       {
         path: "detailRoom/:id",
         element: <DetailRoom />,
-        requiredLogin: true,
+        requiredLogin: false,
       },
       {
         path: "hostHome",
@@ -86,7 +86,6 @@ export default createBrowserRouter([
         element: <Profile />,
         requiredLogin: false
       }
-
     ]
   },
   //admin

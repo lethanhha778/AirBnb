@@ -22,19 +22,21 @@ export const getListLocation = () => {
     }
 }
 // lấy toàn bộ ds show ra theo phân trang tìm kiếm
-export const getAllLocation = ()=>{
-    return(dispatch)=>{
+export const getAllLocation = () => {
+    return (dispatch) => {
+        dispatch(loadingAction)
         let promise = locationService.getAllLocation()
-        promise.then((res) => { 
+        promise.then((res) => {
             const action = {
                 type: GET_ALL_LOCATION,
                 allLocation: res.data.content
             }
             dispatch(action)
-         })
-        promise.catch((err) => { 
+            dispatch(hiddenLoadingAction)
+        })
+        promise.catch((err) => {
             console.log(err)
-         })
+        })
     }
 }
 

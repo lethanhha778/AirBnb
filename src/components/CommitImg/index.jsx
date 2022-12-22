@@ -51,7 +51,7 @@ export default function CommitImg() {
                     <p>Chúng Tôi Sẽ Thay Bạn Tìm Khách Hàng</p>
                     <p>Kết Nối Mọi Người Lại Với Nhau</p>
                     <button
-                        onClick={() => { navigate('hostHome') }}
+                        onClick={() => { navigate('/hostHome') }}
                     >Go</button>
                 </div>
             </div>

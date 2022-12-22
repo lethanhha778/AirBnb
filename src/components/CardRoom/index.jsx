@@ -70,13 +70,13 @@ export default function CardRoom() {
         </Swiper>
         <div data-aos="flip-left" data-aos-duration="1000">
           <div className='room__decripton'>
-            <h5 onClick={() => {
+            <h4 onClick={() => {
               navigate(`/detailRoom/${item.id}`)
             }}
-              className='room__decripton-sites' ><span>{item.tenPhong}</span></h5>
+              className='room__decripton-sites' ><span>{item.tenPhong}</span></h4>
           </div>
           <div className='room__area'>
-            <span> <span className='price'>{item.giaTien}</span> $/ đêm</span>
+            <span> <span className='price'>${item.giaTien}</span> đêm</span>
             <span className='star '><AiFillStar />{`${item.data?.start}`}</span>
           </div>
         </div>

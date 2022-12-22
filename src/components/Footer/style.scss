@@ -32,7 +32,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 10px 0;
+    padding-top: 10px;
     .footer-bottom-left {
         display: flex;
         font-size: 1.2rem;
@@ -51,6 +51,7 @@
             list-style: none;
             font-size: 1.1rem;
             font-weight: 500;
+            cursor: pointer;
             &:hover {
                 color: $color-AirBnb;
             }
