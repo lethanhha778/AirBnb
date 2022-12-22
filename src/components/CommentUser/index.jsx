@@ -6,6 +6,7 @@ import { Rate, Input, Form, Button } from 'antd';
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import './style.scss'
+import { openCustomNotificationWithIcon } from '../../util/func';
 
 
 function CommnetUser(props) {
@@ -44,9 +45,19 @@ function CommnetUser(props) {
 	const current = new Date();
 	const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 	const onFinish = (values) => {
+
 		if (!loggedIn) {
 			navigate("/auth/login")
-		} else {
+		}
+		else if (values.noiDung === '') {
+			console.log(1)
+			openCustomNotificationWithIcon(
+				"warning",
+				"Failed",
+				"Bạn Chưa Nhập Nội Dung"
+			)
+		}
+		else {
 			const contentComment = {
 				maPhong: maPhong,
 				maNguoiBinhLuan: user.id,
@@ -87,7 +98,8 @@ function CommnetUser(props) {
 					name="validate_other"
 					onFinish={onFinish}
 					initialValues={{
-						rate: 3.5,
+						saoBinhLuan: 3,
+						noiDung: ''
 					}}>
 					<Form.Item name="saoBinhLuan" label="Rate">
 						<Rate />
@@ -96,9 +108,9 @@ function CommnetUser(props) {
 						<Input.TextArea allowClear={true} />
 					</Form.Item>
 					<Form.Item>
-						<Button htmlType="submit"
+						<button type="submit"
 							className='btn-comment'> <span>Bình Luận</span>
-						</Button>
+						</button>
 					</Form.Item>
 				</Form>
 			</div>

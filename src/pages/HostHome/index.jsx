@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row, Slider } from 'antd';
 import GoogleMapReact from 'google-map-react';
 import './index.scss'
 
 export default function HostHome() {
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    }, []);
     const price = Number(7)
     const [total, setTotal] = useState(14)
     const [num, setNum] = useState(2)
@@ -54,11 +57,11 @@ export default function HostHome() {
                     <h5>Nhận sự hướng dẫn riêng từ một Chủ nhà siêu cấp</h5>
                     <h6>Chúng tôi sẽ kết nối bạn với một Chủ nhà siêu cấp trong khu vực của bạn, người sẽ hướng dẫn bạn từ câu hỏi đầu tiên cho đến vị khách đầu tiên – qua điện thoại, cuộc gọi video hoặc tính năng trò chuyện.</h6>
                 </Col>
-                <Col xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 8 }} data-aos="flip-up"data-aos-duration="2000" >
+                <Col xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 8 }} data-aos="flip-up" data-aos-duration="2000" >
                     <h5>Vị khách có kinh nghiệm cho lượt đặt phòng đầu tiên của bạn</h5>
                     <h6>Với lượt đặt phòng đầu tiên, bạn có thể lựa chọn chào đón một khách có kinh nghiệm, đã có ít nhất 3 kỳ ở và lịch sử hoạt động tốt trên Airbnb.</h6>
                 </Col>
-                <Col xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 8 }} data-aos="flip-up"data-aos-duration="3000">
+                <Col xs={{ span: 24 }} md={{ span: 8 }} lg={{ span: 8 }} data-aos="flip-up" data-aos-duration="3000">
                     <h5>Hỗ trợ đặc biệt từ Airbnb</h5>
                     <h6>Chỉ cần nhấn nút là Chủ nhà mới có thể liên hệ với nhân viên Hỗ trợ cộng đồng được đào tạo đặc biệt, có thể trợ giúp về mọi vấn đề, từ sự cố tài khoản cho đến hỗ trợ thanh toán.</h6>
                 </Col>

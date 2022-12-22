@@ -23,18 +23,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import './style.scss'
 
 export default function DetailRoom() {
+    const navigation = useNavigate()
+    const dispatch = useDispatch();
     const { arrComment } = useSelector(state => state.CommentReducer)
     const { detailRoom } = useSelector(state => state.RoomReducer)
     const { modal, infoBookingRoom } = useSelector(state => state.BookingReducer)
+    console.log(infoBookingRoom);
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
     let { id } = useParams()
-    console.log(id)
-    let url = useParams()
-    console.log(url)
-    const navigation = useNavigate()
-    const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(getComment())
         dispatch(getDetailRoom(id))
@@ -46,7 +45,6 @@ export default function DetailRoom() {
         dispatch({ type: HIDEN_MODAL })
         navigation('/home')
     };
-
 
     const renderDetailRoom = () => {
         let newRoom = {}
@@ -191,7 +189,6 @@ export default function DetailRoom() {
                         <a href="https://www.airbnb.com.vn/help?audience=guest">Tìm Hiểu Thêm</a>
                     </div>
                     <div className='room-describe'>
-                        <h3>Chi Tiết Phòng</h3>
                         <span>{detailRoom.moTa}</span>
                     </div>
                     <div className='icon-room'>
@@ -242,9 +239,11 @@ export default function DetailRoom() {
                 </Col>
             </Row>
             <Modal title="Đặt Phòng Thành Công" okText="Về Trang Chủ" open={isModalOpen} onOk={handleOk} cancelButtonProps={{ style: { display: 'none' } }}>
-                <h6>Ngày Nhận Phòng: {infoBookingRoom?.ngayDen}</h6>
-                <h6>Ngày Trả Phòng: {infoBookingRoom?.ngayDi}</h6>
-                <h6>Số Người: {infoBookingRoom?.soLuongKhach}</h6>
+                <h5 className='title-modal'>{detailRoom?.tenPhong}</h5>
+                <h6>Ngày Nhận Phòng: <span>{infoBookingRoom?.ngayDen}</span> </h6>
+                <h6>Ngày Trả Phòng: <span>{infoBookingRoom?.ngayDi}</span> </h6>
+                <h6>Số Người: <span>{infoBookingRoom?.soLuongKhach}</span></h6>
+                <p>*Nếu hủy phòng. Vui lòng hủy trước 7 ngày để không mất phí</p>
             </Modal>
 
         </div>

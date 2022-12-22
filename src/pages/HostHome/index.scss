@@ -26,11 +26,17 @@
         .ant-slider {
             width: 70%;
             margin: 0 auto;
+            .ant-slider-rail {
+                height: 10px;
+            }
             .ant-slider-track {
+                height: 10px;
                 background-color: $color-AirBnb;
             }
             .ant-slider-handle {
                 &::after {
+                    height: 20px;
+                    width: 20px;
                     box-shadow: 0 0 0 2px $color-AirBnb;
                 }
             }
