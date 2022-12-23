@@ -1,0 +1,4 @@
+phân chia task:
++ Lê Thanh Hà (leader): Home, Detail,HostHome, RomList, NotFound, isLoading 
++ Trần Thị Kiều Trang: Login, Register, Profile
++ Nguyễn Ngọc Quỳnh: Admin, vẽ wirefame
