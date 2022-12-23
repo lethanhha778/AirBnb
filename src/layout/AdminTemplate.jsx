@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Fragment } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import { Outlet, useLocation } from 'react-router-dom';
-import { FileOutlined, UserOutlined} from '@ant-design/icons';
+import { FileOutlined, UserOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
-import { useSelector } from 'react-redux';
-import { ACCESS_TOKEN, USER_INFO } from '../util/setting';
+import { useDispatch, useSelector } from 'react-redux';
+import { USER_INFO } from '../util/setting';
 import Dropdown from 'react-bootstrap/Dropdown';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
@@ -36,8 +36,11 @@ const items = [
         getItem('Thêm bình luận', '/admin/addcomment')]),
 ];
 
+
+
 const AdminTemplate = () => {
     let { user } = useSelector(state => state.AuthReducer);
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [collapsed, setCollapsed] = useState(false);
     const fixchangeMenu = (url) => {
@@ -51,16 +54,26 @@ const AdminTemplate = () => {
     }
     const [current, setCurrent] = useState(fixchangeMenu(useLocation().pathname));
 
+
     useEffect(() => {
-        if (Object.keys(user).length === 0) {
+        const user_data = localStorage.getItem(USER_INFO) || '{}'
+        const user_json = JSON.parse(user_data)
+        if (Object.keys(user_json).length == 0) {
             navigate('/auth/login');
         }
-        else if (user.role !== 'ADMIN') {
-            navigate('/home');
+        else{
+            if (user_json.role !== 'ADMIN') {
+                navigate('/home');
+            }
         }
-    }, [user]);
+    }, []);
 
-    return <Fragment>
+    const handleLogout = () => {
+		dispatch({ type: "LOGOUT" });
+	};
+
+    if(user.role === 'ADMIN'){
+        return <Fragment>
         <Layout style={{ minHeight: '100vh', }}>
             <Sider width='220px' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
                 <div style={{ height: '64px', textAlign: 'center', lineHeight: '64px' }}>
@@ -72,21 +85,20 @@ const AdminTemplate = () => {
                 }} theme="dark" selectedKeys={[current]} mode="inline" items={items} />
             </Sider>
             <Layout className="site-layout">
-                <Header style={{ textAlign: 'right'}}>
+                <Header style={{ textAlign: 'right' }}>
                     <Dropdown>
-                        <Dropdown.Toggle style={{border: 'none',fontSize: '1.2rem', background:'transparent', color:'rgba(255, 255, 255, 0.65)'}} id="dropdown-basic">
-                        {user.name}
+                        <Dropdown.Toggle style={{ border: 'none', fontSize: '1.2rem', background: 'transparent', color: 'rgba(255, 255, 255, 0.65)' }} id="dropdown-basic">
+                            {user.name}
                         </Dropdown.Toggle>
-                        <Dropdown.Menu style={{ lineHeight: '1.5rem',fontSize: '1.2rem'}}>
-                            <Dropdown.Item  onClick={() => { 
+                        <Dropdown.Menu style={{ lineHeight: '1.5rem', fontSize: '1.2rem' }}>
+                            <Dropdown.Item onClick={() => {
                                 navigate(`/admin/edituser/${user.id}`);
                                 setCurrent('/admin/users');
-                             }}>Cập nhập thông tin</Dropdown.Item>
-                            <Dropdown.Item onClick={() => { 
-                                localStorage.removeItem(ACCESS_TOKEN);
-                                localStorage.removeItem(USER_INFO);
+                            }}>Cập nhập thông tin</Dropdown.Item>
+                            <Dropdown.Item onClick={() => {
+                                handleLogout();
                                 navigate('/home');
-                             }}>Đăng xuất</Dropdown.Item>
+                            }}>Đăng xuất</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Header>
@@ -99,6 +111,8 @@ const AdminTemplate = () => {
             </Layout>
         </Layout>
     </Fragment>
+    }
+    
 }
 
 export default AdminTemplate;

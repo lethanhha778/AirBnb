@@ -11,7 +11,7 @@ export default function Users() {
     let dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
-        getListUserAPI()
+        getListUserAPI();
     }, []);
 
     useEffect(() => {
