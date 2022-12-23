@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./style.scss";
 import { Form, Input, Button, Radio, DatePicker, Upload, Avatar } from "antd";
 import dayjs from "dayjs";
-import { useNavigate } from "react-router-dom";
 import { USER_INFO } from "../../util/setting";
 import { useDispatch, useSelector } from "react-redux";
 import { UPLOAD_AVATAR, EDIT_INFO } from "../../redux/actions/AuthAction";
@@ -26,16 +25,6 @@ const Profile = () => {
 
   const userData = useSelector((state) => state.AuthReducer?.user);
   const urlavatar = useSelector((state) => state.AuthReducer?.user?.avatar);
-  const loggedIn = useSelector((state) => state.AuthReducer.loggedIn);
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   if (!loggedIn) {
-  //     navigate("/auth/login");
-  //   }
-  //   // if (requiredLogin && loggedIn) {
-  //   //   navigate("/home");
-  //   // }
-  // }, [loggedIn]);
 
   const [fields, setFields] = useState([
     {
