@@ -5,9 +5,8 @@ import { Outlet, useLocation } from 'react-router-dom';
 import { FileOutlined, UserOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { ACCESS_TOKEN, USER_INFO } from '../util/setting';
+import { USER_INFO } from '../util/setting';
 import Dropdown from 'react-bootstrap/Dropdown';
-import router from "../router";
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
     return {
