@@ -84,7 +84,7 @@ export default createBrowserRouter([
       {
         path: "profile",
         element: <Profile />,
-        requiredLogin: false
+        requiredLogin: true
       }
     ]
   },
