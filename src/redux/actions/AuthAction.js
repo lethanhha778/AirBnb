@@ -15,6 +15,7 @@ export const EDIT_START = () => ({ type: "EDIT_START" })
 export const EDIT_FAILED = (payload) => ({ type: "EDIT_FAILED", payload })
 export const EDIT_SUCCESS = (payload) => ({ type: "EDIT_SUCCESS", payload })
 
+
 export const LOGIN = (payload) => {
   return dispatch => {
     dispatch(LOGIN_START());
@@ -45,7 +46,6 @@ export const UPLOAD_AVATAR = (payload) => {
 };
 
 export const EDIT_INFO = (payload) => {
-  console.log(payload)
   return dispatch => {
     dispatch(EDIT_START());
     AuthService.editProfile(payload)

@@ -13,11 +13,16 @@ class AuthService {
     uploadAvatar = (file) => {
         const formData = new FormData()
         formData.append('formFile', file)
-        return http.post('/api/users/upload-avatar', formData)
+        return http({
+            method: "POST",
+            url: '/api/users/upload-avatar',
+            data: formData,
+            showErr: true
+        })
     }
     editProfile = (infoUserLogin) => {
         const url = `/api/users/${infoUserLogin.id}`
-        const payload = {
+        const data = {
             avatar: infoUserLogin.avatar,
             birthday: infoUserLogin.birthday,
             email: infoUserLogin.email,
@@ -26,7 +31,7 @@ class AuthService {
             phone: infoUserLogin.phone
 
         }
-        return http.put(url, payload);
+        return http({ method: 'PUT', data, url, showErr: true })
     }
 
 
