@@ -56,7 +56,7 @@ const Profile = () => {
     },
     {
       name: ["birthday"],
-      value: dayjs(birthday, "YYYY/MM/DD"),
+      value: dayjs(birthday, "DD/MM/YYYY"),
     },
   ]);
 
@@ -137,7 +137,7 @@ const Profile = () => {
           <Input />
         </Form.Item>
         <Form.Item label="BirthDay" name="birthday">
-          <DatePicker />
+          <DatePicker format='DD/MM/YYYY'/>
         </Form.Item>
 
         <Form.Item label="Upload" valuePropName="fileList">
