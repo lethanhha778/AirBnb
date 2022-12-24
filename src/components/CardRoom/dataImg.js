@@ -82,7 +82,7 @@ export let dataIMG = [
     },
     {
         img1: 'https://a0.muscache.com/im/pictures/ab03c653-d6f7-4d8c-b239-ca718f400fcc.jpg?im_w=1200',
-        img2: 'https://a0.muscache.com/im/pictures/9dee0133-214c-4239-b14f-0d71cd039a81.jpg?im_w=7200',
+        img2: 'https://a0.muscache.com/im/pictures/8e8c055c-982b-4769-8545-850c367cc69e.jpg?im_w=720',
         img3: 'https://a0.muscache.com/im/pictures/bc6d17c4-a872-47ee-ba0d-143d760bf189.jpg?im_w=720',
         img4: 'https://a0.muscache.com/im/pictures/131d0834-758a-41ff-ad53-c960a499b802.jpg?im_w=720',
         img5: 'https://a0.muscache.com/im/pictures/ffca6a82-591f-4227-8467-03220f1dbb46.jpg?im_w=720',
@@ -146,7 +146,7 @@ export let dataIMG = [
     },
     {
         img1: 'https://a0.muscache.com/im/pictures/ab03c653-d6f7-4d8c-b239-ca718f400fcc.jpg?im_w=1200',
-        img2: 'https://a0.muscache.com/im/pictures/9dee0133-214c-4239-b14f-0d71cd039a81.jpg?im_w=7200',
+        img2: 'https://a0.muscache.com/im/pictures/8e8c055c-982b-4769-8545-850c367cc69e.jpg?im_w=720',
         img3: 'https://a0.muscache.com/im/pictures/bc6d17c4-a872-47ee-ba0d-143d760bf189.jpg?im_w=720',
         img4: 'https://a0.muscache.com/im/pictures/131d0834-758a-41ff-ad53-c960a499b802.jpg?im_w=720',
         img5: 'https://a0.muscache.com/im/pictures/ffca6a82-591f-4227-8467-03220f1dbb46.jpg?im_w=720',
