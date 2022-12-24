@@ -24,12 +24,12 @@ http.interceptors.response.use(
         return res;
     },
     (err) => {
-        // err?.response?.data?.content 
-        // && openCustomNotificationWithIcon(
-        //     "error",
-        //     "Register Failed",
-        //     err?.response?.data?.content
-        // );
+        err?.response?.data?.content
+            && openCustomNotificationWithIcon(
+                "error",
+                "Register Failed",
+                err?.response?.data?.content
+            );
 
         return Promise.reject(err);
     }

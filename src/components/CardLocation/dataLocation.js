@@ -41,7 +41,7 @@ export let dataLocation = [
         img2: 'https://static.cand.com.vn/Files/Image/nguyenbinh/2020/12/02/thumb_660_31fd51ee-e30c-4b1c-95fd-1a6322111002.jpg',
         img3: 'https://godidigo.com/blog/wp-content/uploads/2019/06/cau-song-han-da-nang-2-1280x720.jpg',
         img4: 'https://dulichdongque.com/wp-content/uploads/2019/02/bai-bien-my-khe.jpg',
-    
+
         search: "4.960",
     },
     {
@@ -55,7 +55,7 @@ export let dataLocation = [
     {
         img1: 'https://cdn.vntrip.vn/cam-nang/wp-content/uploads/2018/02/anh21.png',
         img2: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTKSZs4zJY3jHUzpCBkVwLvg6GQA5qm3Hn5zA&usqp=CAU',
-        img3: 'https://www.vietfuntravel.com.vn/image/data/Blog/so-tay/hinh-anh-cac-dia-diem-du-lich-mui-ne/hinh-anh-cac-dia-diem-du-lich-mui-ne-1.jpg0',
+        img3: 'https://static.cand.com.vn/Files/Image/nguyenbinh/2020/12/02/thumb_660_31fd51ee-e30c-4b1c-95fd-1a6322111002.jpg',
         img4: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRue-UxaRyF6giY63_z1GjJiQ6qv2rqL0mIqA&usqp=CAU',
         search: "4.237",
     },
