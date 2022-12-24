@@ -144,7 +144,7 @@ export default function DetailRoom() {
     return (
         <div className='container-detail'>
             {renderDetailRoom()}
-            <Row gutter={[32, 16]}>
+            <Row gutter={[32, 32]}>
                 {/* nên đưa col này thành cpn để tránh render lại */}
                 <Col xs={24} md={12} lg={14} xl={16} className='col__left' >
                     <Row>
@@ -194,7 +194,7 @@ export default function DetailRoom() {
                     <div className='icon-room'>
                         <h3>Nơi này có những gì cho bạn</h3>
                         <Row>
-                            <Col span={8}>
+                            <Col xs={12} md={8}>
                                 {detailRoom.banLa ? <div className='icon__room-item'>
                                     <MdIron /> Bàn Là
                                 </div> : ''}
@@ -214,7 +214,7 @@ export default function DetailRoom() {
                                     <FaSwimmingPool /> Hồ Bơi
                                 </div> : ''}
                             </Col>
-                            <Col span={8}>
+                            <Col xs={12} md={8}>
                                 {detailRoom.doXe ? <div className='icon__room-item'>
                                     <BiSwim /> Hồ Bơi
                                 </div> : ''}
@@ -229,7 +229,7 @@ export default function DetailRoom() {
                                 </div> : ''}
 
                             </Col>
-                            <Col span={8}></Col>
+                            <Col xs={0} md={8}></Col>
                         </Row>
                         <CommnetUser maPhong={id} arr={commentMemo} />
                     </div>

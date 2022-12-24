@@ -2,7 +2,7 @@ import React, { memo, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { postComment } from '../../redux/actions/CommentAction'
 import { listUserAction } from '../../redux/actions/UserAction'
-import { Rate, Input, Form, Button } from 'antd';
+import { Rate, Input, Form } from 'antd';
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
 import './style.scss'
@@ -87,7 +87,7 @@ function CommnetUser(props) {
 	}
 	return (
 		<div className='comment-container'>
-			<h5>{arrCommentUser?.length} Đánh Giá</h5>
+			<h3>{arrCommentUser?.length} Đánh Giá</h3>
 			<div className='item-comment'>
 				{renderComment()}
 			</div>
@@ -107,7 +107,7 @@ function CommnetUser(props) {
 					<Form.Item name="noiDung" label="Bình Luận">
 						<Input.TextArea allowClear={true} />
 					</Form.Item>
-					<Form.Item>
+					<Form.Item className='item-btn'>
 						<button type="submit"
 							className='btn-comment'> <span>Bình Luận</span>
 						</button>

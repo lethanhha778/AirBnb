@@ -76,7 +76,7 @@ export default function CardBooking(props) {
         <div className="ticket-pay">
             <h6 className='title-pay'> <span>${detailRoom.giaTien}</span> đêm</h6>
             <div className="input__choose-item">
-                <Space direction="vertical" size={12}>
+                <Space direction="vertical">
                     <RangePicker defaultValue={moment()} disabledDate={disabledDate} onChange={onChange} />
                 </Space>
             </div>
