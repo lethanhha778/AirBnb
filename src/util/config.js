@@ -15,7 +15,6 @@ http.interceptors.request.use(config => {
     }
     return config
 }, (errors) => {
-    debugger
     return Promise.reject(errors)
 })
 
@@ -24,12 +23,12 @@ http.interceptors.response.use(
         return res;
     },
     (err) => {
-        // err?.response?.data?.content
-        //     && openCustomNotificationWithIcon(
-        //         "error",
-        //         "Register Failed",
-        //         err?.response?.data?.content
-        //     );
+        err.config.showErr && err?.response?.data?.content
+            && openCustomNotificationWithIcon(
+                "error",
+                "Register Failed",
+                err?.response?.data?.content
+            );
 
         return Promise.reject(err);
     }

@@ -1,4 +1,6 @@
 import { ACCESS_TOKEN, USER_INFO } from "../../util/setting"
+import { openCustomNotificationWithIcon } from "../../util/func.js";
+
 const initialState = {
   loggedIn: false,
   user: {},
@@ -36,7 +38,30 @@ const reducer = (state = initialState, action) => {
 
     case "EDIT_SUCCESS":
       localStorage.setItem(USER_INFO, JSON.stringify(userInfo))
+      openCustomNotificationWithIcon(
+        "success",
+        "Edit Success",
+        ""
+      );
       return { ...state, user: userInfo }
+
+    case "EDIT_FAILED":
+      openCustomNotificationWithIcon(
+        "error",
+        "Edit Failed",
+        ""
+      );
+
+      return state
+
+    case "UPLOAD_FAILED":
+      openCustomNotificationWithIcon(
+        "error",
+        "Edit Failed",
+        ""
+      );
+
+      return state
 
     case "LOGOUT":
       localStorage.removeItem(USER_INFO)

@@ -25,7 +25,7 @@ const getNotificationStyle = type => {
   }[type]
 }
 
-export const openCustomNotificationWithIcon = (type, title = "title", description = "description", placement = "top") => {
+export const openCustomNotificationWithIcon = (type = 'success', title = "title", description = "description", placement = "top") => {
   notification[type]({
     message: title,
     description,

@@ -14,7 +14,7 @@ export default function Register() {
     try {
       const res = await AuthService.register({
         ...values,
-        birthday: values.birthday.format("YYYY/MM/DD"),
+        birthday: values.birthday.format("DD/MM/YYYY"),
       });
       if (res.status === 200) {
         openCustomNotificationWithIcon(
@@ -77,7 +77,7 @@ export default function Register() {
               <Input placeholder="Phone" />
             </Form.Item>
             <Form.Item name="birthday">
-              <DatePicker placeholder="BirthDay" />
+              <DatePicker placeholder="BirthDay" format='DD/MM/YYYY'/>
             </Form.Item>
             <Form.Item name="gender">
               <Radio.Group>
