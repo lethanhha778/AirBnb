@@ -45,13 +45,16 @@ export const getDetailRoom = (id)=>{
 //admin
 export const listRoomAction = () => {
     return (dispatch2) => {
+        dispatch2(loadingAction);
         let promise = roomService.listRoom();
         promise.then((result) => {
             let action2 = {
                 type: GET_LIST_ROOM_AD,
                 arrRoom: result.data.content,
+                
             }
             dispatch2(action2);
+            dispatch2(hiddenLoadingAction);
         });
         promise.catch((error) => {
             let action2 = {

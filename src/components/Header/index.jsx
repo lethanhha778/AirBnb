@@ -11,7 +11,8 @@ import {
 } from "react-icons/ai";
 import { HiUserCircle, HiOutlineUserCircle } from "react-icons/hi";
 import { ImExit } from "react-icons/im";
-import { FaUserEdit, FaUserCircle } from "react-icons/fa";
+import { FaUserEdit, FaUserCircle, } from "react-icons/fa";
+import {  MdManageAccounts } from "react-icons/md";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getListLocation } from "../../redux/actions/LocationAction";
@@ -230,6 +231,15 @@ export default function Header() {
 													localStorage.getItem(USER_INFO)
 												).name.substr(0, 20)}
 											</NavLink>
+											{JSON.parse(
+													localStorage.getItem(USER_INFO)
+												).role === "ADMIN" ? (<NavLink
+												to="/admin"
+												className="dropdownUser__item admin"
+											>
+												<MdManageAccounts />{" "} Quản lý
+											</NavLink>):(<></>)}
+											
 											<NavLink
 												onClick={() => handleLogout()}
 												className="dropdownUser__item underlined"

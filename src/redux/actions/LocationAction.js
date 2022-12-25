@@ -43,6 +43,7 @@ export const getAllLocation = () => {
 //admin
 export const listLocationAction = () => {
     return (dispatch2) => {
+        dispatch2(loadingAction)
         let promise = locationService.listLocation();
         promise.then((result) => {
             let action2 = {
@@ -50,6 +51,7 @@ export const listLocationAction = () => {
                 arrLocation: result.data.content,
             }
             dispatch2(action2)
+            dispatch2(hiddenLoadingAction)
         });
         promise.catch((error) => {
             let action2 = {
