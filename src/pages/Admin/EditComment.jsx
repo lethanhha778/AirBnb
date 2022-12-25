@@ -15,12 +15,14 @@ export default function EditComment() {
   let dispatch = useDispatch();
   useEffect(() => {
     if (arrComment.length === 0) navigate('/admin/comments');
+    // eslint-disable-next-line
   }, [arrComment.length]);
 
   const [form] = Form.useForm();
 
   useEffect(() => {
     getCommentAPI()
+    // eslint-disable-next-line
   }, [])
 
   useEffect(() => {
@@ -34,12 +36,14 @@ export default function EditComment() {
         saoBinhLuan: comment.saoBinhLuan,
       });
     }
+    // eslint-disable-next-line
   }, [comment]);
 
   useEffect(() => {
     if (arletContent[0] !== '') {
       info()
     }
+    // eslint-disable-next-line
   }, [arletContent])
 
   const formik = useFormik({

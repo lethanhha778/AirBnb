@@ -26,6 +26,7 @@ export default function EditUser() {
   const [form] = Form.useForm();
   useEffect(() => {
     getUserAPI();
+    // eslint-disable-next-line
   }, [id]);
 
   useEffect(() => {
@@ -47,12 +48,14 @@ export default function EditUser() {
       });
       formik.setValues(user);
     }
+    // eslint-disable-next-line
   }, [user]);
 
   useEffect(() => {
     if (arletContent[0] !== '') {
       info();
     }
+    // eslint-disable-next-line
   }, [arletContent]);
 
   const formik = useFormik({

@@ -26,6 +26,7 @@ export default function EditLocation() {
 
   useEffect(() => {
     getLocationAPI();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -39,12 +40,14 @@ export default function EditLocation() {
       form.setFieldsValue(location);
       formik.setValues(location);
     }
+    // eslint-disable-next-line
   }, [location]);
 
   useEffect(() => {
     if (arletContent[0] !== '') {
-      info()
+      info();
     }
+    // eslint-disable-next-line
   }, [arletContent])
 
   const dummyRequest = ({ file, onSuccess }) => {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { listLocationAction, removeLocationAction, setAlertLocationAction } from '../../redux/actions/LocationAction';
@@ -6,18 +6,29 @@ import { EditFilled , DeleteFilled } from '@ant-design/icons';
 import { Button, Table, Modal } from 'antd';
 
 export default function Location() {
-    const navigate = useNavigate();
-    let { arrLocation, arletContent } = useSelector(state => state.locationAdminReducer);
+    const [tableParams, setTableParams] = useState({
+        pagination: {
+            current: 1,
+            pageSize: 10,
+        },
+    });
+    
+    let { pagLocation, arletContent } = useSelector(state => state.locationAdminReducer);
     let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
+    const navigate = useNavigate();
+
     useEffect(() => {
         getListLocationAPI();
-    }, []);
+        // eslint-disable-next-line
+    }, [JSON.stringify(tableParams)]);
 
     useEffect(() => {
         if (arletContent[0] !== '') {
-            info()
+            getListLocationAPI();
+            info();
         }
+        // eslint-disable-next-line
     }, [arletContent]);
 
     const columns = [
@@ -28,7 +39,7 @@ export default function Location() {
         },
         {
             title: 'Vị trí',
-            dataIndex: 'tenViTri',
+            dataIndex: 'tenViTri', 
         },
         {
             title: 'Tỉnh thành',
@@ -59,7 +70,16 @@ export default function Location() {
         },
     ];
 
-
+    const handleTableChange = (pagination, sorter) => {
+        setTableParams({
+            pagination,
+            ...sorter,
+        });
+        // `dataSource` is useless since `pageSize` changed
+        if (pagination.pageSize !== tableParams.pagination?.pageSize) {
+            pagLocation.data = [];
+        }
+    };
 
     let info = () => {
         Modal.info({
@@ -77,16 +97,24 @@ export default function Location() {
     }
 
     let getListLocationAPI = () => {
-        let action = listLocationAction();
+        let { current, pageSize } = tableParams.pagination;
+        let action = listLocationAction(current, pageSize);
         dispatch(action);
     }
+
     return (
         <div style={{ padding: '15px' }}>
             <h2 >Quản lý vị trí</h2>
-            <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
+            <Button  type="primary" style={{ marginBottom: '20px' }} onClick={() => {
                 navigate('/admin/addlocation');
             }}>Thêm vị trí</Button>
-            <Table rowKey='id' columns={columns} dataSource={arrLocation} loading={tableLoading}/>
+            <Table rowKey='id' columns={columns} dataSource={pagLocation.data} 
+            pagination={{
+                current: pagLocation.pageIndex,
+                pageSize: pagLocation.pageSize, 
+                total: pagLocation.totalRow,
+            }} 
+            loading={tableLoading} onChange={handleTableChange}/>
         </div>
     )
 }

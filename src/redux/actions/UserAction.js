@@ -1,17 +1,37 @@
 import userService from "../../service/UserService";
-import { ADD_USER, DEL_USER, GET_DETAIL_USER, GET_LIST_USER, GET_SEARCH_USER, SET_ALERT, UPDATE_USER, UP_IMAGE_USER } from "../type/UserType";
+import { ADD_USER, DEL_USER, GET_DETAIL_USER, GET_LIST_PAGE_USER, GET_LIST_USER, GET_SEARCH_USER, SET_ALERT, UPDATE_USER, UP_IMAGE_USER } from "../type/UserType";
 import { hiddenloadingTableAction, loadingTableAction } from "./LoadingAction";
 
 
 //admin
 export const listUserAction = () => {
     return (dispatch2) => {
-        dispatch2(loadingTableAction);
         let promise = userService.listUser();
         promise.then((result) => {
             let action2 = {
                 type: GET_LIST_USER,
                 arrUser: result.data.content,
+            }
+            dispatch2(action2);
+        });
+        promise.catch((error) => {
+            let action2 = {
+                type: SET_ALERT,
+                arletContent: [error.response?.data.content, error.response?.data.statusCode],
+            }
+            dispatch2(action2);
+        });
+    }
+}
+
+export const listUserPageAction = (pageIndex, pageSize) => {
+    return (dispatch2) => {
+        dispatch2(loadingTableAction);
+        let promise = userService.listPageUser(pageIndex, pageSize);
+        promise.then((result) => {
+            let action2 = {
+                type: GET_LIST_PAGE_USER,
+                pagUser: result.data.content,
             }
             dispatch2(action2);
             dispatch2(hiddenloadingTableAction);
@@ -109,13 +129,14 @@ export const updateUserAction = (user = {}, id = '') => {
     }
 }
 
-export const searchUserAction = (name = '') => {
+export const searchUserAction = (name = '', pagination) => {
     return (dispatch2) => {
         let promise = userService.searchUser(name);
         promise.then((result) => {
             let action2 = {
                 type: GET_SEARCH_USER,
-                arrUser: result.data.content,
+                searchUser: result.data.content,
+                pagination: pagination,
             }
             dispatch2(action2);
         })

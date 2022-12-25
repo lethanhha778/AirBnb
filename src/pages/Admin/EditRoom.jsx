@@ -26,6 +26,7 @@ export default function EditLocation() {
 
     useEffect(() => {
         getRoomAPI();
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
@@ -39,12 +40,14 @@ export default function EditLocation() {
             form.setFieldsValue(room);
             formik.setValues(room);
         }
+        // eslint-disable-next-line
     }, [room]);
 
     useEffect(() => {
         if (arletContent[0] !== '') {
             info()
         }
+        // eslint-disable-next-line
     }, [arletContent])
 
     const dummyRequest = ({ file, onSuccess }) => {

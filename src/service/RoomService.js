@@ -11,8 +11,12 @@ class RoomService {
     }
 
     //admin
-    listRoom = () => {
-        return http.get(`/api/phong-thue`)
+    // listRoom = () => {
+    //     return http.get(`/api/phong-thue`)
+    // }
+
+    listRoom = (index, size) => {
+        return http.get(`api/phong-thue/phan-trang-tim-kiem?pageIndex=${index}&pageSize=${size}`)
     }
 
     detailRoom = (id)=>{
