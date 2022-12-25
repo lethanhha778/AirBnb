@@ -13,8 +13,8 @@ class LocationService {
     }
 
     //admin
-    listLocation = () => {
-        return http.get(`/api/vi-tri`)
+    listLocation = (index, size) => {
+        return http.get(`api/vi-tri/phan-trang-tim-kiem?pageIndex=${index}&pageSize=${size}`)
     }
 
     detailLocation = (id)=>{

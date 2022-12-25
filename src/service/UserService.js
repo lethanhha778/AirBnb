@@ -20,6 +20,10 @@ class UserService {
         return http.get(`/api/users`);
     }
 
+    listPageUser = (index, size) => {
+        return http.get(`api/users/phan-trang-tim-kiem?pageIndex=${index}&pageSize=${size}`);
+    }
+
     detailUser = (id) => {
         return http.get(`/api/users/${id}`);
     }

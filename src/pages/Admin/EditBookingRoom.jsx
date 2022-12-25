@@ -15,7 +15,8 @@ export default function EditBookingRoom() {
     const [form] = Form.useForm();
 
     useEffect(() => {
-        getBookingAPI()
+        getBookingAPI();
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
@@ -29,12 +30,14 @@ export default function EditBookingRoom() {
                 maNguoiDung: booking.maNguoiDung,
             });
         }
+        // eslint-disable-next-line
     }, [booking]);
 
     useEffect(() => {
         if (arletContent[0] !== '') {
             info()
         }
+        // eslint-disable-next-line
     }, [arletContent])
 
     const formik = useFormik({

@@ -11,13 +11,15 @@ export default function Comments() {
     let dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
-      getListCommentAPI()
+      getListCommentAPI();
+      // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         if (arletContent[0] !== '') {
-            info()
+            info();
         }
+        // eslint-disable-next-line
     }, [arletContent]);
 
     const columns = [
@@ -83,7 +85,7 @@ export default function Comments() {
     return (
         <div style={{ padding: '15px' }}>
             <h2 >Quản lý bình luận</h2>
-            <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
+            <Button  type="primary" style={{ marginBottom: '20px' }} onClick={() => {
                 navigate('/admin/addcomment');
             }}>Thêm bình luận</Button>
             <Table rowKey='id' columns={columns} dataSource={arrComment} loading={tableLoading}/>

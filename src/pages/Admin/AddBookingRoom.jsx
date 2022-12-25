@@ -17,6 +17,7 @@ export default function AddBookingRoom() {
         if (arletContent[0] !== '') {
             info()
         }
+        // eslint-disable-next-line
     }, [arletContent]);
 
     const formik = useFormik({
@@ -68,7 +69,7 @@ export default function AddBookingRoom() {
 
     return (
         <div style={{ padding: '15px' }}>
-            <h2>Đặt phòng</h2>
+            <h2 >Đặt phòng</h2>
             <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} layout="horizontal" onFinish={formik.handleSubmit}
                 initialValues={formik.values}>
                 <Form.Item label="Mã phòng" name="maPhong" validateStatus="error" help={formik.touched.maPhong && formik.errors.maPhong ? (formik.errors.maPhong) : null}>

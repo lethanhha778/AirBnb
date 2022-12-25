@@ -66,6 +66,7 @@ const AdminTemplate = () => {
                 navigate('/home');
             }
         }
+        // eslint-disable-next-line
     }, []);
 
     const handleLogout = () => {
@@ -87,7 +88,7 @@ const AdminTemplate = () => {
             <Layout className="site-layout">
                 <Header style={{ textAlign: 'right' }}>
                     <Dropdown>
-                        <Dropdown.Toggle style={{ border: 'none', fontSize: '1.2rem', background: 'transparent', color: 'rgba(255, 255, 255, 0.65)' }} id="dropdown-basic">
+                        <Dropdown.Toggle id="dropdown-info">
                             {user.name}
                         </Dropdown.Toggle>
                         <Dropdown.Menu style={{ lineHeight: '1.5rem', fontSize: '1.2rem' }}>

@@ -41,14 +41,14 @@ export const getAllLocation = () => {
 }
 
 //admin
-export const listLocationAction = () => {
+export const listLocationAction = (pageIndex, pageSize) => {
     return (dispatch2) => {
         dispatch2(loadingTableAction);
-        let promise = locationService.listLocation();
+        let promise = locationService.listLocation(pageIndex, pageSize);
         promise.then((result) => {
             let action2 = {
                 type: GET_LIST_LOCATION_AD,
-                arrLocation: result.data.content,
+                pagLocation: result.data.content,
             }
             dispatch2(action2)
             dispatch2(hiddenloadingTableAction);
@@ -90,7 +90,7 @@ export const removeLocationAction = (id = '') => {
             let action2 = {
                 type: DEL_LOCATION,
                 arletContent: [result.data.message, 201],
-                locationId: id
+                locationId: id,
             }
             dispatch2(action2);
         })
@@ -110,8 +110,8 @@ export const addLocationAction = (location = {}) => {
         promise.then((result) => {
             let action2 = {
                 type: ADD_LOCATION,
-                arletContent: ["Thêm vị trí thành công", 200],
                 addLocation: result.data.content,
+                arletContent: ["Thêm vị trí thành công", 200],
             }
             dispatch2(action2);
         })
@@ -131,8 +131,8 @@ export const updateLocationAction = (location = {}, id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: UPDATE_LOCATION,
-                arletContent: ["Cập nhập vị trí thành công", 200],
                 updateLocation: result.data.content,
+                arletContent: ["Cập nhập vị trí thành công", 200],
             }
             dispatch2(action2);
         })
@@ -152,8 +152,8 @@ export const upImageLocationAction = (file = [], id = '') => {
         promise.then((result) => {
             let action2 = {
                 type: UP_IMAGE_LOCATION,
-                arletContent: ["Cập nhập hình ảnh thành công", 201],
                 upImageLocation: result.data.content,
+                arletContent: ["Cập nhập hình ảnh thành công", 201],
             }
             dispatch2(action2);
         })

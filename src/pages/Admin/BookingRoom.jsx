@@ -12,12 +12,14 @@ export default function BookingRoom() {
     const navigate = useNavigate();
     useEffect(() => {
         getListBookingAPI();
+        // eslint-disable-next-line
     }, []);
 
     useEffect(() => {
         if (arletContent[0] !== '') {
-            info()
+            info();
         }
+        // eslint-disable-next-line
     }, [arletContent]);
 
     const columns = [
@@ -62,7 +64,6 @@ export default function BookingRoom() {
     ];
 
 
-
     let info = () => {
         Modal.info({
             title: 'Thông báo',
@@ -85,7 +86,7 @@ export default function BookingRoom() {
     return (
         <div style={{ padding: '15px' }}>
             <h2 >Quản lý đặt phòng</h2>
-            <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
+            <Button  type="primary" style={{ marginBottom: '20px' }} onClick={() => {
                 navigate('/admin/addbookingroom');
             }}>Đặt phòng</Button>
             <Table rowKey='id' columns={columns} dataSource={arrBooking} loading={tableLoading}/>

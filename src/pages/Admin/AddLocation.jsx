@@ -15,6 +15,7 @@ export default function AddLocation() {
         if (arletContent[0] !== '') {
             info()
         }
+        // eslint-disable-next-line
     }, [arletContent]);
 
     const formik = useFormik({
@@ -30,7 +31,6 @@ export default function AddLocation() {
             quocGia: Yup.string().required("Quốc gia không được để trống"),
         }),
         onSubmit: values => {
-            console.log(values);
             let action = addLocationAction(values);
             dispatch(action);
         },
@@ -56,7 +56,7 @@ export default function AddLocation() {
 
     return (
         <div style={{ padding: '15px' }}>
-            <h2>Thêm vị trí</h2>
+            <h2 >Thêm vị trí</h2>
             <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} layout="horizontal" onFinish={formik.handleSubmit}
                 initialValues={formik.values}>
                 <Form.Item label="Vị trí" name="tenViTri" validateStatus="error" help={formik.touched.tenViTri && formik.errors.tenViTri ? (formik.errors.tenViTri) : null}>

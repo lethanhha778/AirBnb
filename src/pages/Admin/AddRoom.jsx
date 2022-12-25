@@ -17,6 +17,7 @@ export default function AddLocation() {
         if (arletContent[0] !== '') {
             info()
         }
+        // eslint-disable-next-line
     }, [arletContent]);
 
     const formik = useFormik({
@@ -57,7 +58,6 @@ export default function AddLocation() {
                 }),
         }),
         onSubmit: values => {
-            console.log(values);
             let action = addRoomAction(values);
             dispatch(action);
         },
@@ -83,7 +83,7 @@ export default function AddLocation() {
 
     return (
         <div style={{ padding: '15px' }}>
-            <h2>Thêm Phòng</h2>
+            <h2 >Thêm Phòng</h2>
             <Form layout="horizontal" onFinish={formik.handleSubmit}
                 initialValues={formik.values}>
                 <div style={{ padding: '0 3rem' }}>

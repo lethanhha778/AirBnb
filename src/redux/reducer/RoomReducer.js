@@ -5,6 +5,7 @@ const initialState = {
     arrRoom: [],
     detailRoom: {},
     room: {},
+    pagRoom: {},
     arletContent: ['', 0],
 
 }
@@ -25,8 +26,12 @@ export const RoomReducer = (state = initialState, action) => {
 export const roomAdminReducer = (state = initialState, action) => {
     switch (action.type) {
         //admin
+        // case GET_LIST_ROOM_AD:
+        //     state.arrRoom = action.arrRoom;
+        //     return { ...state }
+
         case GET_LIST_ROOM_AD:
-            state.arrRoom = action.arrRoom;
+            state.pagRoom = action.pagRoom;
             return { ...state }
 
         case GET_DETAIL_ROOM_AD:
@@ -34,29 +39,26 @@ export const roomAdminReducer = (state = initialState, action) => {
             return { ...state }
 
         case DEL_ROOM:
-            state.arrRoom = state.arrRoom.filter(item => item.id !== action.roomId)
             state.arletContent = action.arletContent;
             return { ...state }
 
         case ADD_ROOM:
-            state.arrRoom = [...state.arrRoom, action.addRoom];
             state.arletContent = action.arletContent;
-
             return { ...state }
 
         case UPDATE_ROOM:
-            let indexInfo = state.arrRoom.findIndex((room) => room.id === action.updateRoom.id)
+            let indexInfo = state.pagRoom.data.findIndex((room) => room.id === action.updateRoom.id)
             if (indexInfo > -1) {
-                state.arrRoom[indexInfo] = action.updateRoom
+                state.pagRoom.data[indexInfo] = action.updateRoom
             }
             state.room = action.updateRoom;
             state.arletContent = action.arletContent;
             return { ...state }
 
         case UP_IMAGE_ROOM:
-            let indexImage = state.arrRoom.findIndex((room) => room.id === action.upImageRoom.id)
+            let indexImage = state.pagRoom.data.findIndex((room) => room.id === action.upImageRoom.id)
             if (indexImage > -1) {
-                state.arrRoom[indexImage] = action.upImageRoom;
+                state.pagRoom.data[indexImage] = action.upImageRoom;
             }
             state.room = action.upImageRoom;
             state.arletContent = action.arletContent;

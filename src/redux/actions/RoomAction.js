@@ -43,14 +43,37 @@ export const getDetailRoom = (id)=>{
 }
 
 //admin
-export const listRoomAction = () => {
+// export const listRoomAction = () => {
+//     return (dispatch2) => {
+//         dispatch2(loadingTableAction);
+//         let promise = roomService.listRoom();
+//         promise.then((result) => {
+//             let action2 = {
+//                 type: GET_LIST_ROOM_AD,
+//                 arrRoom: result.data.content,
+                
+//             }
+//             dispatch2(action2);
+//             dispatch2(hiddenloadingTableAction);
+//         });
+//         promise.catch((error) => {
+//             let action2 = {
+//                 type: SET_ALERT,
+//                 arletContent: [error.response?.data.content, error.response?.data.statusCode],
+//             }
+//             dispatch2(action2);
+//         });
+//     }
+// }
+
+export const listRoomAction = (pageIndex, pageSize) => {
     return (dispatch2) => {
         dispatch2(loadingTableAction);
-        let promise = roomService.listRoom();
+        let promise = roomService.listRoom(pageIndex, pageSize);
         promise.then((result) => {
             let action2 = {
                 type: GET_LIST_ROOM_AD,
-                arrRoom: result.data.content,
+                pagRoom: result.data.content,
                 
             }
             dispatch2(action2);
@@ -59,7 +82,7 @@ export const listRoomAction = () => {
         promise.catch((error) => {
             let action2 = {
                 type: SET_ALERT,
-                arletContent: [error.response?.data.content, error.response?.data.statusCode],
+                arletContent: [error.response?.data.content !== '' ? error.response?.data.content : error.response?.message, error.response?.data.statusCode],
             }
             dispatch2(action2);
         });
@@ -111,7 +134,6 @@ export const addRoomAction = (room = {}) => {
     return (dispatch2) => {
         let promise = roomService.addRoom(room);
         promise.then((result) => {
-            console.log(result)
             let action2 = {
                 type: ADD_ROOM,
                 addRoom: result.data.content,

@@ -1,0 +1,16 @@
+.site-layout h2{
+    margin-bottom: 20px;
+}
+
+
+/* dropdown info */
+#dropdown-info{
+    border: none;
+    font-size: 1.2rem;
+    background: transparent;
+    color: #ffffffa6;
+}
+
+#dropdown-info:hover{
+    color: white;
+}

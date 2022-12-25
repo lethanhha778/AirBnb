@@ -17,6 +17,7 @@ export default function AddUser() {
         if (arletContent[0] !== '') {
             info()
         }
+        // eslint-disable-next-line
     }, [arletContent]);
 
     const formik = useFormik({
@@ -68,7 +69,7 @@ export default function AddUser() {
 
     return (
         <div style={{ padding: '15px' }}>
-            <h2>Thêm người dùng</h2>
+            <h2 >Thêm người dùng</h2>
             <Form labelCol={{ span: 4 }} wrapperCol={{ span: 14 }} layout="horizontal" onFinish={formik.handleSubmit}
                 initialValues={formik.values}>
                 <Form.Item label="Tên" name="name" validateStatus="error" help={formik.touched.name && formik.errors.name ? (formik.errors.name) : null}>
