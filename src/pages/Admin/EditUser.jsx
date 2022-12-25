@@ -51,7 +51,7 @@ export default function EditUser() {
 
   useEffect(() => {
     if (arletContent[0] !== '') {
-      info()
+      info();
     }
   }, [arletContent]);
 

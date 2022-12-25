@@ -6,5 +6,5 @@ export const DEL_USER = "DEL_USER";
 export const ADD_USER = "ADD_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const GET_SEARCH_USER = "GET_SEARCH_USER";
-export const UP_IMAGE_USER = "UP_IMAGE_LOCATION";
+export const UP_IMAGE_USER = "UP_IMAGE_USER";
 export const SET_ALERT = "SET_ALERT";

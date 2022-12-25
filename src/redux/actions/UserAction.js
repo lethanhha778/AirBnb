@@ -133,8 +133,8 @@ export const upImageUserAction = (file = []) => {
         promise.then((result) => {
             let action2 = {
                 type: UP_IMAGE_USER,
-                arletContent: ["Cập nhập hình ảnh thành công", 201],
                 upImageUser: result.data.content,
+                arletContent: ["Cập nhập hình ảnh thành công", 201],
             }
             dispatch2(action2);
         })
