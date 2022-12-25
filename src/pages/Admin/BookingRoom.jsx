@@ -7,6 +7,7 @@ import { listBookingAction, removeBookingAction, setAlertBookingAction } from '.
 
 export default function BookingRoom() {
     let { arrBooking, arletContent } = useSelector(state => state.bookingAdminReducer);
+    let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
@@ -87,7 +88,7 @@ export default function BookingRoom() {
             <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
                 navigate('/admin/addbookingroom');
             }}>Đặt phòng</Button>
-            <Table rowKey='id' columns={columns} dataSource={arrBooking} />
+            <Table rowKey='id' columns={columns} dataSource={arrBooking} loading={tableLoading}/>
         </div>
     )
 }

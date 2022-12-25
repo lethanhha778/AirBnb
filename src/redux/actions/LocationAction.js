@@ -1,6 +1,6 @@
 import locationService from "../../service/LocationService"
 import { GET_ALL_LOCATION, GET_LIST_LOCATION } from "../type/LocationType"
-import { hiddenLoadingAction, loadingAction } from "./LoadingAction"
+import { hiddenLoadingAction, hiddenloadingTableAction, loadingAction, loadingTableAction } from "./LoadingAction"
 import { ADD_LOCATION, DEL_LOCATION, GET_DETAIL_LOCATION_AD, GET_LIST_LOCATION_AD, SET_ALERT, UPDATE_LOCATION, UP_IMAGE_LOCATION } from "../type/LocationType";
 
 // lấy ds vị trí ô search
@@ -43,7 +43,7 @@ export const getAllLocation = () => {
 //admin
 export const listLocationAction = () => {
     return (dispatch2) => {
-        dispatch2(loadingAction)
+        dispatch2(loadingTableAction);
         let promise = locationService.listLocation();
         promise.then((result) => {
             let action2 = {
@@ -51,7 +51,7 @@ export const listLocationAction = () => {
                 arrLocation: result.data.content,
             }
             dispatch2(action2)
-            dispatch2(hiddenLoadingAction)
+            dispatch2(hiddenloadingTableAction);
         });
         promise.catch((error) => {
             let action2 = {

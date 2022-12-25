@@ -7,6 +7,7 @@ import { listCommentAction, removeCommentAction, setAlertCommentAction } from '.
 
 export default function Comments() {
     let { arrComment, arletContent } = useSelector(state => state.commentAdminReducer);
+    let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
@@ -85,7 +86,7 @@ export default function Comments() {
             <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
                 navigate('/admin/addcomment');
             }}>Thêm bình luận</Button>
-            <Table rowKey='id' columns={columns} dataSource={arrComment} />
+            <Table rowKey='id' columns={columns} dataSource={arrComment} loading={tableLoading}/>
         </div>
     )
 }

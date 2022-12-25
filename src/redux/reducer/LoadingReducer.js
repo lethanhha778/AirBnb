@@ -1,9 +1,10 @@
-import { DISPLAY_LOADING, HIDDEN_LOADING } from "../type/LoadingType"
+import { DISPLAY_LOADING, HIDDEN_LOADING, TABLE_DISPLAY_LOADING, TABLE_HIDDEN_LOADING } from "../type/LoadingType"
 
 
 
 const stateDefault = {
-  isLoading: false
+  isLoading: false,
+  tableLoading: false,
 }
 
 const LoadingReducer = (state = stateDefault, action) => {
@@ -14,6 +15,14 @@ const LoadingReducer = (state = stateDefault, action) => {
     }
     case HIDDEN_LOADING: {
       state.isLoading = false
+      return { ...state }
+    }
+    case TABLE_DISPLAY_LOADING: {
+      state.tableLoading = true
+      return { ...state }
+    }
+    case TABLE_HIDDEN_LOADING: {
+      state.tableLoading = false
       return { ...state }
     }
     default: return { ...state }

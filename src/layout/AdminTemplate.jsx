@@ -58,7 +58,7 @@ const AdminTemplate = () => {
     useEffect(() => {
         const user_data = localStorage.getItem(USER_INFO) || '{}'
         const user_json = JSON.parse(user_data)
-        if (Object.keys(user_json).length == 0) {
+        if (Object.keys(user_json).length === 0) {
             navigate('/auth/login');
         }
         else{

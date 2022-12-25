@@ -1,10 +1,12 @@
 import userService from "../../service/UserService";
 import { ADD_USER, DEL_USER, GET_DETAIL_USER, GET_LIST_USER, GET_SEARCH_USER, SET_ALERT, UPDATE_USER, UP_IMAGE_USER } from "../type/UserType";
+import { hiddenloadingTableAction, loadingTableAction } from "./LoadingAction";
 
 
 //admin
 export const listUserAction = () => {
     return (dispatch2) => {
+        dispatch2(loadingTableAction);
         let promise = userService.listUser();
         promise.then((result) => {
             let action2 = {
@@ -12,6 +14,7 @@ export const listUserAction = () => {
                 arrUser: result.data.content,
             }
             dispatch2(action2);
+            dispatch2(hiddenloadingTableAction);
         });
         promise.catch((error) => {
             let action2 = {

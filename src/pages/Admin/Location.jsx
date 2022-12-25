@@ -8,6 +8,7 @@ import { Button, Table, Modal } from 'antd';
 export default function Location() {
     const navigate = useNavigate();
     let { arrLocation, arletContent } = useSelector(state => state.locationAdminReducer);
+    let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
     useEffect(() => {
         getListLocationAPI();
@@ -85,7 +86,7 @@ export default function Location() {
             <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
                 navigate('/admin/addlocation');
             }}>Thêm vị trí</Button>
-            <Table rowKey='id' columns={columns} dataSource={arrLocation} />
+            <Table rowKey='id' columns={columns} dataSource={arrLocation} loading={tableLoading}/>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import { GET_ALL_ROOM, BOOKING_ROOM } from "../type/BookingRoomType";
-import { hiddenLoadingAction, loadingAction } from "./LoadingAction";
+import { hiddenLoadingAction, hiddenloadingTableAction, loadingAction, loadingTableAction } from "./LoadingAction";
 import bookingRoomService from "../../service/BookingRoomService";
 import { ADD_BOOKING, DEL_BOOKING, GET_DETAIL_BOOKING_AD, GET_LIST_BOOKING_AD, SET_ALERT, UPDATE_BOOKING } from "../type/BookingRoomType";
 
@@ -44,13 +44,15 @@ export const bookingRoomAction = (info) => {
 //admin
 export const listBookingAction = () => {
     return (dispatch2) => {
+        dispatch2(loadingTableAction);
         let promise = bookingRoomService.listBooking();
         promise.then((result) => {
             let action2 = {
                 type: GET_LIST_BOOKING_AD,
                 arrBooking: result.data.content,
             }
-            dispatch2(action2)
+            dispatch2(action2);
+            dispatch2(hiddenloadingTableAction);
         });
         promise.catch((error) => {
             let action2 = {

@@ -1,5 +1,5 @@
 import { GET_DETAIL_ROOM, GET_LIST_ROOM } from "../type/RoomType";
-import { hiddenLoadingAction, loadingAction } from "./LoadingAction";
+import { hiddenLoadingAction, hiddenloadingTableAction, loadingAction, loadingTableAction } from "./LoadingAction";
 import roomService from "../../service/RoomService";
 import { ADD_ROOM, DEL_ROOM, GET_DETAIL_ROOM_AD, GET_LIST_ROOM_AD, SET_ALERT, UPDATE_ROOM, UP_IMAGE_ROOM } from "../type/RoomType";
 
@@ -45,7 +45,7 @@ export const getDetailRoom = (id)=>{
 //admin
 export const listRoomAction = () => {
     return (dispatch2) => {
-        dispatch2(loadingAction);
+        dispatch2(loadingTableAction);
         let promise = roomService.listRoom();
         promise.then((result) => {
             let action2 = {
@@ -54,7 +54,7 @@ export const listRoomAction = () => {
                 
             }
             dispatch2(action2);
-            dispatch2(hiddenLoadingAction);
+            dispatch2(hiddenloadingTableAction);
         });
         promise.catch((error) => {
             let action2 = {

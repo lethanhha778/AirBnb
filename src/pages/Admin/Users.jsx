@@ -8,6 +8,7 @@ import { Form, Input, Button, Table, Modal } from 'antd';
 
 export default function Users() {
     let { arrUser, arletContent } = useSelector(state => state.userAdminReducer);
+    let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
@@ -120,7 +121,7 @@ export default function Users() {
                 </Form.Item>
 
             </Form>
-            <Table rowKey='id' columns={columns} dataSource={arrUser} />
+            <Table rowKey='id' columns={columns} dataSource={arrUser} loading={tableLoading}/>
         </div>
     )
 }

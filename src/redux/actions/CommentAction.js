@@ -1,7 +1,7 @@
 import commentServices from "../../service/CommentService";
 import { ADD_COMMENT, DEL_COMMENT, GET_DETAIL_COMMENT_AD, GET_LIST_COMMENT_AD, SET_ALERT, UPDATE_COMMENT } from "../type/CommentType";
 import { GET_ALL_COMMENT, POST_COMMENT } from "../type/CommentType"
-import { hiddenLoadingAction, loadingAction } from "./LoadingAction"
+import { hiddenLoadingAction, hiddenloadingTableAction, loadingAction, loadingTableAction } from "./LoadingAction"
 
 
 export const postComment = (contentComment) => {
@@ -41,13 +41,15 @@ export const getComment = () => {
 //admin
 export const listCommentAction = () => {
     return (dispatch2) => {
+        dispatch2(loadingTableAction);
         let promise = commentServices.listComment();
         promise.then((result) => {
             let action2 = {
                 type: GET_LIST_COMMENT_AD,
                 arrComment: result.data.content,
             }
-            dispatch2(action2)
+            dispatch2(action2);
+            dispatch2(hiddenloadingTableAction);
         });
         promise.catch((error) => {
             let action2 = {

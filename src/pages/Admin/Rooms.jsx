@@ -7,6 +7,7 @@ import { listRoomAction, removeRoomAction, setAlertRoomAction } from '../../redu
 
 export default function Location() {
     let { arrRoom, arletContent } = useSelector(state => state.roomAdminReducer);
+    let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {
@@ -85,7 +86,7 @@ export default function Location() {
             <Button  type="primary" style={{ marginBottom: '10px' }} onClick={() => {
                 navigate('/admin/addroom');
             }}>Thêm phòng</Button>
-            <Table rowKey='id' columns={columns} dataSource={arrRoom} />
+            <Table rowKey='id' columns={columns} dataSource={arrRoom} loading={tableLoading}/>
         </div>
     )
 }
