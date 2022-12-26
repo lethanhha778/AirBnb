@@ -14,21 +14,15 @@ const App = () => {
   }, []);
   const dispatch = useDispatch();
   const { navigate } = router
-
   useEffect(() => {
     dispatch(CHECK_LOGIN())
   }, [dispatch])
   const loggedIn = useSelector((state) => state.AuthReducer.loggedIn);
-
   useEffect(() => {
     const requiredLogin = router?.state?.matches.some(el => el.route.requiredLogin)
-    console.log(requiredLogin)
     if (requiredLogin && !loggedIn) {
       navigate("/auth/login");
     }
-    // if (requiredLogin && loggedIn) {
-    //   navigate("/home");
-    // }
   }, [loggedIn, navigate]);
 
   return (

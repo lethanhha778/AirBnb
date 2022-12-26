@@ -22,10 +22,8 @@ export const roomList = () => {
 }
 export const bookingRoomAction = (info) => {
     return (dispatch) => {
-        console.log(info);
         let promise = bookingRoomService.postBookingRoom(info)
         promise.then((res) => {
-            console.log(res.data);
             const action = {
                 type: BOOKING_ROOM,
                 infoBooking: {

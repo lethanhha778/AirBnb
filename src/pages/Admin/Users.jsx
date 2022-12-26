@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { listUserPageAction, removeUserAction, searchUserAction, setAlertUserAction } from '../../redux/actions/UserAction'
 import { EditFilled, DeleteFilled } from '@ant-design/icons';
 import { Form, Input, Button, Table, Modal } from 'antd';
-import './style.css';
+import './style.scss';
 
 export default function Users() {
     const [searchName, setSearchName] = useState('');

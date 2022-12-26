@@ -5,34 +5,29 @@ import { listUserAction } from '../../redux/actions/UserAction'
 import { Rate, Input, Form } from 'antd';
 import { AiFillStar } from "react-icons/ai";
 import { useNavigate } from 'react-router-dom';
-import './style.scss'
 import { openCustomNotificationWithIcon } from '../../util/func';
-
+import './style.scss'
 
 function CommnetUser(props) {
 	const navigate = useNavigate()
 	const { loggedIn } = useSelector((state) => state.AuthReducer);
 	const { arrUser } = useSelector(state => state.userAdminReducer)
 	const dispatch = useDispatch()
-
 	useEffect(() => {
 		dispatch(listUserAction())
 	}, [dispatch])
-
 	const [form] = Form.useForm();
 	const user = (JSON.parse(localStorage.getItem('USER_INFO')))
 	const arrCMFilter = []
 	const maPhong = Number(props.maPhong)
 	const arrComment = props.arr
 	let arrCommentUser = []
-
 	// duyệt lấy cmt của phòng từ data all comment
 	for (let i = 0; i < arrComment?.length; i++) {
 		if (arrComment[i].maPhong === maPhong) {
 			arrCMFilter.push(arrComment[i])
 		}
 	}
-
 	// lọc ra comment có user còn tồn tại để render
 	for (let i = 0; i < arrUser?.length; i++) {
 		for (let j = 0; j < arrCMFilter?.length; j++) {
@@ -45,7 +40,6 @@ function CommnetUser(props) {
 	const current = new Date();
 	const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
 	const onFinish = (values) => {
-
 		if (!loggedIn) {
 			navigate("/auth/login")
 		}
@@ -79,7 +73,7 @@ function CommnetUser(props) {
 						<h6>{comment.title.ngayBinhLuan}</h6>
 					</div>
 				</div>
-				<h5>
+				<h5 className='content'>
 					{comment.title.noiDung}
 				</h5>
 			</div >

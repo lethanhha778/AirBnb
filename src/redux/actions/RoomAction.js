@@ -9,7 +9,6 @@ export const getAllRoom = (id) => {
         dispatch(loadingAction)
         let promise = roomService.getRoomList(id)
         promise.then((res) => {
-            console.log(res.data.content)
             const action = {
                 type: GET_LIST_ROOM,
                 arrRoom: res.data.content
@@ -28,7 +27,6 @@ export const getDetailRoom = (id)=>{
         dispatch(loadingAction)
         const promise = roomService.getDetailRoom(id)
         promise.then((res) => { 
-            console.log(res.data.content)
             const action = {
                 type: GET_DETAIL_ROOM,
                 detailRoom: res.data.content
@@ -43,28 +41,6 @@ export const getDetailRoom = (id)=>{
 }
 
 //admin
-// export const listRoomAction = () => {
-//     return (dispatch2) => {
-//         dispatch2(loadingTableAction);
-//         let promise = roomService.listRoom();
-//         promise.then((result) => {
-//             let action2 = {
-//                 type: GET_LIST_ROOM_AD,
-//                 arrRoom: result.data.content,
-                
-//             }
-//             dispatch2(action2);
-//             dispatch2(hiddenloadingTableAction);
-//         });
-//         promise.catch((error) => {
-//             let action2 = {
-//                 type: SET_ALERT,
-//                 arletContent: [error.response?.data.content, error.response?.data.statusCode],
-//             }
-//             dispatch2(action2);
-//         });
-//     }
-// }
 
 export const listRoomAction = (pageIndex, pageSize) => {
     return (dispatch2) => {

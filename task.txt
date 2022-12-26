@@ -1,7 +1,7 @@
 phân chia task:
 + Lê Thanh Hà (leader): Home, Detail,HostHome, RomList, NotFound, isLoading 
 + Trần Thị Kiều Trang: Login, Register, Profile
-+ Nguyễn Ngọc Quỳnh: Admin, vẽ wirefame
++ Nguyễn Ngọc Quỳnh: Admin
  
  link wirefame: https://drive.google.com/file/d/1cAdnFe94xKrZNwGzMLIF7ckXqChmNIyw/view?usp=share_link
  link demo :https://drive.google.com/file/d/1t4dVLynfNoVEMktxs7KMOpLKGpzLd2MQ/view?usp=share_link

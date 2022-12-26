@@ -28,12 +28,11 @@ export default function DetailRoom() {
     const { arrComment } = useSelector(state => state.CommentReducer)
     const { detailRoom } = useSelector(state => state.RoomReducer)
     const { modal, infoBookingRoom } = useSelector(state => state.BookingReducer)
-    console.log(infoBookingRoom);
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
     }, []);
-    let { id } = useParams()
 
+    let { id } = useParams()
     useEffect(() => {
         dispatch(getComment())
         dispatch(getDetailRoom(id))
@@ -45,7 +44,9 @@ export default function DetailRoom() {
         dispatch({ type: HIDEN_MODAL })
         navigation('/home')
     };
-
+    useEffect(() => {
+        document.title = detailRoom?.tenPhong;
+    }, [detailRoom])
     const renderDetailRoom = () => {
         let newRoom = {}
         if (detailRoom?.id < 30) {

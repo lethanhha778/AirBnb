@@ -53,7 +53,6 @@ export default function AddBookingRoom() {
       saoBinhLuan: Yup.number().typeError("Sao bình chọn không đúng định dạng"),
     }),
     onSubmit: values => {
-      console.log(values);
       let action = addCommentAction(values);
       dispatch(action);
     },

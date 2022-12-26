@@ -2,14 +2,13 @@ import React from 'react'
 import { Carousel, Card } from 'antd';
 import './style.scss'
 
-
 export default function Banner() {
     return (
         <Carousel autoplay className='d-none d-lg-block'
             dots>
             <div className='img__carousel'>
                 <img src="https://haycafe.vn/wp-content/uploads/2022/03/Anh-thien-nhien-Viet-Nam-tren-ruong-bac-thang.jpg" alt="" />
-                <h5 className="title">Tây Bắc Việt Nam</h5>
+                <h5 className="title">Ruộng Bậc Thang</h5>
                 <Card
                     hoverable
                     style={{
@@ -36,8 +35,7 @@ export default function Banner() {
             </div>
             <div className='img__carousel'>
                 <img src="https://pdp.edu.vn/wp-content/uploads/2021/07/hinh-anh-thien-nhien-viet-nam-tuyet-dep.jpg" alt="" />
-                <h5 className="title">Tây Nguyên Việt Nam</h5>
-
+                <h5 className="title">Tây Nguyên </h5>
                 <Card
                     hoverable
                     style={{

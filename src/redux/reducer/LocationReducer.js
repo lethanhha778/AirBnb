@@ -15,9 +15,11 @@ export const LocationReducer = (state = initialState, action) => {
         case GET_LIST_LOCATION:
             state.arrayLocation = action.arrayLocation
             return { ...state }
+
         case GET_ALL_LOCATION:
             state.allLocation = action.allLocation
             return { ...state }
+            
         default:
             return state
     }

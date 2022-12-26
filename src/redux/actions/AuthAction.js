@@ -19,10 +19,8 @@ export const EDIT_SUCCESS = (payload) => ({ type: "EDIT_SUCCESS", payload })
 export const LOGIN = (payload) => {
   return dispatch => {
     dispatch(LOGIN_START());
-
     AuthService.login(payload)
       .then(res => {
-        console.log(res)
         dispatch(LOGIN_SUCCESS(res.data));
       })
       .catch(err => {
@@ -36,7 +34,6 @@ export const UPLOAD_AVATAR = (payload) => {
     dispatch(UPLOAD_START());
     AuthService.uploadAvatar(payload)
       .then(res => {
-        console.log(res)
         dispatch(UPLOAD_SUCCESS(res.data));
       })
       .catch(err => {

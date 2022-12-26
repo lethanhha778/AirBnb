@@ -10,7 +10,6 @@ import { commentAdminReducer, CommentReducer } from './reducer/CommentReducer';
 import { userAdminReducer } from './reducer/UserReducer';
 
 const RootReducer = combineReducers({
-
     // reducer 
     LocationReducer,
     AuthReducer,
@@ -19,7 +18,6 @@ const RootReducer = combineReducers({
     LoadingReducer,
     CommentReducer,
     
-
     // reducer admin 
     userAdminReducer, 
     locationAdminReducer,

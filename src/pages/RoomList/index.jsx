@@ -24,6 +24,8 @@ export default function RoomList() {
             newArr.push(arrRoom[index])
         }
     }
+    document.title = "Danh Sách Phòng";
+
     const defaultProps = {
         center: {
             lat: 21.1010564,
@@ -35,7 +37,6 @@ export default function RoomList() {
         let room = newArr?.map((item, index) => {
             return { ...item, data: dataIMG[item.id - 1] };
         });
-        console.log(room)
         return room?.slice(0, 16).map((item, index) => {
             return <Col className="gutter-row" xs={{ span: 24 }} md={{ span: 12 }} lg={{ span: 12 }} key={index} data-aos="fade-in" data-aos-duration="2000">
                 <Swiper

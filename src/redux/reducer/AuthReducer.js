@@ -14,13 +14,15 @@ const reducer = (state = initialState, action) => {
   switch (type) {
     case 'LOGIN':
       return { ...state, loggedIn: true }
+
     case "LOGIN_START":
       return { ...state, loading: true }
+
     case "LOGIN_SUCCESS":
       localStorage.setItem(ACCESS_TOKEN, payload?.content?.token)
       localStorage.setItem(USER_INFO, JSON.stringify(payload?.content?.user || {}))
-
       return { ...state, loading: false, loggedIn: true, user: payload?.content?.user, error: "" }
+
     case "CHECK_LOGIN":
       const user_data = localStorage.getItem(USER_INFO) || '{}'
       const user_json = JSON.parse(user_data)
@@ -66,13 +68,13 @@ const reducer = (state = initialState, action) => {
     case "LOGOUT":
       localStorage.removeItem(USER_INFO)
       localStorage.removeItem(ACCESS_TOKEN)
-
       return {
         loggedIn: false,
         user: {},
         loading: false,
         error: ""
       }
+
     default:
       return state;
   }
