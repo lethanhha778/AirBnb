@@ -1,3 +1,4 @@
+@import "../../scss/index.scss";
 .ant-carousel {
     .img__carousel {
         position: relative;
@@ -6,6 +7,15 @@
             height: 90vh;
             object-fit: cover;
             vertical-align: bottom;
+        }
+        .title {
+            position: absolute;
+            top: 40%;
+            left: 10%;
+            font-size: 6rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.76);
+            animation: imgTitle 3s ease-in-out infinite;
         }
         .ant-card {
             position: absolute;
@@ -24,12 +34,22 @@
                     vertical-align: bottom;
                     border-radius: 4px;
                     border-radius: 20px;
-                    filter: drop-shadow( 0 0 5px white);
+                    filter: drop-shadow(0 0 5px white);
                 }
             }
         }
     }
+    .slick-dots {
+        li {
+            button {
+                border-radius: 50%;
+                width: 12px;
+                height: 12px;
+            }
+        }
+    }
 }
+
 @keyframes imgCard {
     0% {
         transform: translateY(0px);
@@ -39,5 +59,21 @@
     }
     100% {
         transform: translateY(0px);
+    }
+}
+@keyframes imgTitle {
+    0% {
+        transform: translateY(0px);
+        color: white
+
+    }
+    50% {
+        transform: translateY(20px);
+        color: $color-AirBnb;
+    }
+    100% {
+        transform: translateY(0px);
+        color: white;
+
     }
 }
