@@ -43,7 +43,6 @@ export default function AddBookingRoom() {
             maNguoiDung: Yup.number().typeError("Mã người dùng không đúng định dạng").min(1, "Mã người dùng phải lớn hơn 0"),
         }),
         onSubmit: values => {
-            console.log(values);
             let action = addBookingAction(values);
             dispatch(action);
         },

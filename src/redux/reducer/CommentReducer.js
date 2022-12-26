@@ -12,11 +12,11 @@ export const CommentReducer = (state = initialState, action) => {
         case GET_ALL_COMMENT:
             state.arrComment = action.listComment
             return { ...state }
+            
         case POST_COMMENT:
-            console.log(action.data)
             state.arrComment = [...state.arrComment, action.data]
-            console.log(state.arrComment);
             return { ...state }
+
         default:
             return state
     }
@@ -42,7 +42,6 @@ export const commentAdminReducer = (state = initialState, action) => {
             return { ...state }
 
         case ADD_COMMENT:
-            console.log(action.addComment, action.arletContent)
             state.arrComment = [...state.arrComment, action.addComment];
             state.arletContent = action.arletContent;
             return { ...state }

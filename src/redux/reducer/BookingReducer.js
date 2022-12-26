@@ -15,17 +15,20 @@ export const BookingReducer = (state = initialState, action) => {
         case GET_ALL_ROOM:
             state.arrRoom = action.arrRoom
             return { ...state }
+
         case BOOKING_ROOM:
-            console.log(action.infoBooking);
             state.infoBookingRoom = action.infoBooking.infoRoom
             state.modal = action.infoBooking.modal
             return { ...state }
+
         case SHOW_MODAL:
             state.modal = true
             return { ...state }
+
         case HIDEN_MODAL:
             state.modal = false
             return { ...state }
+
         default:
             return state
     }

@@ -9,7 +9,6 @@ const initialState = {
 
 export const userAdminReducer = (state = initialState, action) => {
     switch (action.type) {
-
         //admin
         case GET_LIST_USER:
             state.arrUser = action.arrUser;

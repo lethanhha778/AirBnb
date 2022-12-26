@@ -1,15 +1,15 @@
 import React from 'react'
 import { Col, Divider, Row } from 'antd';
 import './style.scss'
-export default function Destination() {
 
+export default function Destination() {
     return (
         <div className='destination-container' data-aos="fade-right" data-aos-duration="1000">
             <Divider orientation="left"><h2 className='title mt-3'>Điểm Đến Gần Đây</h2></Divider>
             <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }} >
                 <Col className="gutter-row py-3" xs={{ span: 12 }} md={{ span: 8 }} lg={{ span: 6 }}>
                     <div className='d-flex'>
-                        <img  src="https://res.cloudinary.com/dvzingci9/image/upload/v1665413766/airBnB/Explore%20nearby/Frame_9-2_ovogvc.png" alt="" />
+                        <img src="https://res.cloudinary.com/dvzingci9/image/upload/v1665413766/airBnB/Explore%20nearby/Frame_9-2_ovogvc.png" alt="" />
                         <div className='px-3' >
                             <h6 className='title-city'>Hà Nội</h6>
                             <p>1 giờ lái xe</p>
