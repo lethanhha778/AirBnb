@@ -8,7 +8,8 @@ export default function Banner() {
         <Carousel autoplay className='d-none d-lg-block'
             dots>
             <div className='img__carousel'>
-                <img src="https://badenmountain.sunworld.vn/wp-content/themes/halongcomplex/dist/images/background-1.jpg" alt="" />
+                <img src="https://haycafe.vn/wp-content/uploads/2022/03/Anh-thien-nhien-Viet-Nam-tren-ruong-bac-thang.jpg" alt="" />
+                <h5 className="title">Tây Bắc Việt Nam</h5>
                 <Card
                     hoverable
                     style={{
@@ -20,7 +21,8 @@ export default function Banner() {
                 </Card>
             </div>
             <div className='img__carousel'>
-                <img src="https://dulichdiaphuong.com/imgs/tinh-cao-bang/bai-tinh.jpg" alt="" />
+                <img src="https://phongnhakebang.vn/uploads/news/2016_12/http_2f2fcdn.cnn.com2fcnnnext2fdam2fassets2f160824165257-hang-son-doong-1watch-out-for-dinosaurs-sunbeam.jpg?1523584396273" alt="" />
+                <h5 className="title">Động Phong Nha</h5>   
                 <Card
                     hoverable
                     style={{
@@ -33,7 +35,9 @@ export default function Banner() {
 
             </div>
             <div className='img__carousel'>
-                <img src="https://www.dideden.com/wp-content/uploads/2022/09/cac-dia-diem-du-lich-sapa-12.jpg" alt="" />
+                <img src="https://pdp.edu.vn/wp-content/uploads/2021/07/hinh-anh-thien-nhien-viet-nam-tuyet-dep.jpg" alt="" />
+                <h5 className="title">Tây Nguyên Việt Nam</h5>
+
                 <Card
                     hoverable
                     style={{
