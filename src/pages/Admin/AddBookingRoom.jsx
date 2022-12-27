@@ -9,7 +9,7 @@ import { addBookingAction, setAlertBookingAction } from '../../redux/actions/Boo
 import roomService from '../../service/RoomService';
 
 export default function AddBookingRoom() {
-    let { arletContent } = useSelector(state => state.bookingAdminReducer);
+    let { arletContent } = useSelector(state => state.BookingReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();
 

@@ -19,16 +19,7 @@ export const RoomReducer = (state = initialState, action) => {
         case GET_DETAIL_ROOM:
             state.detailRoom = action.detailRoom
             return { ...state }
-
-        default:
-            return state
-    }
-}
-
-export const roomAdminReducer = (state = initialState, action) => {
-    switch (action.type) {
-        //admin
-
+        // admin
         case GET_LIST_ROOM_AD:
             state.pagRoom = action.pagRoom;
             return { ...state }

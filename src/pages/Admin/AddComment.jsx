@@ -12,7 +12,7 @@ import userService from '../../service/UserService';
 const { TextArea } = Input;
 
 export default function AddBookingRoom() {
-  let { arletContent } = useSelector(state => state.commentAdminReducer);
+  let { arletContent } = useSelector(state => state.CommentReducer);
   let dispatch = useDispatch();
   const navigate = useNavigate();
 

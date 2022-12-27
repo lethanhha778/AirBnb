@@ -7,7 +7,7 @@ const initialState = {
     arletContent: ['', 0],
 }
 
-export const userAdminReducer = (state = initialState, action) => {
+export const UserReducer = (state = initialState, action) => {
     switch (action.type) {
         //admin
         case GET_LIST_USER:

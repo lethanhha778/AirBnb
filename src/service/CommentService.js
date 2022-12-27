@@ -1,5 +1,5 @@
-// api bình luận
 import { http } from "../util/config";
+// api bình luận
 
 class CommentServices {
     // user

@@ -1,9 +1,8 @@
 import React, { useEffect, useMemo } from 'react'
+import "antd/dist/reset.css";
 import { Col, Row, Modal } from 'antd';
 import { useDispatch, useSelector } from 'react-redux'
-import "antd/dist/reset.css";
 import { useNavigate, useParams } from 'react-router-dom';
-import { getDetailRoom } from '../../redux/actions/RoomAction'
 import { AiOutlineHeart } from "react-icons/ai";
 import { GiNetworkBars, GiBusDoors, GiThermometerCold, GiWashingMachine } from "react-icons/gi";
 import { FiShare } from "react-icons/fi";
@@ -15,9 +14,10 @@ import { CgScreen } from "react-icons/cg";
 import { TbToolsKitchen } from "react-icons/tb";
 import { dataIMG } from '../../components/CardRoom/dataImg';
 import CommnetUser from '../../components/CommentUser';
+import { getDetailRoom } from '../../redux/actions/RoomAction'
 import { getComment } from '../../redux/actions/CommentAction';
-import CardBooking from './CardBooking';
 import { HIDEN_MODAL } from '../../redux/type/BookingRoomType';
+import CardBooking from './CardBooking';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import './style.scss'

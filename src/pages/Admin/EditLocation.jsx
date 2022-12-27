@@ -10,7 +10,7 @@ import { getLocationAction, setAlertLocationAction, updateLocationAction, upImag
 
 export default function EditLocation() {
   let { id } = useParams();
-  let { location, arletContent } = useSelector(state => state.locationAdminReducer);
+  let { location, arletContent } = useSelector(state => state.LocationReducer);
   let dispatch = useDispatch();
   const navigate = useNavigate();
   let [fileList, setfileList] = useState([

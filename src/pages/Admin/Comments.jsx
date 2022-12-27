@@ -6,7 +6,7 @@ import { Button, Table, Modal } from 'antd';
 import { listCommentAction, removeCommentAction, setAlertCommentAction } from '../../redux/actions/CommentAction';
 
 export default function Comments() {
-    let { arrComment, arletContent } = useSelector(state => state.commentAdminReducer);
+    let { arrComment, arletContent } = useSelector(state => state.CommentReducer);
     let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();

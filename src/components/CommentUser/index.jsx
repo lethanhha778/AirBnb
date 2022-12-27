@@ -11,7 +11,7 @@ import './style.scss'
 function CommnetUser(props) {
 	const navigate = useNavigate()
 	const { loggedIn } = useSelector((state) => state.AuthReducer);
-	const { arrUser } = useSelector(state => state.userAdminReducer)
+	const { arrUser } = useSelector(state => state.UserReducer)
 	const dispatch = useDispatch()
 	useEffect(() => {
 		dispatch(listUserAction())

@@ -16,7 +16,7 @@ export default function Users() {
         },
     });
 
-    let { pagUser, arletContent } = useSelector(state => state.userAdminReducer);
+    let { pagUser, arletContent } = useSelector(state => state.UserReducer);
     let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();

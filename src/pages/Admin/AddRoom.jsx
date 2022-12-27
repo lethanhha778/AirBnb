@@ -9,7 +9,7 @@ import locationService from '../../service/LocationService';
 const { TextArea } = Input;
 
 export default function AddLocation() {
-    let { arletContent } = useSelector(state => state.roomAdminReducer)
+    let { arletContent } = useSelector(state => state.RoomReducer)
     let dispatch = useDispatch();
     const navigate = useNavigate();
 

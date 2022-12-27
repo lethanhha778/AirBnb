@@ -19,15 +19,7 @@ export const LocationReducer = (state = initialState, action) => {
         case GET_ALL_LOCATION:
             state.allLocation = action.allLocation
             return { ...state }
-            
-        default:
-            return state
-    }
-}
-
-export const locationAdminReducer = (state = initialState, action) => {
-    switch (action.type) {
-        //admin
+        // admin
         case GET_LIST_LOCATION_AD:
             state.pagLocation = action.pagLocation;
             return { ...state }

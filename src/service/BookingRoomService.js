@@ -1,5 +1,5 @@
-// Api đặt phòng
 import { http } from "../util/config";
+// Api đặt phòng
 
 class BookingRoomService {
     // lấy cái api này render ra từng phòng ở home

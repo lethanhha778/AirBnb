@@ -10,7 +10,7 @@ const { TextArea } = Input;
 
 export default function EditLocation() {
     let { id } = useParams()
-    let { room, arletContent } = useSelector(state => state.roomAdminReducer);
+    let { room, arletContent } = useSelector(state => state.RoomReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();
     let [fileList, setfileList] = useState([

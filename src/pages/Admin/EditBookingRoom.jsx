@@ -9,7 +9,7 @@ import { getBookingAction, setAlertBookingAction, updateBookingAction } from '..
 
 export default function EditBookingRoom() {
     let { id } = useParams();
-    let { booking, arletContent } = useSelector(state => state.bookingAdminReducer)
+    let { booking, arletContent } = useSelector(state => state.BookingReducer)
     let dispatch = useDispatch();
     const navigate = useNavigate();
     const [form] = Form.useForm();

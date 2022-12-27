@@ -1,6 +1,5 @@
-// Api Vị trí
-
 import { http } from "../util/config";
+// Api Vị trí
 
 class LocationService {
     // lấy danh sách vị trí để tìm kiếm
@@ -17,7 +16,7 @@ class LocationService {
         return http.get(`api/vi-tri/phan-trang-tim-kiem?pageIndex=${index}&pageSize=${size}`)
     }
 
-    detailLocation = (id)=>{
+    detailLocation = (id) => {
         return http.get(`/api/vi-tri/${id}`)
     }
 
