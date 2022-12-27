@@ -1,6 +1,5 @@
-
 import { http } from "../util/config";
-
+// api auth
 class AuthService {
     // gửi thông tin đăng ký
     register = (infoUserRegister) => {

@@ -6,6 +6,7 @@ import './index.scss'
 export default function HostHome() {
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+        document.title = "Cho Thuê Phòng";
     }, []);
     const price = Number(7)
     const [total, setTotal] = useState(14)

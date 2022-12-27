@@ -1,25 +1,21 @@
-// Api Phòng
 import { http } from "../util/config";
+// Api Phòng
 
 class RoomService {
     // lấy danh sách phòng theo vị trí
     getRoomList = (locationID) => {
         return http.get(`/api/phong-thue/lay-phong-theo-vi-tri?maViTri=${locationID}`)
     }
-    getDetailRoom = (id)=>{
+    getDetailRoom = (id) => {
         return http.get(`/api/phong-thue/${id}`)
     }
 
     //admin
-    // listRoom = () => {
-    //     return http.get(`/api/phong-thue`)
-    // }
-
     listRoom = (index, size) => {
         return http.get(`api/phong-thue/phan-trang-tim-kiem?pageIndex=${index}&pageSize=${size}`)
     }
 
-    detailRoom = (id)=>{
+    detailRoom = (id) => {
         return http.get(`/api/phong-thue/${id}`)
     }
 

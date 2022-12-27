@@ -28,16 +28,7 @@ export const BookingReducer = (state = initialState, action) => {
         case HIDEN_MODAL:
             state.modal = false
             return { ...state }
-
-        default:
-            return state
-    }
-}
-
-export const bookingAdminReducer = (state = initialState, action) => {
-
-    //admin
-    switch (action.type) {
+        // admin
         case GET_LIST_BOOKING_AD:
             state.arrBooking = action.arrBooking;
             return { ...state }
@@ -74,3 +65,4 @@ export const bookingAdminReducer = (state = initialState, action) => {
             return state
     }
 }
+

@@ -10,10 +10,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { dataLocation } from './dataLocation'
 import { getAllLocation } from '../../redux/actions/LocationAction';
+import { useNavigate } from 'react-router-dom';
 import './style.scss'
 
-
 export default function CardLocation() {
+    const navigate = useNavigate()
     const dispatch = useDispatch()
     useEffect(() => {
         const action = getAllLocation()
@@ -73,7 +74,9 @@ export default function CardLocation() {
                 </Swiper>
                 <div data-aos="flip-left" data-aos-duration="1000">
                     <div className='location__decripton'>
-                        <h5 className='location__decripton-sites' ><span>{item.tenViTri}</span></h5>
+                        <h5
+                            onClick={() => { navigate(`/SearchPage/${item.id}`) }}
+                            className='location__decripton-sites' ><span>{item.tenViTri}</span></h5>
                         <span className='search'><FaSearchLocation />{`${item.data?.search}`}</span>
                     </div>
                     <div className='location__area'>

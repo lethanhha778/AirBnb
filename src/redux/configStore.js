@@ -2,12 +2,12 @@ import { composeWithDevTools } from '@redux-devtools/extension'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk';
 import AuthReducer from "./reducer/AuthReducer";
-import { bookingAdminReducer, BookingReducer } from './reducer/BookingReducer';
+import { BookingReducer } from './reducer/BookingReducer';
 import LoadingReducer from './reducer/LoadingReducer';
-import { locationAdminReducer, LocationReducer } from './reducer/LocationReducer';
-import { roomAdminReducer, RoomReducer } from './reducer/RoomReducer';
-import { commentAdminReducer, CommentReducer } from './reducer/CommentReducer';
-import { userAdminReducer } from './reducer/UserReducer';
+import { LocationReducer } from './reducer/LocationReducer';
+import { RoomReducer } from './reducer/RoomReducer';
+import { CommentReducer } from './reducer/CommentReducer';
+import { UserReducer } from './reducer/UserReducer';
 
 const RootReducer = combineReducers({
     // reducer 
@@ -17,14 +17,7 @@ const RootReducer = combineReducers({
     RoomReducer,
     LoadingReducer,
     CommentReducer,
-    
-    // reducer admin 
-    userAdminReducer, 
-    locationAdminReducer,
-    roomAdminReducer,
-    bookingAdminReducer,
-    commentAdminReducer
-
+    UserReducer,
 })
 
 export const store = createStore(

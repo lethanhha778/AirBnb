@@ -13,7 +13,7 @@ export default function Location() {
         },
     });
     
-    let { pagLocation, arletContent } = useSelector(state => state.locationAdminReducer);
+    let { pagLocation, arletContent } = useSelector(state => state.LocationReducer);
     let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();

@@ -11,7 +11,7 @@ const { TextArea } = Input;
 export default function EditComment() {
   let { id } = useParams();
   const navigate = useNavigate();
-  let { arrComment, comment, arletContent } = useSelector(state => state.commentAdminReducer);
+  let { arrComment, comment, arletContent } = useSelector(state => state.CommentReducer);
   let dispatch = useDispatch();
   useEffect(() => {
     if (arrComment.length === 0) navigate('/admin/comments');

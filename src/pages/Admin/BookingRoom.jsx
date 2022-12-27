@@ -6,7 +6,7 @@ import { Button, Table, Modal } from 'antd';
 import { listBookingAction, removeBookingAction, setAlertBookingAction } from '../../redux/actions/BookingRoomAction';
 
 export default function BookingRoom() {
-    let { arrBooking, arletContent } = useSelector(state => state.bookingAdminReducer);
+    let { arrBooking, arletContent } = useSelector(state => state.BookingReducer);
     let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();

@@ -10,7 +10,7 @@ import userService from '../../service/UserService';
 
 export default function AddUser() {
 
-    let { arletContent } = useSelector(state => state.userAdminReducer)
+    let { arletContent } = useSelector(state => state.UserReducer)
     let dispatch = useDispatch();
     const navigate = useNavigate();
     useEffect(() => {

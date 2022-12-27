@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 
 export default function EditUser() {
   let { id } = useParams();
-  let { user, arletContent } = useSelector(state => state.userAdminReducer);
+  let { user, arletContent } = useSelector(state => state.UserReducer);
   let idAuth = useSelector(state => state.AuthReducer).user.id;
   let dispatch = useDispatch();
   const navigate = useNavigate();

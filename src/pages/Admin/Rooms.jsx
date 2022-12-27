@@ -12,7 +12,7 @@ export default function Location() {
             pageSize: 10,
         },
     });
-    let { pagRoom, arletContent } = useSelector(state => state.roomAdminReducer);
+    let { pagRoom, arletContent } = useSelector(state => state.RoomReducer);
     let { tableLoading } = useSelector(state => state.LoadingReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();
