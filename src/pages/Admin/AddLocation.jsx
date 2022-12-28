@@ -7,7 +7,7 @@ import { Form, Input, Button, Modal } from 'antd';
 import { addLocationAction, setAlertLocationAction } from '../../redux/actions/LocationAction';
 
 export default function AddLocation() {
-    let { arletContent } = useSelector(state => state.locationAdminReducer);
+    let { arletContent } = useSelector(state => state.LocationReducer);
     let dispatch = useDispatch();
     const navigate = useNavigate();
 
