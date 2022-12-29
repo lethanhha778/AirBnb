@@ -9,7 +9,6 @@ import { UPLOAD_AVATAR, EDIT_INFO } from "../../redux/actions/AuthAction";
 const getProfileFromLocalStorage = () => {
     const data = localStorage.getItem(USER_INFO);
     const objectData = JSON.parse(data || "{}");
-
     return objectData;
 };
 
@@ -97,7 +96,7 @@ const Profile = () => {
     };
     return (
         <div className="wrap-profile">
-            {JSON.stringify(fileList)}
+            {/* {JSON.stringify(fileList)} */}
             <Form
                 labelCol={{
                     span: 4,

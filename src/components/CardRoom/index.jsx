@@ -86,9 +86,9 @@ export default function CardRoom() {
 
   return (
     <div className='cardRoom'>
-      <Divider orientation="left"><h2 className='title mt-3'>Phòng Nổi Bật</h2></Divider>
-      <Row className='mt-5'
-        gutter={[24, 24]}
+      <Divider orientation="left"><h2 className='title mt-2'>Phòng Nổi Bật</h2></Divider>
+      <Row className='mt-3'
+        gutter={[24, 12]}
       >
         {renderRoomItem()}
       </Row>

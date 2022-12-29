@@ -90,8 +90,8 @@ export default function CardLocation() {
     return (
         <div className='cardLocaTion'>
             <Divider orientation="left"><h2 className='title mt-3'>Điểm Đến Nổi Tiếng 2022</h2></Divider>
-            <Row className='mt-5'
-                gutter={[24, 24]}
+            <Row className='mt-3'
+                gutter={[24, 12]}
             >
                 {renderRoomItem()}
             </Row>
